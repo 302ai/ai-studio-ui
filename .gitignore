@@ -24,3 +24,8 @@ vite.config.ts.timestamp-*
 
 # Paraglide
 src/lib/paraglide
+
+# claude code
+/CLAUDE.local.md
+
+project.inlang

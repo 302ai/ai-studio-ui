@@ -1,0 +1,32 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: 'pnpm-lock.yaml'
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+
+  - repo: local
+    hooks:
+      - id: svelte-check
+        name: svelte-check
+        entry: pnpm exec svelte-check --no-tsconfig --ignore "src/lib/paraglide"
+        language: system
+        files: \.(svelte)$
+
+      - id: prettier
+        name: prettier
+        entry: pnpm exec prettier --write
+        language: system
+        files: \.(js|ts|svelte|json|yaml|yml|html|css|scss)$
+        exclude: '^(pnpm-lock\.yaml|src/lib/paraglide/.*|\.svelte-kit/.*|build/.*|node_modules/.*)$'
+
+      - id: eslint
+        name: eslint
+        entry: pnpm exec eslint --fix
+        language: system
+        files: \.(js|ts|svelte)$
+        exclude: '^(src/lib/paraglide/.*|\.svelte-kit/.*|build/.*|node_modules/.*)$'
