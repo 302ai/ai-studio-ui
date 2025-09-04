@@ -23,7 +23,7 @@
 
 <div
 	class={cn(
-		'group relative flex h-tab-item-height w-tab-item-width cursor-pointer items-center gap-2 px-tab-item-padding-x text-sm transition-all',
+		'group relative flex h-tab-item-height w-tab-item-width cursor-pointer items-center justify-between gap-2 px-tab-item-padding-x text-sm transition-all',
 		'rounded-t-md border border-b-0 hover:bg-tab-item-hover/80',
 		isActive
 			? 'bg-tab-item-bg text-tab-item-text shadow-sm'
