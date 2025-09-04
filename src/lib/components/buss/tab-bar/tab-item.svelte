@@ -23,11 +23,11 @@
 
 <div
 	class={cn(
-		'group relative flex h-8 w-32 cursor-pointer items-center gap-2 px-3 text-sm transition-all',
-		'rounded-t-md border border-b-0 hover:bg-background/80',
+		'group relative flex h-tab-item-height w-tab-item-width cursor-pointer items-center gap-2 px-tab-item-padding-x text-sm transition-all',
+		'rounded-t-md border border-b-0 hover:bg-tab-item-hover/80',
 		isActive
-			? 'bg-background text-foreground shadow-sm'
-			: 'border-transparent bg-muted/50 text-muted-foreground'
+			? 'bg-tab-item-bg text-tab-item-text shadow-sm'
+			: 'border-transparent bg-tab-item-bg-inactive/50 text-tab-item-text-inactive'
 	)}
 	onclick={() => onTabClick(tab)}
 	role="button"
@@ -39,12 +39,12 @@
 		}
 	}}
 >
-	<span class="max-w-[200px] truncate">{tab.title}</span>
+	<span class="max-w-tab-item-max-title-width truncate">{tab.title}</span>
 	{#if tab.closable !== false}
 		<button
 			class={cn(
 				'opacity-0 transition-opacity group-hover:opacity-100',
-				'rounded p-0.5 hover:bg-muted'
+				'rounded p-tab-close-button-padding hover:bg-tab-button-hover'
 			)}
 			onclick={(e) => {
 				e.stopPropagation();
@@ -53,7 +53,7 @@
 			aria-label="Close tab"
 			type="button"
 		>
-			<X class="h-3 w-3" />
+			<X class="size-tab-close-icon-size" />
 		</button>
 	{/if}
 </div>

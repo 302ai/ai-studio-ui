@@ -34,9 +34,9 @@
 	}
 </script>
 
-<div class={cn('flex h-10 w-full items-end border-b bg-muted/50', className)}>
+<div class={cn('flex h-tab-bar-height w-full items-end border-b bg-tab-bar-bg/50', className)}>
 	<div
-		class="flex w-full items-end gap-0.5 overflow-x-auto px-2"
+		class="flex w-full items-end gap-tab-bar-gap overflow-x-auto px-tab-bar-padding-x"
 		use:dndzone={{ items: tabs, flipDurationMs: 200, dropTargetStyle: {} }}
 		onconsider={handleDndConsider}
 		onfinalize={handleDndFinalize}
@@ -48,10 +48,10 @@
 		{/each}
 
 		<button
-			class="flex h-7 w-7 items-center justify-center rounded transition-colors hover:bg-muted"
+			class="flex h-tab-new-button-size w-tab-new-button-size items-center justify-center rounded transition-colors hover:bg-tab-button-hover"
 			onclick={() => onNewTab()}
 		>
-			<Plus class="h-4 w-4" />
+			<Plus class="h-tab-icon-size w-tab-icon-size" />
 		</button>
 	</div>
 </div>
