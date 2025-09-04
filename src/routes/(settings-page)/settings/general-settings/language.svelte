@@ -1,6 +1,8 @@
 <script lang="ts">
 	import * as Select from '$lib/components/ui/select/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
+	import { m } from '$lib/paraglide/messages.js';
+
 	const languages = [
 		{
 			key: 'zh',
@@ -22,11 +24,11 @@
 	let value = $state('zh');
 
 	const triggerContent = $derived(
-		languages.find((f) => f.key === value)?.nativeName ?? 'Select a language'
+		languages.find((f) => f.key === value)?.nativeName ?? m.select_language()
 	);
 </script>
 
-<Label for="language">Language</Label>
+<Label for="language">{m.language()}</Label>
 
 <Select.Root type="single" name="language" bind:value>
 	<Select.Trigger class="w-full">
