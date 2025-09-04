@@ -2,10 +2,9 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { ModeWatcher } from 'mode-watcher';
-	import TabBar from '$lib/components/buss/tab-bar/tab-bar.svelte';
+	import { TabBar, type Tab } from '@/components/buss/tab-bar';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import type { Tab } from '@/components/buss/tab-bar/tab-item.svelte';
 
 	let { children } = $props();
 
