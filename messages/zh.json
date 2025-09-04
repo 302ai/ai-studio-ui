@@ -4,5 +4,7 @@
 	"chat_placeholder": "在这里输入消息，按 Enter 发送，按 Shift + Enter 换行",
 	"chat_slogan": "嗨，准备好和我一起探索世界了吗?",
 	"language": "语言",
-	"selectLanguage": "选择语言"
+	"select_language": "选择语言",
+	"tab_context_close": "关闭",
+	"tab_context_close_all": "关闭全部"
 }

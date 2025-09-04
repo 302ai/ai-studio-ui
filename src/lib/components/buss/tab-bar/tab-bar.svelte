@@ -5,6 +5,7 @@
 		activeTabId: string;
 		onTabClick: (tab: Tab) => void;
 		onTabClose: (tab: Tab) => void;
+		onTabCloseAll: () => void;
 		onNewTab: () => void;
 		class?: string;
 	}
@@ -32,6 +33,7 @@
 		activeTabId = $bindable<string>(),
 		onTabClick,
 		onTabClose,
+		onTabCloseAll,
 		onNewTab,
 		class: className
 	}: Props = $props();
@@ -135,6 +137,7 @@
 					isDragging={draggedElementId === tab.id}
 					{onTabClick}
 					{onTabClose}
+					{onTabCloseAll}
 				/>
 				<div class="mx-0.5">
 					<Separator
