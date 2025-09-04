@@ -28,7 +28,7 @@
 	);
 </script>
 
-<Label for="language">{m.language()}</Label>
+<Label for="language" class="text-label-fg">{m.language()}</Label>
 
 <Select.Root type="single" name="language" bind:value>
 	<Select.Trigger class="w-full">
