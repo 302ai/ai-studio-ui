@@ -34,7 +34,11 @@
 
 	--border: #d9d9d9;
 
+	--switch-border: #dbdbdb;
+
 	--label-fg: #8e8e8e;
+
+	--setting: #f9f9f9;
 
 	--input: #f9f9f9;
 
@@ -87,7 +91,11 @@
 
 	--label-fg: #a0a0a0;
 
+	--setting: #1a1a1a;
+
 	--border: #3d3d3d;
+
+	--switch-border: #3d3d3d;
 
 	--input: #1a1a1a;
 
@@ -147,6 +155,10 @@
 	--color-tab-item-hover: var(--color-muted); /* tab hover 背景色 */
 	--color-tab-button-hover-active: var(--accent-hover); /* 活跃 tab 按钮 hover 背景色 */
 	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
+
+	--color-setting: var(--setting);
+
+	--color-switch-border: var(--switch-border);
 }
 
 @theme inline {
@@ -192,6 +204,8 @@
 	--color-overlay: var(--overlay);
 	--color-overlay-foreground: var(--overlay-foreground);
 	--color-label-fg: var(--label-fg);
+	--color-setting: var(--setting);
+	--color-switch-border: var(--switch-border);
 }
 
 @layer base {

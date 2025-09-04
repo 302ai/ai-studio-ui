@@ -8,5 +8,13 @@
 	"default": "Default",
 	"wide": "Wide",
 	"ultra-wide": "Ultra Wide",
-	"selectLanguage": "Select a language"
+	"selectLanguage": "Select a language",
+	"privacyMode": "Privacy Mode",
+	"autoInherit": "Auto Inherit",
+	"tab_context_close_all": "Close All",
+	"tab_context_close": "Close",
+	"chat_onlineSearch": "Online Search",
+	"chat_thinking": "Thinking",
+	"chat_unsupportAction": "Only models from 302.AI Provider are available",
+	"chat_uploadAttachment": "Attach file(file size cannot exceed 10MB)"
 }

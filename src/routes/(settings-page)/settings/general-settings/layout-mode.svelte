@@ -31,7 +31,9 @@
 <Label for="layout" class="text-label-fg">{m.layout()}</Label>
 
 <Select.Root type="single" name="layout" bind:value>
-	<Select.Trigger class="w-full">{getLabel(value)}</Select.Trigger>
+	<Select.Trigger class="w-full !bg-setting data-[size=default]:h-11"
+		>{getLabel(value)}</Select.Trigger
+	>
 	<Select.Content>
 		{#each layouts as layout (layout.key)}
 			<Select.Item value={layout.value} label={layout.label} />
