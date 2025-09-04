@@ -1,0 +1,40 @@
+<script lang="ts">
+	import * as Select from '$lib/components/ui/select/index.js';
+	import { Label } from '$lib/components/ui/label/index.js';
+	const languages = [
+		{
+			key: 'zh',
+			nativeName: '中文',
+			prefix: '🇨🇳'
+		},
+		{
+			key: 'en',
+			nativeName: 'English',
+			prefix: '🇺🇸'
+		},
+		{
+			key: 'ja',
+			nativeName: '日本語',
+			prefix: '🇯🇵'
+		}
+	];
+
+	let value = $state('zh');
+
+	const triggerContent = $derived(
+		languages.find((f) => f.key === value)?.nativeName ?? 'Select a language'
+	);
+</script>
+
+<Label for="language">Language</Label>
+
+<Select.Root type="single" name="language" bind:value>
+	<Select.Trigger class="w-full">
+		{triggerContent}
+	</Select.Trigger>
+	<Select.Content>
+		{#each languages as language (language.key)}
+			<Select.Item value={language.key} label={language.nativeName} />
+		{/each}
+	</Select.Content>
+</Select.Root>

@@ -1,36 +1,32 @@
 <script lang="ts">
-	import { House, Inbox, Settings } from '@lucide/svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar';
+	import { page } from '$app/state';
 
 	const items = [
 		{
-			title: 'Dashboard',
-			url: '/dashboard',
-			icon: House
-		},
-		{
-			title: 'Projects',
-			url: '/projects',
-			icon: Inbox
+			title: 'general-settings',
+			url: '/settings/general-settings'
 		}
 	];
 </script>
 
-<Sidebar.Root collapsible="offcanvas" variant="sidebar" class="top-10">
-	<Sidebar.Header>
-		<h2 class="px-4 text-lg font-semibold">AI Studio</h2>
-	</Sidebar.Header>
+<Sidebar.Root
+	collapsible="offcanvas"
+	variant="sidebar"
+	class="top-10 w-auto min-w-[var(--setting-width)]"
+>
 	<Sidebar.Content>
 		<Sidebar.Group>
-			<Sidebar.GroupLabel>Application</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each items as item (item.title)}
 						<Sidebar.MenuItem>
-							<Sidebar.MenuButton>
+							<Sidebar.MenuButton
+								class="justify-end text-right"
+								isActive={page.url.pathname === item.url}
+							>
 								{#snippet child({ props })}
 									<a href={item.url} {...props}>
-										<item.icon />
 										<span>{item.title}</span>
 									</a>
 								{/snippet}
@@ -41,7 +37,7 @@
 			</Sidebar.GroupContent>
 		</Sidebar.Group>
 	</Sidebar.Content>
-	<Sidebar.Footer>
+	<!-- <Sidebar.Footer>
 		<Sidebar.Group>
 			<Sidebar.GroupLabel>Settings</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
@@ -50,7 +46,7 @@
 						<Sidebar.MenuButton>
 							<Settings />
 							<span>
-								<a href="/settings/">
+								<a href={'/settings'}>
 									<span>settings</span>
 								</a>
 							</span>
@@ -59,5 +55,5 @@
 				</Sidebar.Menu>
 			</Sidebar.GroupContent>
 		</Sidebar.Group>
-	</Sidebar.Footer>
+	</Sidebar.Footer> -->
 </Sidebar.Root>
