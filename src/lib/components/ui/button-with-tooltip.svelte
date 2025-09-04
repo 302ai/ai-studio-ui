@@ -39,7 +39,7 @@
 
 <TooltipProvider>
 	<Tooltip>
-		<TooltipTrigger class={buttonClass} {disabled} {onclick}>
+		<TooltipTrigger class={cn(buttonClass, 'rounded-[10px]')} {disabled} {onclick}>
 			{@render children?.()}
 		</TooltipTrigger>
 		<TooltipContent
