@@ -4,5 +4,9 @@
 	"chat_placeholder": "Enter your message here. Enter to send, Shift + Enter to line break",
 	"chat_slogan": "Hi, are you ready to explore the world with me?",
 	"language": "Language",
-	"selectLanguage": "Select a language"
+	"selectLanguage": "Select a language",
+	"layout": "Layout",
+	"default": "Default",
+	"wide": "Wide",
+	"ultra-wide": "Ultra Wide"
 }
