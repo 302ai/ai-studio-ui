@@ -1,4 +1,6 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from zh!"
+	"hello_world": "Hello, {name} from zh!",
+	"chat_placeholder": "在这里输入消息，按 Enter 发送，按 Shift + Enter 换行",
+	"chat_slogan": "嗨，准备好和我一起探索世界了吗?"
 }
