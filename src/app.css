@@ -58,6 +58,9 @@
 	--sidebar-accent-foreground: oklch(0.208 0.042 265.755);
 	--sidebar-border: oklch(0.929 0.013 255.508);
 	--sidebar-ring: oklch(0.704 0.04 256.788);
+
+	--tab-item: #f3f2ff;
+	--tab-item-foreground: #8e47f0;
 }
 
 .dark {
@@ -79,7 +82,7 @@
 	--muted: #2d2d2d;
 	--muted-foreground: #5c5c5c;
 
-	--accent: #49306a;
+	--accent: #5c5c5c;
 	--accent-foreground: #e6e6e6;
 	--accent-hover: #503a6c;
 	--hover-2: #383838;
@@ -116,15 +119,8 @@
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.551 0.027 264.364);
 
-	/* Tab Bar Colors for Dark Mode */
-	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */
-	--color-tab-item-bg: var(--color-accent); /* 活跃 tab 背景色 */
-	--color-tab-item-bg-inactive: transparent; /* 非活跃 tab 背景色 */
-	--color-tab-item-text: var(--color-accent-foreground); /* 活跃 tab 文字色 */
-	--color-tab-item-text-inactive: var(--color-foreground); /* 非活跃 tab 文字色 */
-	--color-tab-item-hover: var(--color-secondary); /* tab hover 背景色 */
-	--color-tab-button-hover-active: var(--accent-hover); /* 活跃 tab 按钮 hover 背景色 */
-	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
+	--tab-item: #49306a;
+	--tab-item-foreground: #ffffff;
 }
 
 @theme {
@@ -148,12 +144,12 @@
 
 	/* Tab Bar Colors */
 	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */
-	--color-tab-item-bg: var(--color-accent); /* 活跃 tab 背景色 */
+	--color-tab-item-bg: var(--tab-item); /* 活跃 tab 背景色 */
 	--color-tab-item-bg-inactive: transparent; /* 非活跃 tab 背景色 */
-	--color-tab-item-text: var(--color-accent-foreground); /* 活跃 tab 文字色 */
+	--color-tab-item-text: var(--tab-item-foreground); /* 活跃 tab 文字色 */
 	--color-tab-item-text-inactive: var(--color-foreground); /* 非活跃 tab 文字色 */
 	--color-tab-item-hover: var(--color-muted); /* tab hover 背景色 */
-	--color-tab-button-hover-active: var(--accent-hover); /* 活跃 tab 按钮 hover 背景色 */
+	--color-tab-button-hover-active: var(--primary-hover); /* 活跃 tab 按钮 hover 背景色 */
 	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
 
 	--color-setting: var(--setting);

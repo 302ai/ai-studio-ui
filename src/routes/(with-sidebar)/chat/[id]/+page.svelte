@@ -41,7 +41,11 @@
 				<Globe />
 			</ButtonWithTooltip>
 			<ButtonWithTooltip tooltip={m.chat_mcpServers()}>
-				<img src={mcpIcon} alt="MCP" class="size-4 dark:invert" />
+				<img
+					src={mcpIcon}
+					alt="MCP"
+					class="size-4 group-hover:[filter:brightness(0)_saturate(100%)_invert(35%)_sepia(84%)_saturate(2329%)_hue-rotate(244deg)_brightness(92%)_contrast(96%)] dark:invert"
+				/>
 			</ButtonWithTooltip>
 			<ButtonWithTooltip tooltip={m.chat_parameters()}>
 				<Settings2 />
