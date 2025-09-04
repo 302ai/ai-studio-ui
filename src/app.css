@@ -24,6 +24,8 @@
 
 	--accent: #f3f2ff;
 	--accent-foreground: #8e47f0;
+	--accent-hover: #ece9ff;
+	--hover-2: #e6e6e6;
 
 	--overlay: #f9f9f9;
 	--overlay-foreground: #333333;
@@ -75,12 +77,13 @@
 
 	/* Tab Bar Colors */
 	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */
-	--color-tab-item-bg: var(--color-background); /* 活跃 tab 背景色 */
-	--color-tab-item-bg-inactive: var(--color-muted); /* 非活跃 tab 背景色 */
-	--color-tab-item-text: var(--color-foreground); /* 活跃 tab 文字色 */
-	--color-tab-item-text-inactive: var(--color-muted-foreground); /* 非活跃 tab 文字色 */
-	--color-tab-item-hover: var(--color-background); /* tab hover 背景色 */
-	--color-tab-button-hover: var(--color-muted); /* 按钮 hover 背景色 */
+	--color-tab-item-bg: var(--color-accent); /* 活跃 tab 背景色 */
+	--color-tab-item-bg-inactive: transparent; /* 非活跃 tab 背景色 */
+	--color-tab-item-text: var(--color-accent-foreground); /* 活跃 tab 文字色 */
+	--color-tab-item-text-inactive: var(--color-foreground); /* 非活跃 tab 文字色 */
+	--color-tab-item-hover: var(--color-muted); /* tab hover 背景色 */
+	--color-tab-button-hover-active: var(--accent-hover); /* 活跃 tab 按钮 hover 背景色 */
+	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
 }
 
 .dark {
@@ -102,8 +105,10 @@
 	--muted: #2d2d2d;
 	--muted-foreground: #5c5c5c;
 
-	--accent: #5c5c5c;
+	--accent: #49306a;
 	--accent-foreground: #e6e6e6;
+	--accent-hover: #503a6c;
+	--hover-2: #383838;
 
 	--overlay: #1a1a1a;
 	--overlay-foreground: #e6e6e6;
@@ -132,29 +137,16 @@
 	--sidebar-accent-foreground: oklch(0.984 0.003 247.858);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.551 0.027 264.364);
-}
 
-@theme {
-	--spacing-tab-bar-height: 2.5rem; /* h-10 */
-	--spacing-tab-item-height: 2rem; /* h-8 */
-	--spacing-tab-item-width: 8rem; /* w-32 */
-	--spacing-tab-new-button-size: 1.75rem; /* h-7 w-7 */
-	--spacing-tab-item-max-title-width: 12.5rem; /* max-w-[200px] */
-	--spacing-tab-bar-padding-x: 0.5rem; /* px-2 */
-	--spacing-tab-item-padding-x: 0.75rem; /* px-3 */
-	--spacing-tab-bar-gap: 0.125rem; /* gap-0.5 */
-	--spacing-tab-close-button-padding: 0.125rem; /* p-0.5 */
-	--spacing-tab-icon-size: 1rem; /* h-4 w-4 */
-	--spacing-tab-close-icon-size: 0.75rem; /* h-3 w-3 */
-
-	/* Tab Bar Colors */
+	/* Tab Bar Colors for Dark Mode */
 	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */
-	--color-tab-item-bg: var(--color-background); /* 活跃 tab 背景色 */
-	--color-tab-item-bg-inactive: var(--color-muted); /* 非活跃 tab 背景色 */
-	--color-tab-item-text: var(--color-foreground); /* 活跃 tab 文字色 */
-	--color-tab-item-text-inactive: var(--color-muted-foreground); /* 非活跃 tab 文字色 */
-	--color-tab-item-hover: var(--color-background); /* tab hover 背景色 */
-	--color-tab-button-hover: var(--color-muted); /* 按钮 hover 背景色 */
+	--color-tab-item-bg: var(--color-accent); /* 活跃 tab 背景色 */
+	--color-tab-item-bg-inactive: transparent; /* 非活跃 tab 背景色 */
+	--color-tab-item-text: var(--color-accent-foreground); /* 活跃 tab 文字色 */
+	--color-tab-item-text-inactive: var(--color-foreground); /* 非活跃 tab 文字色 */
+	--color-tab-item-hover: var(--color-secondary); /* tab hover 背景色 */
+	--color-tab-button-hover-active: var(--accent-hover); /* 活跃 tab 按钮 hover 背景色 */
+	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
 }
 
 @theme inline {
