@@ -43,6 +43,15 @@
 		}
 	}
 
+	function handleTabCloseAll() {
+		const unclosableTabs = tabs.filter((tab) => tab.closable === false);
+		if (unclosableTabs.length > 0) {
+			tabs = unclosableTabs;
+			activeTabId = unclosableTabs[0].id;
+			goto(unclosableTabs[0].href);
+		}
+	}
+
 	function handleNewTab() {
 		const chatId = `chat-${Date.now()}`;
 		const newTab: Tab = {
@@ -69,6 +78,7 @@
 		bind:activeTabId
 		onTabClick={handleTabClick}
 		onTabClose={handleTabClose}
+		onTabCloseAll={handleTabCloseAll}
 		onNewTab={handleNewTab}
 	/>
 

@@ -24,7 +24,7 @@
 	let value = $state('zh');
 
 	const triggerContent = $derived(
-		languages.find((f) => f.key === value)?.nativeName ?? m.selectLanguage()
+		languages.find((f) => f.key === value)?.nativeName ?? m.select_language()
 	);
 </script>
 
