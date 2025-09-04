@@ -53,7 +53,8 @@
 	"dependencies": {
 		"@inlang/paraglide-js": "^2.0.0",
 		"@sveltejs/adapter-static": "^3.0.9",
-		"mode-watcher": "^1.1.0"
+		"mode-watcher": "^1.1.0",
+		"svelte-dnd-action": "^0.9.64"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [

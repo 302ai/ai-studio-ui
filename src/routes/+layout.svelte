@@ -2,16 +2,10 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { ModeWatcher } from 'mode-watcher';
-	import TabBar from '$lib/components/layout/TabBar.svelte';
+	import TabBar from '$lib/components/buss/tab-bar/tab-bar.svelte';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-
-	type Tab = {
-		id: string;
-		title: string;
-		href: string;
-		closable?: boolean;
-	};
+	import type { Tab } from '@/components/buss/tab-bar/tab-item.svelte';
 
 	let { children } = $props();
 
