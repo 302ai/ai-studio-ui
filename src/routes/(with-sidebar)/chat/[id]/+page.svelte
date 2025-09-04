@@ -4,6 +4,9 @@
 	import { cn } from '@/utils';
 	import { Globe, Lightbulb, Paperclip } from '@lucide/svelte';
 	import ButtonWithTooltip from '@/components/ui/button-with-tooltip.svelte';
+	import { chatState } from '$lib/stores/chat-state.js';
+
+	let disabled = $derived(chatState.providerType !== '302ai');
 </script>
 
 <div class="flex flex-col gap-y-9">
@@ -21,20 +24,20 @@
 		<Textarea
 			class={cn(
 				'max-h-52 w-full resize-none p-0',
-				'border-none focus-within:ring-0 focus-within:outline-hidden focus-visible:ring-0'
+				'border-none shadow-none focus-within:ring-0 focus-within:outline-hidden focus-visible:ring-0'
 			)}
 			placeholder={m.chat_placeholder()}
 		/>
 
 		<div class="flex h-9 items-center gap-x-2">
-			<ButtonWithTooltip tooltip="Globe">
-				<Globe />
+			<ButtonWithTooltip tooltip={m.chat_uploadAttachment()}>
+				<Paperclip />
 			</ButtonWithTooltip>
-			<ButtonWithTooltip tooltip="Lightbulb">
+			<ButtonWithTooltip tooltip={disabled ? m.chat_unsupportAction() : m.chat_thinking()}>
 				<Lightbulb />
 			</ButtonWithTooltip>
-			<ButtonWithTooltip tooltip="Paperclip">
-				<Paperclip />
+			<ButtonWithTooltip tooltip={disabled ? m.chat_unsupportAction() : m.chat_onlineSearch()}>
+				<Globe />
 			</ButtonWithTooltip>
 		</div>
 	</div>

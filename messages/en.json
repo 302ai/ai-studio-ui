@@ -5,6 +5,10 @@
 	"chat_slogan": "Hi, are you ready to explore the world with me?",
 	"language": "Language",
 	"select_language": "Select a language",
+	"chat_uploadAttachment": "Attach file(file size cannot exceed 10MB)",
+	"chat_unsupportAction": "Only models from 302.AI Provider are available",
+	"chat_thinking": "Thinking",
+	"chat_onlineSearch": "Online Search",
 	"tab_context_close": "Close",
 	"tab_context_close_all": "Close All"
 }
