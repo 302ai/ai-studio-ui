@@ -34,9 +34,9 @@
 	}
 </script>
 
-<div class={cn('flex h-10 items-end border-b bg-muted/50', className)}>
+<div class={cn('flex h-10 w-full items-end border-b bg-muted/50', className)}>
 	<div
-		class="flex items-end gap-0.5 overflow-x-auto px-2"
+		class="flex w-full items-end gap-0.5 overflow-x-auto px-2"
 		use:dndzone={{ items: tabs, flipDurationMs: 200, dropTargetStyle: {} }}
 		onconsider={handleDndConsider}
 		onfinalize={handleDndFinalize}
