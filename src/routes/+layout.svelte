@@ -12,7 +12,7 @@
 		{ id: 'home', title: 'Home', href: '/', closable: false },
 		{ id: 'with-sidebar', title: 'With Sidebar', href: '/dashboard', closable: true },
 		{ id: 'full-width', title: 'Full Width', href: '/full', closable: true },
-		{ id: 'settings', title: 'Settings', href: '/settings', closable: true }
+		{ id: 'settings', title: 'Settings', href: '/settings/general-settings', closable: true }
 	]);
 
 	let activeTabId = $state('home');

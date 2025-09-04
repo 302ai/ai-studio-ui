@@ -50,7 +50,7 @@
 						<Sidebar.MenuButton>
 							<Settings />
 							<span>
-								<a href="/settings/">
+								<a href="/settings/general-settings">
 									<span>settings</span>
 								</a>
 							</span>
