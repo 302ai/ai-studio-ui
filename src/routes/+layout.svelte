@@ -44,10 +44,11 @@
 	}
 
 	function handleNewTab() {
+		const chatId = `chat-${Date.now()}`;
 		const newTab: Tab = {
-			id: `tab-${Date.now()}`,
-			title: 'New Tab',
-			href: '/',
+			id: chatId,
+			title: 'New Chat',
+			href: `/chat/${chatId}`,
 			closable: true
 		};
 		tabs = [...tabs, newTab];
