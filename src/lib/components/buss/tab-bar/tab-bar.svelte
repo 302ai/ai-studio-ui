@@ -20,16 +20,16 @@
 </script>
 
 <script lang="ts">
-	import { Plus } from "@lucide/svelte";
-	import { cn } from "$lib/utils";
-	import { dndzone, TRIGGERS } from "svelte-dnd-action";
-	import { Spring } from "svelte/motion";
-	import { Separator } from "$lib/components/ui/separator/index.js";
 	import ButtonWithTooltip from "$lib/components/ui/button-with-tooltip.svelte";
-	import TabItem from "./tab-item.svelte";
-	import { flip } from "svelte/animate";
-	import { scale } from "svelte/transition";
+	import { Separator } from "$lib/components/ui/separator/index.js";
 	import { m } from "$lib/paraglide/messages.js";
+	import { cn } from "$lib/utils";
+	import { Plus } from "@lucide/svelte";
+	import { dndzone, TRIGGERS } from "svelte-dnd-action";
+	import { flip } from "svelte/animate";
+	import { Spring } from "svelte/motion";
+	import { scale } from "svelte/transition";
+	import TabItem from "./tab-item.svelte";
 
 	let {
 		tabs = $bindable<Tab[]>(),
@@ -43,7 +43,6 @@
 	}: Props = $props();
 
 	let draggedElementId = $state<string | null>(null);
-	let isDraggedOutsideOfAny = $state(false);
 	let buttonSpring = new Spring({ opacity: 1, x: 0 }, { stiffness: 0.2, damping: 0.8 });
 	let buttonBounceSpring = new Spring({ x: 0 }, ANIMATION_CONSTANTS.SPRING_CONFIG);
 
@@ -91,21 +90,6 @@
 			if (draggedTab) {
 				onTabClick(draggedTab);
 			}
-			isDraggedOutsideOfAny = false;
-		}
-
-		if (
-			e.detail.info.trigger === TRIGGERS.DRAGGED_ENTERED ||
-			e.detail.info.trigger === TRIGGERS.DRAGGED_OVER_INDEX ||
-			e.detail.info.trigger === TRIGGERS.DRAGGED_ENTERED_ANOTHER ||
-			e.detail.info.trigger === TRIGGERS.DROPPED_INTO_ZONE ||
-			e.detail.info.trigger === TRIGGERS.DROPPED_INTO_ANOTHER
-		) {
-			isDraggedOutsideOfAny = false;
-		}
-
-		if (e.detail.info.trigger === TRIGGERS.DRAGGED_LEFT_ALL) {
-			isDraggedOutsideOfAny = true;
 		}
 
 		const newItems = e.detail.items;
@@ -118,7 +102,7 @@
 	}
 	function handleDndFinalize(e: CustomEvent) {
 		isDndFinalizing = true;
-		isDraggedOutsideOfAny = false;
+
 		draggedElementId = null;
 		tabs = e.detail.items;
 		buttonSpring.target = { opacity: 1, x: 0 };
@@ -141,15 +125,13 @@
 
 <div class={cn("flex h-tab-bar-height w-full items-center border-b bg-tab-bar-bg/50", className)}>
 	<div
-		class="flex w-full min-w-0 items-center gap-tab-bar-gap overflow-x-hidden px-tab-bar-padding-x {isDraggedOutsideOfAny
-			? 'dnd-outside'
-			: ''}"
+		class="flex w-full min-w-0 items-center gap-tab-bar-gap overflow-x-hidden px-tab-bar-padding-x"
 		use:dndzone={{
 			items: tabs,
 			flipDurationMs: 200,
 			dropTargetStyle: {},
 			transformDraggedElement,
-			morphDisabled: isDraggedOutsideOfAny,
+			morphDisabled: true,
 		}}
 		onconsider={handleDndConsider}
 		onfinalize={handleDndFinalize}
