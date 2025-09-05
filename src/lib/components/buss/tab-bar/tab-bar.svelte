@@ -1,5 +1,7 @@
 <script lang="ts" module>
+	import type { DndEvent } from "svelte-dnd-action";
 	import { type Tab } from "./tab-item.svelte";
+
 	interface Props {
 		tabs: Tab[];
 		activeTabId: string;
@@ -16,7 +18,9 @@
 		BOUNCE_INTENSITY: 20,
 		BOUNCE_DURATION: 200,
 		SPRING_CONFIG: { stiffness: 0.2, damping: 0.7 },
-	};
+	} as const;
+
+	type TabDndEvent = DndEvent<Tab>;
 </script>
 
 <script lang="ts">
@@ -24,7 +28,9 @@
 	import { Separator } from "$lib/components/ui/separator/index.js";
 	import { m } from "$lib/paraglide/messages.js";
 	import { cn } from "$lib/utils";
+	import { animateButtonBounce } from "$lib/utils/animation";
 	import { Plus } from "@lucide/svelte";
+	import { onDestroy } from "svelte";
 	import { dndzone, TRIGGERS } from "svelte-dnd-action";
 	import { flip } from "svelte/animate";
 	import { Spring } from "svelte/motion";
@@ -44,86 +50,90 @@
 
 	let draggedElementId = $state<string | null>(null);
 	let buttonSpring = new Spring({ opacity: 1, x: 0 }, { stiffness: 0.2, damping: 0.8 });
-	let buttonBounceSpring = new Spring({ x: 0 }, ANIMATION_CONSTANTS.SPRING_CONFIG);
+	let buttonBounceSpring = new Spring({ x: 0 }, { stiffness: 0.4, damping: 0.6 });
 
 	let previousTabsLength = $state(tabs.length);
 	let isAnimating = $state(false);
 	let isDndFinalizing = $state(false);
 
+	let tabsCountDiff = $derived(tabs.length - previousTabsLength);
+	let shouldAnimateCloseTab = $derived(tabsCountDiff < 0 && !isAnimating);
+
 	function handleNewTab() {
 		if (isAnimating) return;
 
 		isAnimating = true;
-
 		onNewTab();
 
-		setTimeout(() => {
-			buttonBounceSpring.target = { x: 12 };
-
-			setTimeout(() => {
-				buttonBounceSpring.target = { x: 0 };
-				setTimeout(() => {
-					isAnimating = false;
-				}, ANIMATION_CONSTANTS.BOUNCE_DURATION);
-			}, 80);
-		}, ANIMATION_CONSTANTS.TAB_APPEAR_DELAY - 20);
+		animateButtonBounce(buttonBounceSpring, "new").then(() => {
+			isAnimating = false;
+		});
 	}
 
 	$effect(() => {
-		const tabsCountDiff = tabs.length - previousTabsLength;
-
-		if (tabsCountDiff < 0 && !isAnimating) {
-			buttonBounceSpring.target = { x: -10 };
-			setTimeout(() => {
-				buttonBounceSpring.target = { x: 0 };
-			}, 100);
+		if (shouldAnimateCloseTab) {
+			animateButtonBounce(buttonBounceSpring, "close");
 		}
-
 		previousTabsLength = tabs.length;
 	});
 
-	function handleDndConsider(e: CustomEvent) {
-		if (e.detail.info.trigger === TRIGGERS.DRAG_STARTED) {
-			draggedElementId = e.detail.info.id;
-			buttonSpring.target = { opacity: 0, x: 10 };
-			const draggedTab = tabs.find((tab) => tab.id === e.detail.info.id);
+	function handleDndConsider(e: CustomEvent<TabDndEvent>) {
+		const { info, items: newItems } = e.detail;
+
+		if (info.trigger === TRIGGERS.DRAG_STARTED) {
+			draggedElementId = info.id;
+			buttonSpring.target = { opacity: 0.3, x: 8 };
+			const draggedTab = tabs.find((tab) => tab.id === info.id);
 			if (draggedTab) {
 				onTabClick(draggedTab);
 			}
 		}
 
-		const newItems = e.detail.items;
-		const hasOrderChanged = newItems.some(
-			(item: Tab, index: number) => item.id !== tabs[index]?.id,
-		);
-		if (hasOrderChanged) {
-			tabs = newItems;
-		}
+		const hasOrderChanged = newItems.some((item, index) => item.id !== tabs[index]?.id);
+		if (hasOrderChanged) tabs = newItems;
 	}
-	function handleDndFinalize(e: CustomEvent) {
+	function handleDndFinalize(e: CustomEvent<TabDndEvent>) {
 		isDndFinalizing = true;
 
-		draggedElementId = null;
-		tabs = e.detail.items;
-		buttonSpring.target = { opacity: 1, x: 0 };
-		setTimeout(() => {
-			isDndFinalizing = false;
-		}, 0);
-	}
-	function transformDraggedElement(element?: HTMLElement) {
-		if (element) {
-			element.style.outline = "none";
-			const tabElement = element.querySelector('div[role="button"]') as HTMLElement;
-			if (tabElement) {
-				tabElement.classList.remove("hover:bg-tab-item-hover");
-				tabElement.classList.add("bg-tab-item-bg", "text-tab-item-text", "shadow-sm");
-				tabElement.classList.remove("bg-tab-item-bg-inactive", "text-tab-item-text-inactive");
-			}
+		try {
+			draggedElementId = null;
+			tabs = e.detail.items;
+			buttonSpring.target = { opacity: 1, x: 0 };
+		} catch (error) {
+			console.error("Error finalizing drag operation:", error);
+		} finally {
+			queueMicrotask(() => {
+				isDndFinalizing = false;
+			});
 		}
 	}
+	function transformDraggedElement(element?: HTMLElement) {
+		if (!element) return;
+
+		try {
+			element.style.outline = "none";
+
+			const tabElement = element.querySelector('[role="button"]') as HTMLElement;
+			tabElement?.classList.remove("hover:bg-tab-item-hover");
+			tabElement?.classList.add("bg-tab-item-bg", "text-tab-item-text", "shadow-sm");
+			tabElement?.classList.remove("bg-tab-item-bg-inactive", "text-tab-item-text-inactive");
+		} catch (error) {
+			console.warn("Error transforming dragged element:", error);
+		}
+	}
+	onDestroy(() => {
+		buttonSpring.target = { opacity: 1, x: 0 };
+		buttonBounceSpring.target = { x: 0 };
+
+		window.cancelAnimationFrame?.(0);
+	});
 </script>
 
-<div class={cn("flex h-tab-bar-height w-full items-center border-b bg-tab-bar-bg/50", className)}>
+<div
+	class={cn("flex h-tab-bar-height w-full items-center border-b bg-tab-bar-bg/50", className)}
+	role="tablist"
+	aria-label={m.tab_new() ?? "Tab bar"}
+>
 	<div
 		class="flex w-full min-w-0 items-center gap-tab-bar-gap overflow-x-hidden px-tab-bar-padding-x"
 		use:dndzone={{
@@ -132,6 +142,9 @@
 			dropTargetStyle: {},
 			transformDraggedElement,
 			morphDisabled: true,
+			autoAriaDisabled: false,
+			zoneTabIndex: 0,
+			zoneItemTabIndex: 0,
 		}}
 		onconsider={handleDndConsider}
 		onfinalize={handleDndFinalize}
@@ -145,6 +158,8 @@
 			<div
 				class={cn("flex min-w-0 items-center", autoStretch && "flex-1 basis-0")}
 				data-id={tab.id}
+				role="presentation"
+				aria-label={tab.title}
 				animate:flip={{ duration: 200 }}
 				in:scale={draggedElementId || isDndFinalizing
 					? { duration: 0 }

@@ -17,15 +17,18 @@
 		onTabCloseAll: () => void;
 		class?: string;
 	}
+
+	const COMPACT_THRESHOLD_PX = 64;
 </script>
 
 <script lang="ts">
-	import { X, XCircle } from "@lucide/svelte";
-	import { cn } from "$lib/utils";
-	import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
 	import ButtonWithTooltip from "$lib/components/ui/button-with-tooltip.svelte";
+	import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
 	import { m } from "$lib/paraglide/messages.js";
+	import { cn } from "$lib/utils";
+	import { X, XCircle } from "@lucide/svelte";
 	import type { Snippet } from "svelte";
+	import { onDestroy } from "svelte";
 
 	let {
 		tab,
@@ -40,16 +43,31 @@
 
 	let triggerRef = $state<HTMLElement | null>(null);
 	let isCompact = $state(false);
-	const COMPACT_THRESHOLD_PX = 64;
 
 	$effect(() => {
-		if (!triggerRef || !triggerRef.parentElement) return;
-		const ro = new ResizeObserver(() => {
-			const width = triggerRef?.parentElement?.clientWidth ?? 0;
+		if (!triggerRef?.parentElement) return;
+
+		try {
+			const ro = new ResizeObserver((entries) => {
+				requestAnimationFrame(() => {
+					const entry = entries[0];
+					if (entry?.contentRect) {
+						isCompact = entry.contentRect.width < COMPACT_THRESHOLD_PX;
+					}
+				});
+			});
+
+			ro.observe(triggerRef.parentElement);
+			return () => ro.disconnect();
+		} catch (error) {
+			console.warn("Error setting up ResizeObserver:", error);
+			const width = triggerRef.parentElement.clientWidth;
 			isCompact = width < COMPACT_THRESHOLD_PX;
-		});
-		ro.observe(triggerRef.parentElement);
-		return () => ro.disconnect();
+		}
+	});
+
+	onDestroy(() => {
+		window.cancelAnimationFrame?.(0);
 	});
 </script>
 
@@ -69,12 +87,6 @@
 		onclick={() => onTabClick(tab)}
 		role="button"
 		tabindex={0}
-		onkeydown={(e) => {
-			if (e.key === "Enter" || e.key === " ") {
-				e.preventDefault();
-				onTabClick(tab);
-			}
-		}}
 	>
 		<div bind:this={triggerRef} class="contents">
 			{#if tab.icon && !isCompact}
