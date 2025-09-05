@@ -97,8 +97,8 @@ This is a **SvelteKit 5** application using the modern `$props()` and `{@render}
 
 <script lang="ts">
 	// Component logic (instance-specific)
-	import { X } from '@lucide/svelte';
-	import { cn } from '$lib/utils';
+	import { X } from "@lucide/svelte";
+	import { cn } from "$lib/utils";
 
 	let { tab, isActive, onTabClick, onTabClose }: Props = $props();
 </script>
@@ -108,7 +108,7 @@ This is a **SvelteKit 5** application using the modern `$props()` and `{@render}
 
 ```svelte
 <script lang="ts">
-	import { X, Menu, Home } from '@lucide/svelte';
+	import { X, Menu, Home } from "@lucide/svelte";
 </script>
 
 <!-- Standard fixed sizes -->
@@ -127,10 +127,10 @@ This is a **SvelteKit 5** application using the modern `$props()` and `{@render}
   - `index.ts` for exports following this pattern:
 
 ```ts
-import Root from './accordion.svelte';
-import Content from './accordion-content.svelte';
-import Item from './accordion-item.svelte';
-import Trigger from './accordion-trigger.svelte';
+import Root from "./accordion.svelte";
+import Content from "./accordion-content.svelte";
+import Item from "./accordion-item.svelte";
+import Trigger from "./accordion-trigger.svelte";
 
 export {
 	Root,
@@ -141,7 +141,7 @@ export {
 	Root as Accordion,
 	Content as AccordionContent,
 	Item as AccordionItem,
-	Trigger as AccordionTrigger
+	Trigger as AccordionTrigger,
 };
 ```
 
@@ -149,12 +149,12 @@ export {
 
 ```svelte
 <script lang="ts">
-	import { setLocale } from '$lib/paraglide/runtime';
-	import { m } from '$lib/paraglide/messages.js';
+	import { setLocale } from "$lib/paraglide/runtime";
+	import { m } from "$lib/paraglide/messages.js";
 </script>
 
-<h1>{m.hello_world({ name: 'User' })}</h1>
-<button onclick={() => setLocale('zh')}>中文</button>
+<h1>{m.hello_world({ name: "User" })}</h1>
+<button onclick={() => setLocale("zh")}>中文</button>
 ```
 
 **Customizable Component Pattern (Tab Bar Example):**
@@ -171,19 +171,19 @@ export {
 </script>
 
 <script lang="ts">
-	import { X } from '@lucide/svelte';
-	import { cn } from '$lib/utils';
+	import { X } from "@lucide/svelte";
+	import { cn } from "$lib/utils";
 
 	let { tab, isActive, onTabClick, onTabClose }: Props = $props();
 </script>
 
 <div
 	class={cn(
-		'group relative flex h-tab-item-height w-tab-item-width cursor-pointer items-center gap-2 px-tab-item-padding-x text-sm transition-all',
-		'rounded-t-md border border-b-0 hover:bg-tab-item-hover/80',
+		"group relative flex h-tab-item-height w-tab-item-width cursor-pointer items-center gap-2 px-tab-item-padding-x text-sm transition-all",
+		"rounded-t-md border border-b-0 hover:bg-tab-item-hover/80",
 		isActive
-			? 'bg-tab-item-bg text-tab-item-text shadow-sm'
-			: 'border-transparent bg-tab-item-bg-inactive/50 text-tab-item-text-inactive'
+			? "bg-tab-item-bg text-tab-item-text shadow-sm"
+			: "border-transparent bg-tab-item-bg-inactive/50 text-tab-item-text-inactive",
 	)}
 	onclick={() => onTabClick(tab)}
 >
@@ -191,8 +191,8 @@ export {
 	{#if tab.closable !== false}
 		<button
 			class={cn(
-				'opacity-0 transition-opacity group-hover:opacity-100',
-				'rounded p-tab-close-button-padding hover:bg-tab-button-hover'
+				"opacity-0 transition-opacity group-hover:opacity-100",
+				"hover:bg-tab-button-hover rounded p-tab-close-button-padding",
 			)}
 			onclick={(e) => {
 				e.stopPropagation();

@@ -5,7 +5,7 @@
 	let { children } = $props();
 </script>
 
-<Sidebar.Provider class="h-full min-h-fit">
+<Sidebar.Provider class="h-full min-h-fit" style="--sidebar-width: var(--setting-width);">
 	<SettingsSidebar />
 	<Sidebar.Inset class="flex-1">
 		<div class="flex-1 overflow-auto">

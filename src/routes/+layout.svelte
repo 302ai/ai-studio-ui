@@ -5,7 +5,7 @@
 	import { TabBar, type Tab } from "@/components/buss/tab-bar";
 	import { page } from "$app/state";
 	import { goto } from "$app/navigation";
-	import { Home, Layout, Maximize, Settings, MessageCircle } from "@lucide/svelte";
+	import { Home, Layout, Settings, MessageCircle } from "@lucide/svelte";
 
 	let { children } = $props();
 
@@ -23,13 +23,6 @@
 			href: "/dashboard",
 			closable: true,
 			icon: layoutIcon,
-		},
-		{
-			id: "full-width",
-			title: "Full Width",
-			href: "/full",
-			closable: true,
-			icon: maximizeIcon,
 		},
 		{
 			id: "settings",
@@ -102,10 +95,6 @@
 
 {#snippet layoutIcon()}
 	<Layout class="h-full w-full" />
-{/snippet}
-
-{#snippet maximizeIcon()}
-	<Maximize class="h-full w-full" />
 {/snippet}
 
 {#snippet settingsIcon()}

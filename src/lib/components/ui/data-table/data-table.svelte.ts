@@ -3,9 +3,9 @@ import {
 	type TableOptions,
 	type TableOptionsResolved,
 	type TableState,
-	createTable
-} from '@tanstack/table-core';
-import { SvelteSet } from 'svelte/reactivity';
+	createTable,
+} from "@tanstack/table-core";
+import { SvelteSet } from "svelte/reactivity";
 
 /**
  * Creates a reactive TanStack table object for Svelte.
@@ -41,12 +41,12 @@ export function createSvelteTable<TData extends RowData>(options: TableOptions<T
 			renderFallbackValue: null,
 			mergeOptions: (
 				defaultOptions: TableOptions<TData>,
-				options: Partial<TableOptions<TData>>
+				options: Partial<TableOptions<TData>>,
 			) => {
 				return mergeObjects(defaultOptions, options);
-			}
+			},
 		},
-		options
+		options,
 	);
 
 	const table = createTable(resolvedOptions);
@@ -63,7 +63,7 @@ export function createSvelteTable<TData extends RowData>(options: TableOptions<T
 					else state = mergeObjects(state, updater);
 
 					options.onStateChange?.(updater);
-				}
+				},
 			});
 		});
 	}
@@ -93,7 +93,7 @@ export function mergeObjects<Sources extends readonly MaybeThunk<any>[]>(
 	...sources: Sources
 ): Intersection<{ [K in keyof Sources]: Sources[K] }> {
 	const resolve = <T extends object>(src: MaybeThunk<T>): T | undefined =>
-		typeof src === 'function' ? (src() ?? undefined) : src;
+		typeof src === "function" ? (src() ?? undefined) : src;
 
 	const findSourceWithKey = (key: PropertyKey) => {
 		for (let i = sources.length - 1; i >= 0; i--) {
@@ -135,8 +135,8 @@ export function mergeObjects<Sources extends readonly MaybeThunk<any>[]>(
 				enumerable: true,
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				value: (src as any)[key],
-				writable: true
+				writable: true,
 			};
-		}
+		},
 	}) as Intersection<{ [K in keyof Sources]: Sources[K] }>;
 }
