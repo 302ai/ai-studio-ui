@@ -43,15 +43,13 @@
 	}: Props = $props();
 
 	let draggedElementId = $state<string | null>(null);
-
-	let rowEl = $state<HTMLElement | null>(null);
-	let controlsEl = $state<HTMLElement | null>(null);
-
+	let isDraggedOutsideOfAny = $state(false);
 	let buttonSpring = new Spring({ opacity: 1, x: 0 }, { stiffness: 0.2, damping: 0.8 });
 	let buttonBounceSpring = new Spring({ x: 0 }, ANIMATION_CONSTANTS.SPRING_CONFIG);
 
 	let previousTabsLength = $state(tabs.length);
 	let isAnimating = $state(false);
+	let isDndFinalizing = $state(false);
 
 	function handleNewTab() {
 		if (isAnimating) return;
@@ -93,14 +91,40 @@
 			if (draggedTab) {
 				onTabClick(draggedTab);
 			}
+			isDraggedOutsideOfAny = false;
 		}
 
-		tabs = e.detail.items;
+		if (
+			e.detail.info.trigger === TRIGGERS.DRAGGED_ENTERED ||
+			e.detail.info.trigger === TRIGGERS.DRAGGED_OVER_INDEX ||
+			e.detail.info.trigger === TRIGGERS.DRAGGED_ENTERED_ANOTHER ||
+			e.detail.info.trigger === TRIGGERS.DROPPED_INTO_ZONE ||
+			e.detail.info.trigger === TRIGGERS.DROPPED_INTO_ANOTHER
+		) {
+			isDraggedOutsideOfAny = false;
+		}
+
+		if (e.detail.info.trigger === TRIGGERS.DRAGGED_LEFT_ALL) {
+			isDraggedOutsideOfAny = true;
+		}
+
+		const newItems = e.detail.items;
+		const hasOrderChanged = newItems.some(
+			(item: Tab, index: number) => item.id !== tabs[index]?.id,
+		);
+		if (hasOrderChanged) {
+			tabs = newItems;
+		}
 	}
 	function handleDndFinalize(e: CustomEvent) {
-		tabs = e.detail.items;
+		isDndFinalizing = true;
+		isDraggedOutsideOfAny = false;
 		draggedElementId = null;
+		tabs = e.detail.items;
 		buttonSpring.target = { opacity: 1, x: 0 };
+		setTimeout(() => {
+			isDndFinalizing = false;
+		}, 0);
 	}
 	function transformDraggedElement(element?: HTMLElement) {
 		if (element) {
@@ -113,36 +137,20 @@
 			}
 		}
 	}
-
-	function recomputeStretch() {
-		if (!rowEl || !controlsEl) return;
-		// Could be used for dynamic stretching logic
-	}
-
-	$effect(() => {
-		// Recompute when tabs change (add/remove/rename)
-		void tabs;
-		setTimeout(recomputeStretch, 0);
-	});
-
-	$effect(() => {
-		if (!rowEl || !controlsEl) return;
-		const ro1 = new ResizeObserver(() => recomputeStretch());
-		const ro2 = new ResizeObserver(() => recomputeStretch());
-		ro1.observe(rowEl);
-		ro2.observe(controlsEl);
-		return () => {
-			ro1.disconnect();
-			ro2.disconnect();
-		};
-	});
 </script>
 
 <div class={cn("flex h-tab-bar-height w-full items-center border-b bg-tab-bar-bg/50", className)}>
 	<div
-		bind:this={rowEl}
-		class="flex w-full min-w-0 items-center gap-tab-bar-gap overflow-x-hidden px-tab-bar-padding-x"
-		use:dndzone={{ items: tabs, flipDurationMs: 200, dropTargetStyle: {}, transformDraggedElement }}
+		class="flex w-full min-w-0 items-center gap-tab-bar-gap overflow-x-hidden px-tab-bar-padding-x {isDraggedOutsideOfAny
+			? 'dnd-outside'
+			: ''}"
+		use:dndzone={{
+			items: tabs,
+			flipDurationMs: 200,
+			dropTargetStyle: {},
+			transformDraggedElement,
+			morphDisabled: isDraggedOutsideOfAny,
+		}}
 		onconsider={handleDndConsider}
 		onfinalize={handleDndFinalize}
 	>
@@ -155,12 +163,13 @@
 			<div
 				class={cn("flex min-w-0 items-center", autoStretch && "flex-1 basis-0")}
 				data-id={tab.id}
-				style={draggedElementId === tab.id ? "visibility: hidden;" : ""}
 				animate:flip={{ duration: 200 }}
-				in:scale={draggedElementId
+				in:scale={draggedElementId || isDndFinalizing
 					? { duration: 0 }
 					: { duration: 250, start: 0.8, delay: ANIMATION_CONSTANTS.TAB_APPEAR_DELAY }}
-				out:scale={draggedElementId ? { duration: 0 } : { duration: 200, start: 0.8 }}
+				out:scale={draggedElementId || isDndFinalizing
+					? { duration: 0 }
+					: { duration: 200, start: 0.8 }}
 			>
 				<TabItem
 					{tab}
@@ -183,7 +192,6 @@
 		{/each}
 
 		<div
-			bind:this={controlsEl}
 			class="flex shrink-0 items-center"
 			style="opacity: {buttonSpring.current.opacity}; transform: translateX({buttonSpring.current
 				.x + buttonBounceSpring.current.x}px);"

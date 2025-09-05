@@ -251,4 +251,15 @@
 	* {
 		--setting-width: 170px;
 	}
+
+	.dnd-outside [data-is-dnd-shadow-item-internal="true"] {
+		width: 0 !important;
+		min-width: 0 !important;
+		max-width: 0 !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		border: 0 !important;
+		visibility: hidden !important;
+		overflow: hidden !important;
+	}
 }
