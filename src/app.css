@@ -34,7 +34,11 @@
 
 	--border: #d9d9d9;
 
+	--settings-switch-border: #dbdbdb;
+
 	--label-fg: #8e8e8e;
+
+	--settings-item-bg: #f9f9f9;
 
 	--input: #f9f9f9;
 
@@ -80,6 +84,8 @@
 	--accent-hover: #503a6c;
 	--hover-2: #383838;
 
+	--settings-item-bg: #1a1a1a;
+
 	--overlay: #1a1a1a;
 	--overlay-foreground: #e6e6e6;
 
@@ -88,6 +94,8 @@
 	--label-fg: #a0a0a0;
 
 	--border: #3d3d3d;
+
+	--settings-switch-border: #3d3d3d;
 
 	--input: #1a1a1a;
 
@@ -146,6 +154,12 @@
 	--color-tab-item-hover: var(--color-muted); /* tab hover 背景色 */
 	--color-tab-button-hover-active: var(--accent-hover); /* 活跃 tab 按钮 hover 背景色 */
 	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
+
+	/* Settings Item Colors */
+	--color-settings-item-bg: var(--settings-item-bg);
+
+	/* Settings switch color*/
+	--color-settings-switch-border: var(--settings-switch-border);
 }
 
 @theme inline {
@@ -157,6 +171,7 @@
 	--radius-2xl: calc(var(--radius-lg) * 1.5);
 	--radius-3xl: calc(var(--radius-lg) * 2);
 	--radius-4xl: calc(var(--radius-lg) * 3);
+	--radius-settings-item-border-radius: var(--spacing-settings-item-border-radius);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -191,6 +206,8 @@
 	--color-overlay: var(--overlay);
 	--color-overlay-foreground: var(--overlay-foreground);
 	--color-label-fg: var(--label-fg);
+	--color-switch-border: var(--switch-border);
+	--color-settings-item-bg: var(--settings-item-bg);
 }
 
 @layer base {

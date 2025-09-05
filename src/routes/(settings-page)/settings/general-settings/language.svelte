@@ -31,7 +31,7 @@
 <Label for="language" class="text-label-fg">{m.language()}</Label>
 
 <Select.Root type="single" name="language" bind:value>
-	<Select.Trigger class="!bg-setting w-full data-[size=default]:h-settings-item-height">
+	<Select.Trigger class="w-full !bg-settings-item-bg data-[size=default]:h-settings-item-height">
 		{triggerContent}
 	</Select.Trigger>
 	<Select.Content>

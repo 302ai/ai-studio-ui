@@ -31,7 +31,7 @@
 <Label for="layout" class="text-label-fg">{m.layout()}</Label>
 
 <Select.Root type="single" name="layout" bind:value>
-	<Select.Trigger class="!bg-setting w-full data-[size=default]:h-settings-item-height"
+	<Select.Trigger class="w-full !bg-settings-item-bg data-[size=default]:h-settings-item-height"
 		>{getLabel(value)}</Select.Trigger
 	>
 	<Select.Content>
