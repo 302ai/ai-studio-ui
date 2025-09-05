@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Textarea } from "@/components/ui/textarea";
 	import { m } from "$lib/paraglide/messages.js";
-	import { cn } from "@/utils";
-	import { Globe, Lightbulb, Settings2 } from "@lucide/svelte";
 	import ButtonWithTooltip from "@/components/ui/button-with-tooltip.svelte";
+	import { Textarea } from "@/components/ui/textarea";
 	import { chatState } from "@/stores/chat-state.svelte";
+	import { cn } from "@/utils";
 	import mcpIcon from "@lobehub/icons-static-svg/icons/mcp.svg";
+	import { Globe, Lightbulb, Settings2 } from "@lucide/svelte";
 	import { AttachmentThumbnailBar, AttachmentUploader } from "../components";
 
 	let disabled = $derived(chatState.providerType !== "302ai");
