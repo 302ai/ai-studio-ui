@@ -3,10 +3,10 @@
 </script>
 
 <script lang="ts">
-	import ButtonWithTooltip from "@/components/ui/button-with-tooltip.svelte";
 	import { m } from "$lib/paraglide/messages.js";
-	import { Paperclip } from "@lucide/svelte";
+	import ButtonWithTooltip from "@/components/ui/button-with-tooltip.svelte";
 	import { chatState, type AttachmentFile } from "@/stores/chat-state.svelte";
+	import { Paperclip } from "@lucide/svelte";
 	import { nanoid } from "nanoid";
 
 	let attachments = $derived(chatState.attachments);
