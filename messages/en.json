@@ -18,5 +18,9 @@
 	"ultra-wide": "Ultra Wide",
 	"selectLanguage": "Select a language",
 	"privacyMode": "Privacy mode",
-	"autoInherit": "Auto inherit"
+	"autoInherit": "Auto inherit",
+	"autoUpdate": "Automatic Update",
+	"versionUpdate": "Version update",
+	"versionInformation": "Version",
+	"checkUpdate": "Check"
 }

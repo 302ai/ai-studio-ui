@@ -4,6 +4,10 @@
 	"chat_placeholder": "在这里输入消息，按 Enter 发送，按 Shift + Enter 换行",
 	"chat_slogan": "嗨，准备好和我一起探索世界了吗?",
 	"language": "语言",
+	"layout": "布局",
+	"default": "默认",
+	"wide": "宽",
+	"ultra-wide": "超宽",
 	"select_language": "选择语言",
 	"chat_uploadAttachment": "上传附件(文件不能超过10MB)",
 	"chat_unsupportAction": "仅302.AI供应商的模型可用",
@@ -11,12 +15,12 @@
 	"chat_onlineSearch": "联网搜索",
 	"tab_context_close": "关闭",
 	"tab_context_close_all": "关闭全部",
-	"layout": "布局",
-	"default": "默认",
-	"wide": "宽",
-	"ultra-wide": "超宽",
 	"chat_mcpServers": "搜索MCPf服务",
 	"chat_parameters": "参数设置",
 	"privacyMode": "隐私模式",
-	"autoInherit": "自动继承"
+	"autoInherit": "自动继承",
+	"autoUpdate": "自动更新",
+	"versionUpdate": "版本更新",
+	"versionInformation": "版本信息",
+	"checkUpdate": "检查更新"
 }
