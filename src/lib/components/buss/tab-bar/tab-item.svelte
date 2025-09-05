@@ -22,7 +22,7 @@
 	import { X, XCircle } from "@lucide/svelte";
 	import { cn } from "$lib/utils";
 	import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
-	import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+	import ButtonWithTooltip from "$lib/components/ui/button-with-tooltip.svelte";
 	import { m } from "$lib/paraglide/messages.js";
 
 	let {
@@ -79,46 +79,22 @@
 				<span class="max-w-tab-item-max-title-width min-w-0 flex-1 truncate">{tab.title}</span>
 			{/if}
 			{#if tab.closable !== false}
-				{#if isCompact}
-					<Tooltip.Provider>
-						<Tooltip.Root>
-							<Tooltip.Trigger>
-								<button
-									class={cn(
-										"shrink-0 rounded p-tab-close-button-padding transition-colors",
-										isActive
-											? "hover:bg-tab-button-hover-active"
-											: "hover:bg-tab-button-hover-inactive",
-									)}
-									onclick={(e) => {
-										e.stopPropagation();
-										onTabClose(tab);
-									}}
-									aria-label="Close tab"
-									type="button"
-								>
-									<X class="size-tab-close-icon-size" />
-								</button>
-							</Tooltip.Trigger>
-							<Tooltip.Content side="bottom" align="center">{tab.title}</Tooltip.Content>
-						</Tooltip.Root>
-					</Tooltip.Provider>
-				{:else}
-					<button
-						class={cn(
-							"shrink-0 rounded p-tab-close-button-padding transition-colors",
-							isActive ? "hover:bg-tab-button-hover-active" : "hover:bg-tab-button-hover-inactive",
-						)}
-						onclick={(e) => {
-							e.stopPropagation();
-							onTabClose(tab);
-						}}
-						aria-label="Close tab"
-						type="button"
-					>
-						<X class="size-tab-close-icon-size" />
-					</button>
-				{/if}
+				<ButtonWithTooltip
+					tooltip={isCompact ? tab.title : m.tab_context_close()}
+					tooltipSide="bottom"
+					variant="ghost"
+					size="icon"
+					class={cn(
+						"h-auto w-auto shrink-0 rounded bg-transparent p-tab-close-button-padding transition-colors hover:bg-transparent",
+						isActive ? "hover:!bg-tab-button-hover-active" : "hover:!bg-tab-button-hover-inactive",
+					)}
+					onclick={(e) => {
+						e.stopPropagation();
+						onTabClose(tab);
+					}}
+				>
+					<X class="size-tab-close-icon-size" />
+				</ButtonWithTooltip>
 			{/if}
 		</div>
 	</ContextMenu.Trigger>

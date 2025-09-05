@@ -25,9 +25,11 @@
 	import { dndzone, TRIGGERS } from "svelte-dnd-action";
 	import { Spring } from "svelte/motion";
 	import { Separator } from "$lib/components/ui/separator/index.js";
+	import ButtonWithTooltip from "$lib/components/ui/button-with-tooltip.svelte";
 	import TabItem from "./tab-item.svelte";
 	import { flip } from "svelte/animate";
 	import { scale } from "svelte/transition";
+	import { m } from "$lib/paraglide/messages.js";
 
 	let {
 		tabs = $bindable<Tab[]>(),
@@ -190,12 +192,16 @@
 				orientation="vertical"
 				class={cn("mx-0.5 !h-[20px] !w-0.5", tabs.length === 0 ? "opacity-0" : "opacity-100")}
 			/>
-			<button
-				class="hover:bg-tab-button-hover flex h-tab-new-button-size w-tab-new-button-size items-center justify-center rounded transition-colors"
+			<ButtonWithTooltip
+				tooltip={m.tab_new()}
+				tooltipSide="bottom"
+				variant="ghost"
+				size="icon"
+				class="h-tab-new-button-size w-tab-new-button-size bg-transparent transition-colors hover:bg-tab-button-hover-inactive hover:text-current"
 				onclick={handleNewTab}
 			>
 				<Plus class="h-tab-icon-size w-tab-icon-size" />
-			</button>
+			</ButtonWithTooltip>
 		</div>
 	</div>
 </div>
