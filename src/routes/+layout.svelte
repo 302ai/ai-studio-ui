@@ -1,21 +1,46 @@
 <script lang="ts">
-	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
-	import { ModeWatcher } from 'mode-watcher';
-	import { TabBar, type Tab } from '@/components/buss/tab-bar';
-	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
+	import "../app.css";
+	import favicon from "$lib/assets/favicon.svg";
+	import { ModeWatcher } from "mode-watcher";
+	import { TabBar, type Tab } from "@/components/buss/tab-bar";
+	import { page } from "$app/state";
+	import { goto } from "$app/navigation";
+	import { Home, Layout, Maximize, Settings, MessageCircle } from "@lucide/svelte";
 
 	let { children } = $props();
 
 	let tabs = $state<Tab[]>([
-		{ id: 'home', title: 'Home', href: '/', closable: false },
-		{ id: 'with-sidebar', title: 'With Sidebar', href: '/dashboard', closable: true },
-		{ id: 'full-width', title: 'Full Width', href: '/full', closable: true },
-		{ id: 'settings', title: 'Settings', href: '/settings/general-settings', closable: true }
+		{
+			id: "home",
+			title: "Home",
+			href: "/",
+			closable: false,
+			icon: homeIcon,
+		},
+		{
+			id: "with-sidebar",
+			title: "With Sidebar",
+			href: "/dashboard",
+			closable: true,
+			icon: layoutIcon,
+		},
+		{
+			id: "full-width",
+			title: "Full Width",
+			href: "/full",
+			closable: true,
+			icon: maximizeIcon,
+		},
+		{
+			id: "settings",
+			title: "Settings",
+			href: "/settings/general-settings",
+			closable: true,
+			icon: settingsIcon,
+		},
 	]);
 
-	let activeTabId = $state('home');
+	let activeTabId = $state("home");
 
 	$effect(() => {
 		const currentPath = page.url.pathname;
@@ -56,9 +81,10 @@
 		const chatId = `chat-${Date.now()}`;
 		const newTab: Tab = {
 			id: chatId,
-			title: 'New Chat',
+			title: "New Chat",
 			href: `/chat/${chatId}`,
-			closable: true
+			closable: true,
+			icon: messageIcon,
 		};
 		tabs = [...tabs, newTab];
 		activeTabId = newTab.id;
@@ -69,6 +95,26 @@
 <svelte:head>
 	<link rel="icon" href={favicon} />
 </svelte:head>
+
+{#snippet homeIcon()}
+	<Home class="h-full w-full" />
+{/snippet}
+
+{#snippet layoutIcon()}
+	<Layout class="h-full w-full" />
+{/snippet}
+
+{#snippet maximizeIcon()}
+	<Maximize class="h-full w-full" />
+{/snippet}
+
+{#snippet settingsIcon()}
+	<Settings class="h-full w-full" />
+{/snippet}
+
+{#snippet messageIcon()}
+	<MessageCircle class="h-full w-full" />
+{/snippet}
 
 <ModeWatcher />
 

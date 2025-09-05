@@ -4,6 +4,7 @@
 		title: string;
 		href: string;
 		closable?: boolean;
+		icon?: Snippet;
 	};
 
 	interface Props {
@@ -24,6 +25,7 @@
 	import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
 	import ButtonWithTooltip from "$lib/components/ui/button-with-tooltip.svelte";
 	import { m } from "$lib/paraglide/messages.js";
+	import type { Snippet } from "svelte";
 
 	let {
 		tab,
@@ -75,6 +77,13 @@
 		}}
 	>
 		<div bind:this={triggerRef} class="contents">
+			{#if tab.icon}
+				<div
+					class="mr-tab-item-icon-margin-right flex size-tab-item-icon-size shrink-0 items-center justify-center"
+				>
+					{@render tab.icon()}
+				</div>
+			{/if}
 			{#if !isCompact}
 				<span class="max-w-tab-item-max-title-width min-w-0 flex-1 truncate">{tab.title}</span>
 			{/if}

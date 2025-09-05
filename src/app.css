@@ -131,6 +131,8 @@
 	--spacing-tab-bar-gap: 0.125rem; /* gap-0.5 */
 	--spacing-tab-close-button-padding: 0.125rem; /* p-0.5 */
 	--spacing-tab-icon-size: 1rem; /* h-4 w-4 */
+	--spacing-tab-item-icon-size: 0.875rem; /* h-3.5 w-3.5 */
+	--spacing-tab-item-icon-margin-right: 0.5rem; /* mr-2 */
 	--spacing-tab-close-icon-size: 0.75rem; /* h-3 w-3 */
 
 	/* Settings Layout Sizing */
