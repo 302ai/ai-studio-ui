@@ -27,5 +27,10 @@
 	"settings_lightMode": "Light",
 	"settings_darkMode": "Dark",
 	"settings_systemMode": "System",
-	"settings_theme": "Theme"
+	"settings_theme": "Theme",
+	"settings_chatSetting": "Chat Settings",
+	"settings_hideCode": "Hide code blocks",
+	"settings_hideReason": "Hide reason",
+	"settings_collapseThink": "Collapse think",
+	"settings_disableMarkdown": "Disable markdown"
 }
