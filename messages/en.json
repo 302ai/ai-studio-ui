@@ -32,5 +32,16 @@
 	"settings_hideCode": "Hide code blocks",
 	"settings_hideReason": "Hide reason",
 	"settings_collapseThink": "Collapse think",
-	"settings_disableMarkdown": "Disable markdown"
+	"settings_disableMarkdown": "Disable markdown",
+	"settings_searchProvider": "Default Search Service",
+	"settings_parseUrl": "Parse URLs",
+	"settings_ParseUrlDesc": "Automatically parse URL content in messages",
+	"settings_streamOutputLabel": "Stream Smoother",
+	"settings_streamOutputEnable": "Enable smooth streaming output",
+	"settings_displayAppStore": "302.AI App Store",
+	"settings_DisplayAppStoreEnable": "Display App Store on Homepage",
+	"settings_titleGenerationTiming": "Generate Conversation Title",
+	"settings_firstTime": "First Conversation",
+	"settings_everyConversation": "Every Conversation",
+	"settings_off": "Off"
 }

@@ -1,8 +1,8 @@
 <script lang="ts" module>
 	export interface SelectOption {
-		key: string;
 		label: string;
 		value: string;
+		key?: string;
 	}
 
 	interface Props {
@@ -32,7 +32,7 @@
 		{placeholder && !value ? placeholder : getLabel(value)}
 	</Select.Trigger>
 	<Select.Content>
-		{#each options as option (option.key)}
+		{#each options as option (option.key || option.value)}
 			<Select.Item value={option.value} label={option.label} />
 		{/each}
 	</Select.Content>

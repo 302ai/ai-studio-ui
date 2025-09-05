@@ -32,5 +32,16 @@
 	"settings_hideCode": "自动折叠代码块",
 	"settings_hideReason": "隐藏推理过程",
 	"settings_collapseThink": "自动折叠推理过程",
-	"settings_disableMarkdown": "关闭markdown渲染"
+	"settings_disableMarkdown": "关闭markdown渲染",
+	"settings_searchProvider": "默认搜索服务",
+	"settings_parseUrl": "解析链接",
+	"settings_ParseUrlDesc": "自动解析消息中的链接内容",
+	"settings_streamOutputLabel": "流输出平滑",
+	"settings_streamOutputEnable": "启用流式输出平滑功能",
+	"settings_displayAppStore": "302.AI 应用超市",
+	"settings_DisplayAppStoreEnable": "在首页显示应用超市",
+	"settings_titleGenerationTiming": "生成会话标题",
+	"settings_firstTime": "首次对话",
+	"settings_everyConversation": "每次对话",
+	"settings_off": "关闭"
 }
