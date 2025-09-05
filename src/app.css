@@ -54,6 +54,8 @@
 	--sidebar-accent-foreground: oklch(0.208 0.042 265.755);
 	--sidebar-border: oklch(0.929 0.013 255.508);
 	--sidebar-ring: oklch(0.704 0.04 256.788);
+
+	--chat-action-hover: #f3f2ff;
 }
 
 .dark {
@@ -117,6 +119,8 @@
 	--color-tab-item-hover: var(--color-secondary); /* tab hover 背景色 */
 	--color-tab-button-hover-active: var(--accent-hover); /* 活跃 tab 按钮 hover 背景色 */
 	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
+
+	--chat-action-hover: #383838;
 }
 
 @theme {
@@ -137,6 +141,23 @@
 	--spacing-settings-layout-max-width: 33rem; /* max-w-[528px] */
 	--spacing-settings-layout-min-width: 33rem; /* min-w-[528px] */
 	--spacing-settings-layout-padding-top: 1.125rem; /* pt-[18px] */
+
+	/* Chat Page Sizing */
+	--text-chat-slogan: 2.125rem; /* text-[34px] */
+	--spacing-chat-container-max-width: 45rem; /* max-w-[720px] */
+	--spacing-chat-container-max-height: 13rem; /* max-h-52 */
+	--spacing-chat-container-min-height: 7.875rem; /* min-h-[126px] */
+	--spacing-chat-container-gap-y: 2.25rem; /* gap-y-9 */
+	--spacing-chat-container-padding: 0.75rem; /* p-3 */
+	--spacing-chat-button-bar-height: 2.25rem; /* h-9 */
+	--spacing-chat-button-bar-gap: 0.5rem; /* gap-x-2 */
+	--spacing-chat-icon-size: 1rem; /* size-4 */
+
+	/* Chat Page Styling */
+	--radius-chat-container: 1.25rem; /* rounded-[20px] */
+
+	/* Chat Page Colors */
+	--color-chat-action-hover: var(--chat-action-hover);
 
 	/* Tab Bar Colors */
 	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */

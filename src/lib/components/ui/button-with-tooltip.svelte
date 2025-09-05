@@ -1,37 +1,37 @@
 <script lang="ts" module>
-	import type { ButtonVariant, ButtonSize } from '$lib/components/ui/button/index.js';
+	import type { ButtonVariant, ButtonSize } from "$lib/components/ui/button/index.js";
 
 	export interface ButtonWithTooltipProps {
 		tooltip: string;
-		tooltipSide?: 'top' | 'right' | 'bottom' | 'left';
+		tooltipSide?: "top" | "right" | "bottom" | "left";
 		variant?: ButtonVariant;
 		size?: ButtonSize;
 		class?: string;
 		disabled?: boolean;
 		onclick?: (event: MouseEvent) => void;
-		children?: import('svelte').Snippet;
+		children?: import("svelte").Snippet;
 	}
 </script>
 
 <script lang="ts">
-	import { buttonVariants } from '$lib/components/ui/button/index.js';
+	import { buttonVariants } from "$lib/components/ui/button/index.js";
 	import {
 		Tooltip,
 		TooltipContent,
 		TooltipTrigger,
-		TooltipProvider
-	} from '$lib/components/ui/tooltip/index.js';
-	import { cn } from '$lib/utils.js';
+		TooltipProvider,
+	} from "$lib/components/ui/tooltip/index.js";
+	import { cn } from "$lib/utils.js";
 
 	let {
 		tooltip,
-		tooltipSide = 'top',
-		variant = 'ghost',
-		size = 'icon',
+		tooltipSide = "top",
+		variant = "ghost",
+		size = "icon",
 		class: className,
 		disabled,
 		onclick,
-		children
+		children,
 	}: ButtonWithTooltipProps = $props();
 
 	const buttonClass = $derived(cn(buttonVariants({ variant, size }), className));
@@ -39,7 +39,7 @@
 
 <TooltipProvider>
 	<Tooltip>
-		<TooltipTrigger class={cn(buttonClass, 'group rounded-[10px]')} {disabled} {onclick}>
+		<TooltipTrigger class={cn(buttonClass, "group rounded-[10px]")} {disabled} {onclick}>
 			{@render children?.()}
 		</TooltipTrigger>
 		<TooltipContent
