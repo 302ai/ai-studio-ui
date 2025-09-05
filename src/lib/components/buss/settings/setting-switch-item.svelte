@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Switch } from '@/components/ui/switch';
+	import { Switch } from "@/components/ui/switch";
 
 	interface Props {
 		label: string;
@@ -14,11 +14,13 @@
 	}
 </script>
 
-<div class="flex h-11 w-full items-center justify-between rounded-[10px] bg-setting px-3.5 py-2.5">
+<div
+	class="flex h-11 w-full items-center justify-between rounded-[10px] bg-settings-item-bg px-3.5 py-2.5"
+>
 	<label for={id} class="text-sm">{label}</label>
 	<Switch
 		{id}
-		class="data-[state=unchecked]:border-switch-border"
+		class="data-[state=unchecked]:border-settings-switch-border"
 		{checked}
 		onCheckedChange={handleCheckedChange}
 	/>
