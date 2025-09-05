@@ -107,16 +107,6 @@
 	--sidebar-accent-foreground: oklch(0.984 0.003 247.858);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.551 0.027 264.364);
-
-	/* Tab Bar Colors for Dark Mode */
-	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */
-	--color-tab-item-bg: var(--color-accent); /* 活跃 tab 背景色 */
-	--color-tab-item-bg-inactive: transparent; /* 非活跃 tab 背景色 */
-	--color-tab-item-text: var(--color-accent-foreground); /* 活跃 tab 文字色 */
-	--color-tab-item-text-inactive: var(--color-foreground); /* 非活跃 tab 文字色 */
-	--color-tab-item-hover: var(--color-secondary); /* tab hover 背景色 */
-	--color-tab-button-hover-active: var(--accent-hover); /* 活跃 tab 按钮 hover 背景色 */
-	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
 }
 
 @theme {
