@@ -1,27 +1,27 @@
 <script lang="ts">
-	import * as Select from '$lib/components/ui/select/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import { m } from '$lib/paraglide/messages.js';
+	import * as Select from "$lib/components/ui/select/index.js";
+	import { Label } from "$lib/components/ui/label/index.js";
+	import { m } from "$lib/paraglide/messages.js";
 
 	const layouts = [
 		{
-			key: 'default',
-			label: '默认',
-			value: 'default'
+			key: "default",
+			label: "默认",
+			value: "default",
 		},
 		{
-			key: 'wide',
-			label: '宽',
-			value: 'wide'
+			key: "wide",
+			label: "宽",
+			value: "wide",
 		},
 		{
-			key: 'ultraWide',
-			label: '超宽',
-			value: 'ultra-wide'
-		}
+			key: "ultraWide",
+			label: "超宽",
+			value: "ultra-wide",
+		},
 	];
 
-	let value = $state('default');
+	let value = $state("default");
 
 	function getLabel(val: string) {
 		return layouts.find((l) => l.value === val)?.label || val;
@@ -31,7 +31,7 @@
 <Label for="layout" class="text-label-fg">{m.layout()}</Label>
 
 <Select.Root type="single" name="layout" bind:value>
-	<Select.Trigger class="w-full !bg-setting data-[size=default]:h-11"
+	<Select.Trigger class="!bg-setting w-full data-[size=default]:h-settings-item-height"
 		>{getLabel(value)}</Select.Trigger
 	>
 	<Select.Content>

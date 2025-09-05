@@ -131,6 +131,12 @@
 	--spacing-settings-layout-min-width: 33rem; /* min-w-[528px] */
 	--spacing-settings-layout-padding-top: 1.125rem; /* pt-[18px] */
 
+	/* Settings Item Sizing */
+	--spacing-settings-item-height: 2.75rem; /* h-11 */
+	--spacing-settings-item-padding-x: 0.75rem; /* px-3 */
+	--spacing-settings-item-padding-y: 0.625rem; /* py-2.5 */
+	--spacing-settings-item-border-radius: 0.625rem; /* rounded-[10px] */
+
 	/* Tab Bar Colors */
 	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */
 	--color-tab-item-bg: var(--color-accent); /* 活跃 tab 背景色 */
