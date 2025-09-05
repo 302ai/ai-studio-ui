@@ -15,9 +15,13 @@
 	"default": "默认",
 	"wide": "宽",
 	"ultra-wide": "超宽",
-	"chat_mcpServers": "搜索MCP服务",
+	"chat_mcpServers": "搜索MCPf服务",
 	"chat_parameters": "参数设置",
 	"privacyMode": "隐私模式",
 	"autoInherit": "自动继承",
-	"tab_new": "新建标签页"
+	"tab_new": "新建标签页",
+	"autoUpdate": "自动更新",
+	"versionUpdate": "版本更新",
+	"versionInformation": "版本信息",
+	"checkUpdate": "检查更新"
 }

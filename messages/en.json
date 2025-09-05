@@ -19,5 +19,9 @@
 	"selectLanguage": "Select a language",
 	"privacyMode": "Privacy mode",
 	"autoInherit": "Auto inherit",
-	"tab_new": "New tab"
+	"tab_new": "New tab",
+	"autoUpdate": "Automatic Update",
+	"versionUpdate": "Version update",
+	"versionInformation": "Version",
+	"checkUpdate": "Check"
 }
