@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Calendar as CalendarPrimitive } from 'bits-ui';
-	import { cn, type WithoutChildrenOrChild } from '$lib/utils.js';
-	import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
+	import { Calendar as CalendarPrimitive } from "bits-ui";
+	import { cn, type WithoutChildrenOrChild } from "$lib/utils.js";
+	import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
 
 	let {
 		ref = $bindable(null),
@@ -13,8 +13,8 @@
 
 <span
 	class={cn(
-		'relative flex rounded-md border border-input shadow-xs has-focus:border-ring has-focus:ring-[3px] has-focus:ring-ring/50',
-		className
+		"relative flex rounded-md border border-input shadow-xs has-focus:border-ring has-focus:ring-[3px] has-focus:ring-ring/50",
+		className,
 	)}
 >
 	<CalendarPrimitive.YearSelect bind:ref class="absolute inset-0 opacity-0" {...restProps}>

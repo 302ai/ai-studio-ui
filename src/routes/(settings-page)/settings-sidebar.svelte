@@ -1,20 +1,20 @@
 <script lang="ts">
-	import * as Sidebar from '$lib/components/ui/sidebar';
-	import { page } from '$app/state';
+	import * as Sidebar from "$lib/components/ui/sidebar";
+	import { page } from "$app/state";
 
 	const items = [
 		{
-			title: 'general-settings',
-			url: '/settings/general-settings'
-		}
+			title: "general-settings",
+			url: "/settings/general-settings",
+		},
+		{
+			title: "model-settings",
+			url: "/settings/model-settings",
+		},
 	];
 </script>
 
-<Sidebar.Root
-	collapsible="offcanvas"
-	variant="sidebar"
-	class="top-10 w-auto min-w-[var(--setting-width)]"
->
+<Sidebar.Root collapsible="offcanvas" variant="sidebar" class="top-10">
 	<Sidebar.Content>
 		<Sidebar.Group>
 			<Sidebar.GroupContent>

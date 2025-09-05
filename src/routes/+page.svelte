@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
-	import ThemeSwitcher from '$lib/components/ui/theme-switcher.svelte';
+	import Button from "$lib/components/ui/button/button.svelte";
+	import ThemeSwitcher from "$lib/components/ui/theme-switcher.svelte";
 </script>
 
 <div class="container mx-auto p-8">
@@ -15,7 +15,7 @@
 			<p class="mb-4 text-muted-foreground">
 				Navigate to the Dashboard tab to see a layout with a collapsible sidebar
 			</p>
-			<Button onclick={() => (window.location.href = '/dashboard')}>Go to Dashboard</Button>
+			<Button onclick={() => (window.location.href = "/dashboard")}>Go to Dashboard</Button>
 		</div>
 
 		<div class="rounded-lg border p-6">
@@ -23,7 +23,7 @@
 			<p class="mb-4 text-muted-foreground">
 				Navigate to the Full Width tab to see a layout without sidebar
 			</p>
-			<Button onclick={() => (window.location.href = '/full')}>Go to Full Width</Button>
+			<Button onclick={() => (window.location.href = "/full")}>Go to Full Width</Button>
 		</div>
 	</div>
 

@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { House, Inbox, Settings } from '@lucide/svelte';
-	import * as Sidebar from '$lib/components/ui/sidebar';
+	import { House, Inbox, Settings } from "@lucide/svelte";
+	import * as Sidebar from "$lib/components/ui/sidebar";
 
 	const items = [
 		{
-			title: 'Dashboard',
-			url: '/dashboard',
-			icon: House
+			title: "Dashboard",
+			url: "/dashboard",
+			icon: House,
 		},
 		{
-			title: 'Projects',
-			url: '/projects',
-			icon: Inbox
-		}
+			title: "Projects",
+			url: "/projects",
+			icon: Inbox,
+		},
 	];
 </script>
 
