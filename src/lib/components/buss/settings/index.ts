@@ -1,3 +1,4 @@
-import SettingSwitchItem from './setting-switch-item.svelte';
+import SettingSwitchItem from "./setting-switch-item.svelte";
+import SegButton from "./seg-button.svelte";
 
-export { SettingSwitchItem };
+export { SettingSwitchItem, SegButton };

@@ -191,6 +191,12 @@
 
 	/* Settings switch color*/
 	--color-settings-switch-border: var(--settings-switch-border);
+
+	/* Segmented Button Sizing */
+	--spacing-seg-button-thumb-height: 2rem; /* h-[32px] */
+	--spacing-seg-button-container-height: 2.75rem; /* h-11 */
+	--spacing-seg-button-container-padding-x: 0.5rem; /* px-2 */
+	--radius-seg-button-container: 0.625rem; /* rounded-[10px] */
 }
 
 @theme inline {

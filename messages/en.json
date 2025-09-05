@@ -23,5 +23,9 @@
 	"autoUpdate": "Automatic Update",
 	"versionUpdate": "Version update",
 	"versionInformation": "Version",
-	"checkUpdate": "Check"
+	"checkUpdate": "Check",
+	"settings_lightMode": "Light",
+	"settings_darkMode": "Dark",
+	"settings_systemMode": "System",
+	"settings_theme": "Theme"
 }

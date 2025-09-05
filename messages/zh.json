@@ -23,5 +23,9 @@
 	"autoUpdate": "自动更新",
 	"versionUpdate": "版本更新",
 	"versionInformation": "版本信息",
-	"checkUpdate": "检查更新"
+	"checkUpdate": "检查更新",
+	"settings_lightMode": "浅色",
+	"settings_darkMode": "深色",
+	"settings_systemMode": "系统",
+	"settings_theme": "主题"
 }
