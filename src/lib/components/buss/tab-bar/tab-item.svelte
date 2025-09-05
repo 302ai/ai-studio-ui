@@ -58,7 +58,7 @@
 		class={cn(
 			"relative flex h-tab-item-height cursor-pointer items-center px-tab-item-padding-x text-sm",
 			isCompact ? "justify-center" : "justify-between gap-2",
-			stretch ? "w-auto min-w-[var(--spacing-tab-item-min-width)]" : "w-tab-item-width",
+			stretch ? "w-auto min-w-tab-item-min-width" : "w-tab-item-width",
 			isActive
 				? "bg-tab-item-bg text-tab-item-text"
 				: "border-transparent bg-tab-item-bg-inactive text-tab-item-text-inactive hover:bg-tab-item-hover",
