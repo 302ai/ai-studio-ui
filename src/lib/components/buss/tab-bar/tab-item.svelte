@@ -77,7 +77,7 @@
 		}}
 	>
 		<div bind:this={triggerRef} class="contents">
-			{#if tab.icon}
+			{#if tab.icon && !isCompact}
 				<div
 					class="mr-tab-item-icon-margin-right flex size-tab-item-icon-size shrink-0 items-center justify-center"
 				>

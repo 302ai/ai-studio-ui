@@ -123,7 +123,8 @@
 	/* Tab Bar Sizing */
 	--spacing-tab-bar-height: 2.5rem; /* h-10 */
 	--spacing-tab-item-height: 2rem; /* h-8 */
-	--spacing-tab-item-width: 8rem; /* w-32 */
+	--spacing-tab-item-width: 10rem; /* w-40 - increased to accommodate icons */
+	--spacing-tab-item-min-width: 8rem; /* w-32 - minimum width for stretch mode with icons */
 	--spacing-tab-new-button-size: 1.75rem; /* h-7 w-7 */
 	--spacing-tab-item-max-title-width: 12.5rem; /* max-w-[200px] */
 	--spacing-tab-bar-padding-x: 0.5rem; /* px-2 */
