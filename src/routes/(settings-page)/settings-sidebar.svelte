@@ -8,6 +8,10 @@
 			url: "/settings/general-settings",
 		},
 		{
+			title: "preferences-settings",
+			url: "/settings/preferences-settings",
+		},
+		{
 			title: "model-settings",
 			url: "/settings/model-settings",
 		},

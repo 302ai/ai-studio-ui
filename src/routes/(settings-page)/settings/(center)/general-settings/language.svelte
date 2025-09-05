@@ -1,7 +1,8 @@
 <script lang="ts">
-	import * as Select from "$lib/components/ui/select/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
+	import SettingSelect from "$lib/components/buss/settings/setting-select.svelte";
 	import { m } from "$lib/paraglide/messages.js";
+	import type { SelectOption } from "$lib/components/buss/settings/setting-select.svelte";
 
 	const languages = [
 		{
@@ -23,20 +24,13 @@
 
 	let value = $state("zh");
 
-	const triggerContent = $derived(
-		languages.find((f) => f.key === value)?.nativeName ?? m.select_language(),
-	);
+	const options: SelectOption[] = languages.map((lang) => ({
+		key: lang.key,
+		label: lang.nativeName,
+		value: lang.key,
+	}));
 </script>
 
 <Label for="language" class="text-label-fg">{m.language()}</Label>
 
-<Select.Root type="single" name="language" bind:value>
-	<Select.Trigger class="w-full !bg-settings-item-bg data-[size=default]:h-settings-item-height">
-		{triggerContent}
-	</Select.Trigger>
-	<Select.Content>
-		{#each languages as language (language.key)}
-			<Select.Item value={language.key} label={language.nativeName} />
-		{/each}
-	</Select.Content>
-</Select.Root>
+<SettingSelect name="language" bind:value {options} placeholder={m.select_language()} />

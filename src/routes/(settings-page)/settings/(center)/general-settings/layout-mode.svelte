@@ -1,7 +1,8 @@
 <script lang="ts">
-	import * as Select from "$lib/components/ui/select/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
+	import SettingSelect from "$lib/components/buss/settings/setting-select.svelte";
 	import { m } from "$lib/paraglide/messages.js";
+	import type { SelectOption } from "$lib/components/buss/settings/setting-select.svelte";
 
 	const layouts = [
 		{
@@ -23,20 +24,13 @@
 
 	let value = $state("default");
 
-	function getLabel(val: string) {
-		return layouts.find((l) => l.value === val)?.label || val;
-	}
+	const options: SelectOption[] = layouts.map((layout) => ({
+		key: layout.key,
+		label: layout.label,
+		value: layout.value,
+	}));
 </script>
 
 <Label for="layout" class="text-label-fg">{m.layout()}</Label>
 
-<Select.Root type="single" name="layout" bind:value>
-	<Select.Trigger class="w-full !bg-settings-item-bg data-[size=default]:h-settings-item-height"
-		>{getLabel(value)}</Select.Trigger
-	>
-	<Select.Content>
-		{#each layouts as layout (layout.key)}
-			<Select.Item value={layout.value} label={layout.label} />
-		{/each}
-	</Select.Content>
-</Select.Root>
+<SettingSelect name="layout" bind:value {options} />
