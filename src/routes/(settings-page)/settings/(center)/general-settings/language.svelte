@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Label } from "$lib/components/ui/label/index.js";
-	import SettingSelect from "$lib/components/buss/settings/setting-select.svelte";
-	import { m } from "$lib/paraglide/messages.js";
 	import type { SelectOption } from "$lib/components/buss/settings/setting-select.svelte";
+	import SettingSelect from "$lib/components/buss/settings/setting-select.svelte";
+	import { Label } from "$lib/components/ui/label/index.js";
+	import { m } from "$lib/paraglide/messages.js";
 
 	const languages = [
 		{
@@ -31,6 +31,6 @@
 	}));
 </script>
 
-<Label for="language" class="text-label-fg">{m.language()}</Label>
+<Label id="language" class="text-label-fg">{m.language()}</Label>
 
 <SettingSelect name="language" bind:value {options} placeholder={m.select_language()} />

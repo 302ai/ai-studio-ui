@@ -7,6 +7,6 @@
 </script>
 
 <div class="flex flex-col gap-2">
-	<Label class="text-label-fg">{m.privacyMode()}</Label>
+	<Label id="privacy-mode" class="text-label-fg">{m.privacyMode()}</Label>
 	<SettingSwitchItem label={m.autoInherit()} bind:checked={autoInherit} />
 </div>

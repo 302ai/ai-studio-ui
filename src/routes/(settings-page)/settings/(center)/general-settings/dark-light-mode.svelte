@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Label from "@/components/ui/label/label.svelte";
 	import { SegButton } from "@/components/buss/settings";
-	import { Laptop, Moon, Sun } from "@lucide/svelte";
+	import Label from "@/components/ui/label/label.svelte";
 	import { m } from "@/paraglide/messages";
+	import { Laptop, Moon, Sun } from "@lucide/svelte";
 
 	let selectedKey = "system";
 	const themeOptions = [
@@ -31,6 +31,6 @@
 	}
 </script>
 
-<Label for="dark-light-mode" class="text-label-fg">{m.settings_theme()}</Label>
+<Label class="text-label-fg">{m.settings_theme()}</Label>
 
 <SegButton options={themeOptions} {selectedKey} onSelect={handleSelect} />

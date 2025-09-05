@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Label } from "$lib/components/ui/label/index.js";
-	import SettingSelect from "$lib/components/buss/settings/setting-select.svelte";
-	import { m } from "$lib/paraglide/messages.js";
 	import type { SelectOption } from "$lib/components/buss/settings/setting-select.svelte";
+	import SettingSelect from "$lib/components/buss/settings/setting-select.svelte";
+	import { Label } from "$lib/components/ui/label/index.js";
+	import { m } from "$lib/paraglide/messages.js";
 
 	const layouts = [
 		{
@@ -31,6 +31,6 @@
 	}));
 </script>
 
-<Label for="layout" class="text-label-fg">{m.layout()}</Label>
+<Label id="layout" class="text-label-fg">{m.layout()}</Label>
 
 <SettingSelect name="layout" bind:value {options} />
