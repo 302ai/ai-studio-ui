@@ -177,7 +177,7 @@
 					{onTabClose}
 					{onTabCloseAll}
 				/>
-				<div class="mx-0.5 shrink-0">
+				<div class="shrink-0 px-0.5" style="cursor: pointer !important;">
 					<Separator
 						orientation="vertical"
 						class="!h-[20px] !w-0.5 transition-opacity duration-200 {shouldShowSeparator
@@ -196,6 +196,7 @@
 			<Separator
 				orientation="vertical"
 				class={cn("mx-0.5 !h-[20px] !w-0.5", tabs.length === 0 ? "opacity-0" : "opacity-100")}
+				style="cursor: none !important;"
 			/>
 			<ButtonWithTooltip
 				tooltip={m.tab_new()}
