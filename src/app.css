@@ -60,6 +60,7 @@
 	--sidebar-ring: oklch(0.704 0.04 256.788);
 
 	--chat-action-hover: #f3f2ff;
+	--chat-action-active: #f3f2ff;
 }
 
 .dark {
@@ -129,6 +130,7 @@
 	--color-tab-button-hover-inactive: var(--hover-2); /* 非活跃 tab 按钮 hover 背景色 */
 
 	--chat-action-hover: #383838;
+	--chat-action-active: rgba(142, 71, 240, 0.2);
 }
 
 @theme {
@@ -175,6 +177,8 @@
 
 	/* Chat Page Colors */
 	--color-chat-action-hover: var(--chat-action-hover);
+	--color-chat-action-active: var(--chat-action-active);
+	--color-chat-icon-active: var(--color-primary);
 
 	/* Tab Bar Colors */
 	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */

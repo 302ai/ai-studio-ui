@@ -9,6 +9,8 @@
 	import { AttachmentThumbnailBar, AttachmentUploader } from "../components";
 
 	let disabled = $derived(chatState.providerType !== "302ai");
+	let isThinkingActive = $state(false);
+	let isOnlineSearchActive = $state(false);
 </script>
 
 <div class="flex h-full flex-col items-center justify-center gap-chat-container-gap-y">
@@ -35,16 +37,24 @@
 			<div class="flex h-chat-button-bar-height items-center gap-chat-button-bar-gap">
 				<AttachmentUploader />
 				<ButtonWithTooltip
-					class="hover:!bg-chat-action-hover"
+					class={cn(
+						"hover:!bg-chat-action-hover",
+						isThinkingActive && "!bg-chat-action-active hover:!bg-chat-action-active",
+					)}
 					tooltip={disabled ? m.chat_unsupportAction() : m.chat_thinking()}
+					onclick={() => (isThinkingActive = !isThinkingActive)}
 				>
-					<Lightbulb />
+					<Lightbulb class={cn(isThinkingActive && "!text-chat-icon-active")} />
 				</ButtonWithTooltip>
 				<ButtonWithTooltip
-					class="hover:!bg-chat-action-hover"
+					class={cn(
+						"hover:!bg-chat-action-hover",
+						isOnlineSearchActive && "!bg-chat-action-active hover:!bg-chat-action-active",
+					)}
 					tooltip={disabled ? m.chat_unsupportAction() : m.chat_onlineSearch()}
+					onclick={() => (isOnlineSearchActive = !isOnlineSearchActive)}
 				>
-					<Globe />
+					<Globe class={cn(isOnlineSearchActive && "!text-chat-icon-active")} />
 				</ButtonWithTooltip>
 				<ButtonWithTooltip class="hover:!bg-chat-action-hover" tooltip={m.chat_mcpServers()}>
 					<img

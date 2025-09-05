@@ -87,7 +87,6 @@
 {#if attachments.length > 0}
 	<div class="flex gap-2 p-2">
 		{#each attachments as attachment (attachment.id)}
-			{@const IconComponent = getFileIcon(attachment)}
 			<div class="group relative">
 				<div
 					class={cn(
@@ -103,6 +102,7 @@
 							class="h-full w-full object-cover"
 						/>
 					{:else}
+						{@const IconComponent = getFileIcon(attachment)}
 						<div
 							class="flex h-full w-full flex-col items-center justify-center gap-y-1 px-0.5 text-muted-foreground"
 						>
