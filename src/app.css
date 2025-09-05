@@ -61,6 +61,7 @@
 
 	--chat-action-hover: #f3f2ff;
 	--chat-action-active: #f3f2ff;
+	--chat-send-message-disabled: rgba(142, 71, 240, 0.5);
 }
 
 .dark {
@@ -131,6 +132,7 @@
 
 	--chat-action-hover: #383838;
 	--chat-action-active: rgba(142, 71, 240, 0.2);
+	--chat-send-message-disabled: rgba(142, 71, 240, 0.5);
 }
 
 @theme {
@@ -179,6 +181,7 @@
 	--color-chat-action-hover: var(--chat-action-hover);
 	--color-chat-action-active: var(--chat-action-active);
 	--color-chat-icon-active: var(--color-primary);
+	--color-chat-send-message-disabled: var(--chat-send-message-disabled);
 
 	/* Tab Bar Colors */
 	--color-tab-bar-bg: var(--color-muted); /* tab bar 背景色 */

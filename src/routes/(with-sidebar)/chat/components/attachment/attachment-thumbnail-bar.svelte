@@ -123,9 +123,7 @@
 					)}
 				>
 					<!-- File size -->
-					<div
-						class="absolute right-0 bottom-0 left-0 px-1.5 py-0.5 text-center text-xs font-medium"
-					>
+					<div class="absolute right-0 bottom-0 left-0 px-1.5 text-center text-xs font-medium">
 						{formatFileSize(attachment.size)}
 					</div>
 				</div>
@@ -133,9 +131,9 @@
 				<!-- Remove button -->
 				<button
 					onclick={() => handleRemove(attachment.id)}
-					class="absolute -top-1 -right-1 size-4 cursor-pointer text-destructive opacity-0 group-hover:opacity-100"
+					class="absolute top-0.5 right-0.5 size-4 text-destructive opacity-0 group-hover:opacity-100"
 				>
-					<Trash2 class="size-4" />
+					<Trash2 class="size-4 hover:text-destructive/80" />
 				</button>
 			</div>
 		{/each}

@@ -12,16 +12,45 @@ export interface AttachmentFile {
 }
 
 class ChatState {
+	inputValue = $state("");
+	attachments = $state<AttachmentFile[]>([]);
 	providerType = $state("302ai");
 	mcpServers = $state<MCPServer[]>([]);
-	attachments = $state<AttachmentFile[]>([]);
+	isThinkingActive = $state(false);
+	isOnlineSearchActive = $state(false);
+	isMCPActive = $state(false);
+
+	setInputValue(value: string) {
+		this.inputValue = value;
+	}
+
+	sendMessage = () => {
+		this.inputValue = "";
+		this.attachments = [];
+	};
 
 	addAttachment(attachment: AttachmentFile) {
 		this.attachments = [...this.attachments, attachment];
 	}
 
+	addAttachments(attachments: AttachmentFile[]) {
+		this.attachments = [...this.attachments, ...attachments];
+	}
+
 	removeAttachment(id: string) {
 		this.attachments = this.attachments.filter((att) => att.id !== id);
+	}
+
+	handleThinkingActiveChange(active: boolean) {
+		this.isThinkingActive = active;
+	}
+
+	handleOnlineSearchActiveChange(active: boolean) {
+		this.isOnlineSearchActive = active;
+	}
+
+	handleMCPActiveChange(active: boolean) {
+		this.isMCPActive = active;
 	}
 }
 

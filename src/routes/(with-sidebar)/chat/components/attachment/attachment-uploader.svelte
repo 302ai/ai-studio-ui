@@ -56,7 +56,7 @@
 			newAttachments.push(attachment);
 		}
 
-		chatState.attachments = [...attachments, ...newAttachments];
+		chatState.addAttachments(newAttachments);
 		target.value = "";
 	}
 
