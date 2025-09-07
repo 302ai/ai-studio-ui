@@ -118,21 +118,32 @@
 
 	/* Spacing */
 	--spacing-tab-h: var(--ui-tab-height);
+	/* Simplified alias */
+	--spacing-tab: var(--ui-tab-height); /* h-tab */
 	--spacing-tab-w: var(--ui-tab-width);
 	--spacing-tab-min-w: var(--ui-tab-min-width);
 	--spacing-tab-pad-x: var(--ui-tab-padding-x);
+	--spacing-tab-x: var(--ui-tab-padding-x); /* px-tab-x */
 	--spacing-tab-gap: var(--ui-tab-gap);
 	--spacing-tabbar-h: var(--ui-tabbar-height);
+	--spacing-tabbar: var(--ui-tabbar-height); /* h-tabbar */
 	--spacing-tabbar-pad-x: var(--ui-tabbar-padding-x);
+	--spacing-tabbar-x: var(--ui-tabbar-padding-x); /* px-tabbar-x */
 	--spacing-tab-title-max-w: var(--ui-tab-title-max-w);
+	/* Simplified alias */
+	--spacing-tab-title: var(--ui-tab-title-max-w); /* max-w-tab-title */
 	--spacing-tab-icon-mr: var(--ui-tab-icon-mr);
+	--spacing-tab-icon: var(--ui-tab-icon-mr); /* mr-tab-icon */
 	--spacing-tab-close-pad: var(--ui-tab-close-pad);
+	--spacing-tab-close: var(--ui-tab-close-pad); /* p-tab-close */
 
 	/* Sizes */
 	--size-tab-icon: var(--ui-tab-icon-size);
 	--size-tab-item-icon: var(--ui-tab-item-icon-size);
 	--size-tab-close-icon: var(--ui-tab-close-icon-size);
 	--size-tab-new-btn: var(--ui-tab-new-button-size);
+	/* Simplified alias */
+	--size-tab-new: var(--ui-tab-new-button-size);
 
 	/* Radius */
 	--radius-tab: var(--ui-tab-radius);
@@ -145,15 +156,26 @@
 	--spacing-settings-item-height: var(--ui-settings-item-h);
 	--spacing-settings-item-padding-x: var(--ui-settings-item-px);
 	--spacing-settings-item-padding-y: var(--ui-settings-item-py);
+	/* Simplified aliases */
+	--spacing-settings-item: var(--ui-settings-item-h);
+	--spacing-settings-item-x: var(--ui-settings-item-px);
+	--spacing-settings-item-y: var(--ui-settings-item-py);
 	--spacing-settings-layout-max-width: var(--ui-settings-layout-max-w);
 	--spacing-settings-layout-min-width: var(--ui-settings-layout-min-w);
 	--spacing-settings-layout-padding-top: var(--ui-settings-layout-pt);
+	/* Simplified aliases (both max/min can use same token by default) */
+	--spacing-settings-layout: var(--ui-settings-layout-max-w);
+	--spacing-settings-layout-pt: var(--ui-settings-layout-pt);
 
 	/* Segmented button bridge */
 	--spacing-seg-button-thumb-height: var(--ui-seg-btn-thumb-h);
 	--spacing-seg-button-container-height: var(--ui-seg-btn-container-h);
 	--spacing-seg-button-container-padding-x: var(--ui-seg-btn-container-px);
 	--radius-seg-button-container: var(--ui-seg-btn-radius);
+	/* Simplified aliases */
+	--spacing-seg: var(--ui-seg-btn-container-h);
+	--spacing-seg-thumb: var(--ui-seg-btn-thumb-h);
+	--spacing-seg-x: var(--ui-seg-btn-container-px);
 
 	/* Chat bridge */
 	--text-chat-slogan: var(--ui-chat-slogan-text);
@@ -164,10 +186,20 @@
 	--spacing-chat-container-padding: var(--ui-chat-container-padding);
 	--spacing-chat-button-bar-height: var(--ui-chat-button-bar-h);
 	--spacing-chat-button-bar-gap: var(--ui-chat-button-bar-gap);
-	--spacing-chat-button-bar-height: var(--ui-chat-button-bar-h);
-	--spacing-chat-button-bar-gap: var(--ui-chat-button-bar-gap);
+	/* Aliases for shorter utilities */
+	--spacing-chat-max-w: var(--ui-chat-container-max-w);
+	--spacing-chat-max-h: var(--ui-chat-container-max-h);
+	--spacing-chat-min-h: var(--ui-chat-container-min-h);
+	--spacing-chat-gap-y: var(--ui-chat-container-gap-y);
+	--spacing-chat-pad: var(--ui-chat-container-padding);
+	--spacing-chat-bar: var(--ui-chat-button-bar-h);
+	--spacing-chat-bar-gap: var(--ui-chat-button-bar-gap);
 	--size-chat-icon-size: var(--ui-chat-icon-size);
+	/* Simplified alias */
+	--size-chat-icon: var(--ui-chat-icon-size);
 	--radius-chat-container: var(--ui-chat-container-radius);
+	/* Alias */
+	--radius-chat: var(--ui-chat-container-radius);
 	--color-chat-action-hover: var(--ui-chat-action-hover);
 	--color-chat-action-active: var(--ui-chat-action-active);
 	--color-chat-icon-active: var(--ui-chat-icon-active);

@@ -27,7 +27,7 @@
 
 <Select.Root type="single" {name} bind:value>
 	<Select.Trigger
-		class={cn("w-full !bg-settings-item-bg data-[size=default]:h-settings-item-height", className)}
+		class={cn("w-full !bg-settings-item-bg data-[size=default]:h-settings-item", className)}
 	>
 		{placeholder && !value ? placeholder : getLabel(value)}
 	</Select.Trigger>

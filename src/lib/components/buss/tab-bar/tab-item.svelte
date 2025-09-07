@@ -74,7 +74,7 @@
 <ContextMenu.Root>
 	<ContextMenu.Trigger
 		class={cn(
-			"relative flex h-tab-h cursor-pointer items-center rounded-tab px-tab-pad-x text-sm",
+			"relative flex h-tab cursor-pointer items-center rounded-tab px-tab-x text-sm",
 			isCompact ? "justify-center" : "justify-between gap-tab-gap",
 			stretch ? "w-auto min-w-tab-min-w" : "w-tab-w",
 			isActive
@@ -89,12 +89,12 @@
 	>
 		<div bind:this={triggerRef} class="contents">
 			{#if tab.icon && !isCompact}
-				<div class="mr-tab-icon-mr flex size-tab-item-icon shrink-0 items-center justify-center">
+				<div class="mr-tab-icon flex size-tab-item-icon shrink-0 items-center justify-center">
 					{@render tab.icon()}
 				</div>
 			{/if}
 			{#if !isCompact}
-				<span class="max-w-tab-title-max-w min-w-0 flex-1 truncate">{tab.title}</span>
+				<span class="max-w-tab-title min-w-0 flex-1 truncate">{tab.title}</span>
 			{/if}
 			{#if tab.closable !== false}
 				<ButtonWithTooltip
@@ -103,7 +103,7 @@
 					variant="ghost"
 					size="icon"
 					class={cn(
-						"h-auto w-auto shrink-0 rounded bg-transparent p-tab-close-pad transition-colors hover:bg-transparent",
+						"h-auto w-auto shrink-0 rounded bg-transparent p-tab-close transition-colors hover:bg-transparent",
 						isActive ? "hover:bg-tab-btn-hover-active" : "hover:bg-tab-btn-hover-inactive",
 					)}
 					onclick={(e) => {

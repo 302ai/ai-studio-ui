@@ -44,16 +44,24 @@ Tab-specific (high-level)
 Generated Utilities
 
 - Colors: bg-tab-active, bg-tab-inactive, bg-tab-hover, text-tab-fg-active, text-tab-fg-inactive, bg-tabbar-bg, bg-tab-btn-hover-active, bg-tab-btn-hover-inactive
-- Spacing: h-tab-h, w-tab-w, min-w-tab-min-w, px-tab-pad-x, gap-tab-gap, h-tabbar-h, px-tabbar-pad-x, max-w-tab-title-max-w, mr-tab-icon-mr, p-tab-close-pad
-- Sizes: size-tab-icon, size-tab-item-icon, size-tab-close-icon, size-tab-new-btn
+- Spacing: h-tab (was: h-tab-h), w-tab-w, min-w-tab-min-w, px-tab-x (was: px-tab-pad-x), gap-tab-gap, h-tabbar (was: h-tabbar-h), px-tabbar-x (was: px-tabbar-pad-x), max-w-tab-title (was: max-w-tab-title-max-w), mr-tab-icon (was: mr-tab-icon-mr), p-tab-close (was: p-tab-close-pad)
+- Sizes: size-tab-icon, size-tab-item-icon, size-tab-close-icon, size-tab-new (was: size-tab-new-btn)
 - Radius: rounded-tab
 
 Settings Utilities
 
 - Colors: bg-settings-item-bg, border-settings-switch-border
-- Item: h-settings-item-height, px-settings-item-padding-x, py-settings-item-padding-y, rounded-settings-item
+- Item: h-settings-item-height (alias: h-settings-item), px-settings-item-padding-x (alias: px-settings-item-x), py-settings-item-padding-y (alias: py-settings-item-y), rounded-settings-item
 - Layout: max-w-settings-layout-max-width, min-w-settings-layout-min-width, pt-settings-layout-padding-top
-- Segmented: h-seg-button-container-height, px-seg-button-container-padding-x, h-seg-button-thumb-height, rounded-seg-button-container
+- Segmented: h-seg-button-container-height (alias: h-seg), px-seg-button-container-padding-x (alias: px-seg-x), h-seg-button-thumb-height (alias: h-seg-thumb), rounded-seg-button-container
+
+Chat Utilities
+
+- Text: text-chat-slogan
+- Container: max-w-chat-container-max-width, max-h-chat-container-max-height, min-h-chat-container-min-height, gap-chat-container-gap-y, p-chat-container-padding, rounded-chat-container
+- Bar: h-chat-button-bar-height, gap-chat-button-bar-gap
+- Icons: size-chat-icon-size (alias: size-chat-icon)
+- Colors: bg-chat-action-hover, bg-chat-action-active, text-chat-icon-active, bg-chat-send-message-disabled
 
 User Overrides (Settings)
 

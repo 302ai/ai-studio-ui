@@ -15,15 +15,15 @@
 	);
 </script>
 
-<div class="flex h-full flex-col items-center justify-center gap-chat-container-gap-y">
+<div class="flex h-full flex-col items-center justify-center gap-chat-gap-y">
 	<span class="text-center text-chat-slogan">{m.chat_slogan()}</span>
 
-	<div class="w-full max-w-chat-container-max-width">
+	<div class="w-full max-w-chat-max-w">
 		<AttachmentThumbnailBar />
 		<div
 			class={cn(
 				"transition-[color,box-shadow]",
-				"flex max-h-chat-container-max-height min-h-chat-container-min-height w-full flex-col justify-between rounded-chat-container border p-chat-container-padding pb-1.5",
+				"flex max-h-chat-max-h min-h-chat-min-h w-full flex-col justify-between rounded-chat border p-chat-pad pb-1.5",
 				"focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:outline-hidden",
 				"bg-input",
 			)}
@@ -38,7 +38,7 @@
 			/>
 
 			<div class="mt-1.5 flex flex-row justify-between">
-				<div class="flex h-chat-button-bar-height items-center gap-chat-button-bar-gap">
+				<div class="flex h-chat-bar items-center gap-chat-bar-gap">
 					<AttachmentUploader />
 					<ButtonWithTooltip
 						class={cn(
@@ -74,7 +74,7 @@
 							src={mcpIcon}
 							alt="MCP"
 							class={cn(
-								"size-chat-icon-size group-hover:[filter:brightness(0)_saturate(100%)_invert(35%)_sepia(84%)_saturate(2329%)_hue-rotate(244deg)_brightness(92%)_contrast(96%)] dark:invert",
+								"size-chat-icon group-hover:[filter:brightness(0)_saturate(100%)_invert(35%)_sepia(84%)_saturate(2329%)_hue-rotate(244deg)_brightness(92%)_contrast(96%)] dark:invert",
 								chatState.isMCPActive &&
 									"[filter:brightness(0)_saturate(100%)_invert(35%)_sepia(84%)_saturate(2329%)_hue-rotate(244deg)_brightness(92%)_contrast(96%)] dark:[filter:brightness(0)_saturate(100%)_invert(35%)_sepia(84%)_saturate(2329%)_hue-rotate(244deg)_brightness(92%)_contrast(96%)]",
 							)}

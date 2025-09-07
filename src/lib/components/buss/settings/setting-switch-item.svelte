@@ -15,7 +15,7 @@
 </script>
 
 <div
-	class="flex h-settings-item-height w-full items-center justify-between rounded-settings-item bg-settings-item-bg px-settings-item-padding-x py-settings-item-padding-y"
+	class="flex h-settings-item w-full items-center justify-between rounded-settings-item bg-settings-item-bg px-settings-item-x py-settings-item-y"
 >
 	<label for={id} class="text-sm">{label}</label>
 	<Switch

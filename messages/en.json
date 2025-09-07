@@ -43,5 +43,7 @@
 	"settings_titleGenerationTiming": "Generate Conversation Title",
 	"settings_firstTime": "First Conversation",
 	"settings_everyConversation": "Every Conversation",
-	"settings_off": "Off"
+	"settings_off": "Off",
+	"apply": "Apply",
+	"reset": "Reset"
 }

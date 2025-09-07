@@ -10,7 +10,7 @@
 	<Label class="text-label-fg">{m.versionUpdate()}</Label>
 	<SettingSwitchItem label={m.autoUpdate()} bind:checked={autoInherit} />
 	<div
-		class="flex h-settings-item-height w-full items-center justify-between rounded-settings-item bg-settings-item-bg px-settings-item-padding-x py-settings-item-padding-y"
+		class="flex h-settings-item w-full items-center justify-between rounded-settings-item bg-settings-item-bg px-settings-item-x py-settings-item-y"
 	>
 		<div class=" flex items-center gap-2">
 			<Label class="text-sm">{m.versionInformation()}</Label>

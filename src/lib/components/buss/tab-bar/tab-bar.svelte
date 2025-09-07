@@ -130,12 +130,12 @@
 </script>
 
 <div
-	class={cn("flex h-tabbar-h w-full items-center border-b bg-tabbar-bg/50", className)}
+	class={cn("flex h-tabbar w-full items-center border-b bg-tabbar-bg/50", className)}
 	role="tablist"
 	aria-label={m.tab_new() ?? "Tab bar"}
 >
 	<div
-		class="flex w-full min-w-0 items-center gap-tab-gap overflow-x-hidden px-tabbar-pad-x"
+		class="flex w-full min-w-0 items-center gap-tab-gap overflow-x-hidden px-tabbar-x"
 		use:dndzone={{
 			items: tabs,
 			flipDurationMs: 200,
@@ -203,7 +203,7 @@
 				tooltipSide="bottom"
 				variant="ghost"
 				size="icon"
-				class="size-tab-new-btn bg-transparent transition-colors hover:bg-tab-btn-hover-inactive hover:text-current"
+				class="size-tab-new bg-transparent transition-colors hover:bg-tab-btn-hover-inactive hover:text-current"
 				onclick={handleNewTab}
 			>
 				<Plus class="size-tab-icon" />

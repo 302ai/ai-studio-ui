@@ -12,6 +12,10 @@
 			url: "/settings/preferences-settings",
 		},
 		{
+			title: "theme-settings",
+			url: "/settings/theme-settings",
+		},
+		{
 			title: "model-settings",
 			url: "/settings/model-settings",
 		},

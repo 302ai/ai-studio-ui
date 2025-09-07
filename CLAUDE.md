@@ -76,6 +76,16 @@ This is a **SvelteKit 5** application using the modern `$props()` and `{@render}
   - External exposure should use `--ui-*` as much as possible, avoiding exposing too many detail variables
   - See existing examples in `src/lib/theme/ds.css` and `src/lib/theme/README.md`
 
+### Naming Simplification
+
+- New, shorter aliases are provided to reduce verbosity while keeping backward compatibility.
+- Prefer simplified utilities in new code; legacy names remain supported.
+- Examples:
+  - Tabs: `max-w-tab-title` (alias of `max-w-tab-title-max-w`), `h-tab` (alias of `h-tab-h`)
+  - Settings: `h-settings-item`, `px-settings-item-x`, `py-settings-item-y`
+  - Segmented: `h-seg`, `h-seg-thumb`, `px-seg-x`
+  - Chat: `size-chat-icon` (alias of `size-chat-icon-size`)
+
 ### Key Patterns:
 
 **Svelte 5 Component Pattern with Module Script:**

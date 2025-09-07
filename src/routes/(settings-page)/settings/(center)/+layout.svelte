@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="mx-auto flex h-full max-w-settings-layout-max-width min-w-settings-layout-min-width flex-col gap-4 pt-settings-layout-padding-top"
+	class="mx-auto flex h-full max-w-settings-layout min-w-settings-layout flex-col gap-4 pt-settings-layout-pt"
 >
 	{@render children()}
 </div>
