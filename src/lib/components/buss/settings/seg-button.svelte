@@ -72,8 +72,8 @@
 			<button
 				bind:this={itemElements[index]}
 				class={cn(
-					"relative z-2 flex h-[32px] flex-1 cursor-pointer items-center justify-center gap-1 rounded-md text-sm",
-					isActive ? "text-accent-fg" : "text-secondary-fg hover:bg-hover-primary z-1",
+					"relative z-2 flex h-seg-button-thumb-height flex-1 cursor-pointer items-center justify-center gap-1 rounded-md text-sm",
+					isActive ? "text-accent-foreground" : "text-secondary-foreground hover:bg-tab-hover z-1",
 				)}
 				type="button"
 				on:mousedown={() => handleSelect(option.key)}

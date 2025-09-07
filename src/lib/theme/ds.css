@@ -63,20 +63,49 @@
     Defaults align with previous hand-picked colors to preserve look & feel.
     Fallbacks keep the dynamic color-mix behavior for future flexibility.
   */
-	--ui-tab-hover-bg: var(--color-muted, color-mix(in oklch, var(--ui-accent) 12%, transparent));
-	--ui-tab-btn-hover-active: var(
-		--accent-hover,
-		color-mix(in oklch, var(--ui-accent) 18%, transparent)
-	);
-	--ui-tab-btn-hover-inactive: var(
-		--hover-2,
-		color-mix(in oklch, var(--ui-surface-muted) 60%, transparent)
-	);
+	--ui-tab-hover-bg: var(--color-muted);
+	--ui-tab-btn-hover-active: var(--accent-hover);
+	--ui-tab-btn-hover-inactive: var(--hover-2);
 	--ui-tabbar-bg: var(--ui-surface-muted);
+
+	/* Settings — exposed minimal knobs (concrete defaults; avoid cycles) */
+	--ui-settings-item-bg: var(--settings-item-bg, var(--overlay));
+	--ui-settings-switch-border: var(--settings-switch-border, var(--border));
+	--ui-settings-item-radius: 0.625rem; /* rounded-[10px] */
+	--ui-settings-item-h: 2.75rem; /* h-11 */
+	--ui-settings-item-px: 0.875rem; /* px-3.5 */
+	--ui-settings-item-py: 0.625rem; /* py-2.5 */
+
+	/* Settings layout (concrete defaults) */
+	--ui-settings-layout-max-w: 33rem; /* max-w-[528px] */
+	--ui-settings-layout-min-w: 33rem; /* min-w-[528px] */
+	--ui-settings-layout-pt: 1.125rem; /* pt-[18px] */
+
+	/* Segmented button (concrete defaults) */
+	--ui-seg-btn-thumb-h: 2rem; /* h-[32px] */
+	--ui-seg-btn-container-h: 2.75rem; /* h-11 */
+	--ui-seg-btn-container-px: 0.5rem; /* px-2 */
+	--ui-seg-btn-radius: 0.625rem; /* rounded-[10px] */
+
+	/* Chat — exposed minimal knobs (preserve existing look) */
+	--ui-chat-slogan-text: 2.125rem; /* text-[34px] */
+	--ui-chat-container-max-w: 45rem; /* max-w-[720px] */
+	--ui-chat-container-max-h: 13rem; /* max-h-52 */
+	--ui-chat-container-min-h: 7.875rem; /* min-h-[126px] */
+	--ui-chat-container-gap-y: 2.25rem; /* gap-y-9 */
+	--ui-chat-container-padding: 0.75rem; /* p-3 */
+	--ui-chat-button-bar-h: 2.25rem; /* h-9 */
+	--ui-chat-button-bar-gap: 0.5rem; /* gap-x-2 */
+	--ui-chat-icon-size: 1rem; /* size-4 */
+	--ui-chat-container-radius: 1.25rem; /* rounded-[20px] */
+	--ui-chat-action-hover: var(--chat-action-hover);
+	--ui-chat-action-active: var(--chat-action-active);
+	--ui-chat-icon-active: var(--color-primary);
+	--ui-chat-send-message-disabled: var(--chat-send-message-disabled);
 }
 
 /* 2) Tailwind v4 theme bridge: generates utilities like bg-*, h-*, px-*, gap-*, size-*, rounded-* */
-@theme {
+@theme inline {
 	/* Colors */
 	--color-tab-active: var(--ui-tab-bg-active);
 	--color-tab-inactive: var(--ui-tab-bg-inactive);
@@ -107,4 +136,40 @@
 
 	/* Radius */
 	--radius-tab: var(--ui-tab-radius);
+
+	/* Settings bridge */
+	--color-settings-item-bg: var(--ui-settings-item-bg);
+	--color-settings-switch-border: var(--ui-settings-switch-border);
+	--radius-settings-item: var(--ui-settings-item-radius);
+	--radius-settings-item-border-radius: var(--ui-settings-item-radius);
+	--spacing-settings-item-height: var(--ui-settings-item-h);
+	--spacing-settings-item-padding-x: var(--ui-settings-item-px);
+	--spacing-settings-item-padding-y: var(--ui-settings-item-py);
+	--spacing-settings-layout-max-width: var(--ui-settings-layout-max-w);
+	--spacing-settings-layout-min-width: var(--ui-settings-layout-min-w);
+	--spacing-settings-layout-padding-top: var(--ui-settings-layout-pt);
+
+	/* Segmented button bridge */
+	--spacing-seg-button-thumb-height: var(--ui-seg-btn-thumb-h);
+	--spacing-seg-button-container-height: var(--ui-seg-btn-container-h);
+	--spacing-seg-button-container-padding-x: var(--ui-seg-btn-container-px);
+	--radius-seg-button-container: var(--ui-seg-btn-radius);
+
+	/* Chat bridge */
+	--text-chat-slogan: var(--ui-chat-slogan-text);
+	--spacing-chat-container-max-width: var(--ui-chat-container-max-w);
+	--spacing-chat-container-max-height: var(--ui-chat-container-max-h);
+	--spacing-chat-container-min-height: var(--ui-chat-container-min-h);
+	--spacing-chat-container-gap-y: var(--ui-chat-container-gap-y);
+	--spacing-chat-container-padding: var(--ui-chat-container-padding);
+	--spacing-chat-button-bar-height: var(--ui-chat-button-bar-h);
+	--spacing-chat-button-bar-gap: var(--ui-chat-button-bar-gap);
+	--spacing-chat-button-bar-height: var(--ui-chat-button-bar-h);
+	--spacing-chat-button-bar-gap: var(--ui-chat-button-bar-gap);
+	--size-chat-icon-size: var(--ui-chat-icon-size);
+	--radius-chat-container: var(--ui-chat-container-radius);
+	--color-chat-action-hover: var(--ui-chat-action-hover);
+	--color-chat-action-active: var(--ui-chat-action-active);
+	--color-chat-icon-active: var(--ui-chat-icon-active);
+	--color-chat-send-message-disabled: var(--ui-chat-send-message-disabled);
 }

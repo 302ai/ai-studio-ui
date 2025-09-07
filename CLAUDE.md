@@ -56,22 +56,25 @@ This is a **SvelteKit 5** application using the modern `$props()` and `{@render}
 
 **Styling:**
 
-- **TailwindCSS 4.0** with `@theme` directive for custom variables
-- Custom CSS variables for component theming and user customization
+- **TailwindCSS 4.0** with `@theme` directive
+- New Design System token layer: `src/lib/theme/ds.css`
+  - Exposed tokens: `--ui-*` (user-safe, minimal and precise)
+  - Derived tokens + @theme bridge → utility classes (e.g., `bg-tab-active`, `h-tab-h`)
+- Users can customize styles by overriding `--ui-*` variables (supports settings page injection)
 - Theme switching via `theme-switcher.svelte` component
 - Uses `mode-watcher` for dark/light mode detection
 
-**TailwindCSS 4 Theme Variables:**
+**TailwindCSS 4 Theme Variables (Design System):**
 
-- Use `@theme` directive to define custom variables in `app.css`
-- Variable naming follows namespace conventions:
-  - `--spacing-*` for sizing (width, height, padding, margin, gap, etc.)
-  - `--color-*` for colors and theming
-  - `--radius-*` for border radius values
-- Component-specific variable naming: `--spacing-component-property`
-  - Example: `--spacing-tab-item-height`, `--color-tab-item-bg`
-- Reference other variables using `var()`: `--color-tab-bg: var(--color-muted)`
-- Always provide comments indicating original Tailwind class equivalents
+- Component style variables are uniformly defined in `src/lib/theme/ds.css`. Don't put business component variables in `app.css` anymore.
+- Layered approach:
+  - Exposed (`--ui-*`): A small number of user-facing safe variables (surface, primary color, radius, density, etc.)
+  - Derived: Component-level variables calculated based on `--ui-*` (e.g., tab hover, spacing)
+  - @theme bridge: Maps variables to Tailwind v4 utility classes (e.g., `bg-*`, `h-*`, `size-*`, `rounded-*`)
+- Naming conventions:
+  - Colors `--color-*`, spacing `--spacing-*`, sizes `--size-*`, border-radius `--radius-*` generate corresponding utility classes via @theme
+  - External exposure should use `--ui-*` as much as possible, avoiding exposing too many detail variables
+  - See existing examples in `src/lib/theme/ds.css` and `src/lib/theme/README.md`
 
 ### Key Patterns:
 
@@ -114,9 +117,9 @@ This is a **SvelteKit 5** application using the modern `$props()` and `{@render}
 <!-- Standard fixed sizes -->
 <X class="h-4 w-4" />
 
-<!-- Using custom size variables for customizable components -->
-<X class="size-tab-close-icon-size" />
-<Plus class="h-tab-icon-size w-tab-icon-size" />
+<!-- Using DS token-generated utilities -->
+<X class="size-tab-close-icon" />
+<Plus class="size-tab-icon" />
 ```
 
 **Component Organization:**
@@ -179,27 +182,23 @@ export {
 
 <div
 	class={cn(
-		"group h-tab-item-height w-tab-item-width px-tab-item-padding-x relative flex cursor-pointer items-center gap-2 text-sm transition-all",
-		"hover:bg-tab-item-hover/80 rounded-t-md border border-b-0",
+		"relative flex h-tab-h w-tab-w items-center gap-tab-gap rounded-tab px-tab-pad-x text-sm",
 		isActive
-			? "bg-tab-item-bg text-tab-item-text shadow-sm"
-			: "bg-tab-item-bg-inactive/50 text-tab-item-text-inactive border-transparent",
+			? "bg-tab-active text-tab-fg-active shadow-sm"
+			: "bg-tab-inactive text-tab-fg-inactive hover:bg-tab-hover",
 	)}
 	onclick={() => onTabClick(tab)}
 >
-	<span class="max-w-tab-item-max-title-width truncate">{tab.title}</span>
+	<span class="max-w-tab-title-max-w truncate">{tab.title}</span>
 	{#if tab.closable !== false}
 		<button
-			class={cn(
-				"opacity-0 transition-opacity group-hover:opacity-100",
-				"hover:bg-tab-button-hover p-tab-close-button-padding rounded",
-			)}
+			class="rounded p-tab-close-pad hover:bg-tab-btn-hover-inactive"
 			onclick={(e) => {
 				e.stopPropagation();
 				onTabClose(tab);
 			}}
 		>
-			<X class="size-tab-close-icon-size" />
+			<X class="size-tab-close-icon" />
 		</button>
 	{/if}
 </div>
@@ -215,26 +214,28 @@ export {
 
 **Best Practices:**
 
-1. **Extract all hardcoded styles** to CSS variables for complex/reusable components
-2. **Define variables in `@theme` blocks** in `app.css`
-3. **Use descriptive variable names** following the component-property pattern
-4. **Replace hardcoded Tailwind classes** with custom variable-based classes
-5. **Group related variables** with comments for organization
+1. Prioritize using `src/lib/theme/ds.css` to define/extend tokens (don't put business tokens in `app.css`)
+2. Expose as few and semantically clear `--ui-*` variables as possible, with the rest as derived internal variables
+3. Use @theme to expose tokens as utility classes (`bg-*`, `h-*`, `px-*`, `size-*`, `rounded-*`)
+4. Replace hardcoded/arbitrary values with these utility classes in components to reduce style fragmentation
+5. Use consistent naming for the same semantics to facilitate large-scale maintenance
 
-**CSS Variable Definition Example:**
+**Token Definition Example (in ds.css):**
 
 ```css
-@theme {
-	/* Tab Bar Sizing */
-	--spacing-tab-bar-height: 2.5rem; /* h-10 */
-	--spacing-tab-item-height: 2rem; /* h-8 */
-	--spacing-tab-item-width: 8rem; /* w-32 */
-	--spacing-tab-icon-size: 1rem; /* h-4 w-4 */
+/* Exposed */
+:root {
+	--ui-accent: var(--accent);
+	--ui-accent-fg: var(--accent-foreground);
+	--ui-radius: 0.375rem;
+}
 
-	/* Tab Bar Colors */
-	--color-tab-bar-bg: var(--color-muted);
-	--color-tab-item-bg: var(--color-background);
-	--color-tab-item-text: var(--color-foreground);
+/* Bridge */
+@theme {
+	--color-tab-active: var(--ui-accent);
+	--color-tab-fg-active: var(--ui-accent-fg);
+	--spacing-tab-h: 2rem;
+	--radius-tab: var(--ui-radius);
 }
 ```
 
@@ -244,16 +245,28 @@ export {
 <!-- Instead of hardcoded classes -->
 <div class="h-8 w-32 bg-background text-foreground">
 
-<!-- Use custom variable classes -->
-<div class="h-tab-item-height w-tab-item-width bg-tab-item-bg text-tab-item-text">
+<!-- Use DS token classes -->
+<div class="h-tab-h w-tab-w bg-tab-active text-tab-fg-active rounded-tab">
 ```
 
-**User Customization:**
-Users can customize components by overriding CSS variables:
+**User Customization (Safe):**
+Only allow overriding `--ui-*` variables to avoid arbitrary CSS injection:
 
 ```css
-@theme {
-	--spacing-tab-item-height: 3rem; /* Taller tabs */
-	--color-tab-item-bg: var(--color-blue-500); /* Blue active tabs */
-}
+/* e.g. via Settings raw textarea */
+--ui-accent: oklch(65% 0.16 280);
+--ui-accent-fg: #fff;
+--ui-radius: 0.5rem;
 ```
+
+Or inject via code:
+
+```ts
+import { applyUserVars, applyRawUserCss } from "$lib/theme/user-theme";
+
+applyUserVars({ "--ui-accent": "#9b59b6", "--ui-radius": "8px" });
+// or
+applyRawUserCss("--ui-accent: oklch(65% 0.16 280);\n--ui-radius: 8px;");
+```
+
+> Note: Old tab-related @theme keys and variables have been removed from `app.css`; new business tokens should be uniformly placed in `src/lib/theme/ds.css`.

@@ -125,51 +125,6 @@
 	--chat-send-message-disabled: rgba(142, 71, 240, 0.5);
 }
 
-@theme {
-	/* Settings Layout Sizing */
-	--spacing-settings-layout-max-width: 33rem; /* max-w-[528px] */
-	--spacing-settings-layout-min-width: 33rem; /* min-w-[528px] */
-	--spacing-settings-layout-padding-top: 1.125rem; /* pt-[18px] */
-
-	/* Settings Item Sizing */
-	--spacing-settings-item-height: 2.75rem; /* h-11 */
-	--spacing-settings-item-padding-x: 0.75rem; /* px-3 */
-	--spacing-settings-item-padding-y: 0.625rem; /* py-2.5 */
-	--spacing-settings-item-border-radius: 0.625rem; /* rounded-[10px] */
-
-	/* Chat Page Sizing */
-	--text-chat-slogan: 2.125rem; /* text-[34px] */
-	--spacing-chat-container-max-width: 45rem; /* max-w-[720px] */
-	--spacing-chat-container-max-height: 13rem; /* max-h-52 */
-	--spacing-chat-container-min-height: 7.875rem; /* min-h-[126px] */
-	--spacing-chat-container-gap-y: 2.25rem; /* gap-y-9 */
-	--spacing-chat-container-padding: 0.75rem; /* p-3 */
-	--spacing-chat-button-bar-height: 2.25rem; /* h-9 */
-	--spacing-chat-button-bar-gap: 0.5rem; /* gap-x-2 */
-	--spacing-chat-icon-size: 1rem; /* size-4 */
-
-	/* Chat Page Styling */
-	--radius-chat-container: 1.25rem; /* rounded-[20px] */
-
-	/* Chat Page Colors */
-	--color-chat-action-hover: var(--chat-action-hover);
-	--color-chat-action-active: var(--chat-action-active);
-	--color-chat-icon-active: var(--color-primary);
-	--color-chat-send-message-disabled: var(--chat-send-message-disabled);
-
-	/* Settings Item Colors */
-	--color-settings-item-bg: var(--settings-item-bg);
-
-	/* Settings switch color*/
-	--color-settings-switch-border: var(--settings-switch-border);
-
-	/* Segmented Button Sizing */
-	--spacing-seg-button-thumb-height: 2rem; /* h-[32px] */
-	--spacing-seg-button-container-height: 2.75rem; /* h-11 */
-	--spacing-seg-button-container-padding-x: 0.5rem; /* px-2 */
-	--radius-seg-button-container: 0.625rem; /* rounded-[10px] */
-}
-
 @theme inline {
 	--radius-lg: 0.5rem;
 	--radius-xs: calc(var(--radius-lg) * 0.5);
@@ -179,7 +134,6 @@
 	--radius-2xl: calc(var(--radius-lg) * 1.5);
 	--radius-3xl: calc(var(--radius-lg) * 2);
 	--radius-4xl: calc(var(--radius-lg) * 3);
-	--radius-settings-item-border-radius: var(--spacing-settings-item-border-radius);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -215,7 +169,6 @@
 	--color-overlay-foreground: var(--overlay-foreground);
 	--color-label-fg: var(--label-fg);
 	--color-switch-border: var(--switch-border);
-	--color-settings-item-bg: var(--settings-item-bg);
 }
 
 @layer base {
@@ -227,6 +180,8 @@
 	}
 	* {
 		--setting-width: 170px;
+		/* Fallback for Tailwind v4 text sizing line-height var if needed */
+		--tw-leading: 1.5;
 	}
 }
 

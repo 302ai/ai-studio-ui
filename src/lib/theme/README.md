@@ -21,6 +21,13 @@ Exposed Tokens (stable API)
 - --ui-radius: Global radius baseline.
 - --ui-density: Scale factor for compactness (1 = default).
 
+Settings-specific (high-level)
+
+- --ui-settings-item-bg, --ui-settings-switch-border
+- --ui-settings-item-radius, --ui-settings-item-h, --ui-settings-item-px, --ui-settings-item-py
+- --ui-settings-layout-max-w, --ui-settings-layout-min-w, --ui-settings-layout-pt
+- --ui-seg-btn-thumb-h, --ui-seg-btn-container-h, --ui-seg-btn-container-px, --ui-seg-btn-radius
+
 Tab-specific (high-level)
 
 - --ui-tab-radius
@@ -40,6 +47,13 @@ Generated Utilities
 - Spacing: h-tab-h, w-tab-w, min-w-tab-min-w, px-tab-pad-x, gap-tab-gap, h-tabbar-h, px-tabbar-pad-x, max-w-tab-title-max-w, mr-tab-icon-mr, p-tab-close-pad
 - Sizes: size-tab-icon, size-tab-item-icon, size-tab-close-icon, size-tab-new-btn
 - Radius: rounded-tab
+
+Settings Utilities
+
+- Colors: bg-settings-item-bg, border-settings-switch-border
+- Item: h-settings-item-height, px-settings-item-padding-x, py-settings-item-padding-y, rounded-settings-item
+- Layout: max-w-settings-layout-max-width, min-w-settings-layout-min-width, pt-settings-layout-padding-top
+- Segmented: h-seg-button-container-height, px-seg-button-container-padding-x, h-seg-button-thumb-height, rounded-seg-button-container
 
 User Overrides (Settings)
 
