@@ -114,9 +114,9 @@
 			element.style.outline = "none";
 
 			const tabElement = element.querySelector('[role="button"]') as HTMLElement;
-			tabElement?.classList.remove("hover:bg-tab-item-hover");
-			tabElement?.classList.add("bg-tab-item-bg", "text-tab-item-text", "shadow-sm");
-			tabElement?.classList.remove("bg-tab-item-bg-inactive", "text-tab-item-text-inactive");
+			tabElement?.classList.remove("hover:bg-tab-hover");
+			tabElement?.classList.add("bg-tab-active", "text-tab-fg-active", "shadow-sm");
+			tabElement?.classList.remove("bg-tab-inactive", "text-tab-fg-inactive");
 		} catch (error) {
 			console.warn("Error transforming dragged element:", error);
 		}
@@ -130,12 +130,12 @@
 </script>
 
 <div
-	class={cn("flex h-tab-bar-height w-full items-center border-b bg-tab-bar-bg/50", className)}
+	class={cn("flex h-tabbar-h w-full items-center border-b bg-tabbar-bg/50", className)}
 	role="tablist"
 	aria-label={m.tab_new() ?? "Tab bar"}
 >
 	<div
-		class="flex w-full min-w-0 items-center gap-tab-bar-gap overflow-x-hidden px-tab-bar-padding-x"
+		class="flex w-full min-w-0 items-center gap-tab-gap overflow-x-hidden px-tabbar-pad-x"
 		use:dndzone={{
 			items: tabs,
 			flipDurationMs: 200,
@@ -203,10 +203,10 @@
 				tooltipSide="bottom"
 				variant="ghost"
 				size="icon"
-				class="h-tab-new-button-size w-tab-new-button-size bg-transparent transition-colors hover:bg-tab-button-hover-inactive hover:text-current"
+				class="size-tab-new-btn bg-transparent transition-colors hover:bg-tab-btn-hover-inactive hover:text-current"
 				onclick={handleNewTab}
 			>
-				<Plus class="h-tab-icon-size w-tab-icon-size" />
+				<Plus class="size-tab-icon" />
 			</ButtonWithTooltip>
 		</div>
 	</div>

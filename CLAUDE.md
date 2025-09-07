@@ -179,11 +179,11 @@ export {
 
 <div
 	class={cn(
-		"group relative flex h-tab-item-height w-tab-item-width cursor-pointer items-center gap-2 px-tab-item-padding-x text-sm transition-all",
-		"rounded-t-md border border-b-0 hover:bg-tab-item-hover/80",
+		"group h-tab-item-height w-tab-item-width px-tab-item-padding-x relative flex cursor-pointer items-center gap-2 text-sm transition-all",
+		"hover:bg-tab-item-hover/80 rounded-t-md border border-b-0",
 		isActive
 			? "bg-tab-item-bg text-tab-item-text shadow-sm"
-			: "border-transparent bg-tab-item-bg-inactive/50 text-tab-item-text-inactive",
+			: "bg-tab-item-bg-inactive/50 text-tab-item-text-inactive border-transparent",
 	)}
 	onclick={() => onTabClick(tab)}
 >
@@ -192,7 +192,7 @@ export {
 		<button
 			class={cn(
 				"opacity-0 transition-opacity group-hover:opacity-100",
-				"hover:bg-tab-button-hover rounded p-tab-close-button-padding",
+				"hover:bg-tab-button-hover p-tab-close-button-padding rounded",
 			)}
 			onclick={(e) => {
 				e.stopPropagation();

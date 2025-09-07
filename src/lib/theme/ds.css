@@ -1,0 +1,110 @@
+/*
+  Design System v1 — Tailwind v4 Token Layer
+
+  Goals:
+  - Preserve shadcn UI tokens; do not modify existing components.
+  - Provide a clean, layered token system for our components.
+  - Allow end-users to override a curated set of variables using plain CSS syntax.
+
+  Layering strategy:
+  1) Exposed tokens (prefix: --ui-*) — safe, minimal knobs users can tweak.
+  2) Derived component tokens (prefix: --ui-tab-*) — computed from exposed tokens.
+  3) Tailwind v4 @theme bridge (prefix: --color-*, --spacing-*, --size-*, --radius-*)
+     to generate ergonomic utility classes like bg-*, h-*, size-*, rounded-*.
+
+  To override via CSS in Settings, users should set only --ui-* variables, e.g.:
+    :root {
+      --ui-accent: oklch(65% 0.17 277);
+      --ui-accent-fg: #fff;
+      --ui-radius: 0.5rem;
+    }
+*/
+
+/* 1) Exposed tokens (safe for users). Default to shadcn base tokens to keep parity. */
+:root {
+	/* Core surfaces & text */
+	--ui-surface: var(--background);
+	--ui-surface-muted: var(--muted);
+	--ui-text: var(--foreground);
+	--ui-text-muted: var(--muted-foreground);
+
+	/* Accent & focus */
+	--ui-accent: var(--accent);
+	--ui-accent-fg: var(--accent-foreground);
+	--ui-ring: var(--ring);
+
+	/* Global geometry & density */
+	--ui-radius: 0.375rem; /* 6px — aligns with current visuals */
+	--ui-density: 1; /* scale factor for compactness */
+
+	/* Component-level high-level knobs (kept minimal) */
+	--ui-tab-radius: var(--ui-radius);
+	--ui-tab-height: calc(2rem * var(--ui-density));
+	--ui-tab-padding-x: calc(0.75rem * var(--ui-density));
+	--ui-tab-gap: calc(0.125rem * var(--ui-density));
+	--ui-tabbar-height: 2.5rem;
+	--ui-tabbar-padding-x: 0.5rem;
+	--ui-tab-width: 10rem; /* accommodates icons */
+	--ui-tab-min-width: 8rem; /* stretch mode minimum */
+	--ui-tab-title-max-w: 12.5rem;
+	--ui-tab-icon-size: 1rem;
+	--ui-tab-item-icon-size: 0.875rem;
+	--ui-tab-icon-mr: 0.5rem;
+	--ui-tab-close-icon-size: 0.75rem;
+	--ui-tab-close-pad: 0.125rem;
+	--ui-tab-new-button-size: 1.75rem;
+
+	/* Semantic states for tabs (derived) */
+	--ui-tab-bg-active: var(--ui-accent);
+	--ui-tab-fg-active: var(--ui-accent-fg);
+	--ui-tab-bg-inactive: transparent;
+	--ui-tab-fg-inactive: var(--ui-text);
+	/*
+    Defaults align with previous hand-picked colors to preserve look & feel.
+    Fallbacks keep the dynamic color-mix behavior for future flexibility.
+  */
+	--ui-tab-hover-bg: var(--color-muted, color-mix(in oklch, var(--ui-accent) 12%, transparent));
+	--ui-tab-btn-hover-active: var(
+		--accent-hover,
+		color-mix(in oklch, var(--ui-accent) 18%, transparent)
+	);
+	--ui-tab-btn-hover-inactive: var(
+		--hover-2,
+		color-mix(in oklch, var(--ui-surface-muted) 60%, transparent)
+	);
+	--ui-tabbar-bg: var(--ui-surface-muted);
+}
+
+/* 2) Tailwind v4 theme bridge: generates utilities like bg-*, h-*, px-*, gap-*, size-*, rounded-* */
+@theme {
+	/* Colors */
+	--color-tab-active: var(--ui-tab-bg-active);
+	--color-tab-inactive: var(--ui-tab-bg-inactive);
+	--color-tab-hover: var(--ui-tab-hover-bg);
+	--color-tab-fg-active: var(--ui-tab-fg-active);
+	--color-tab-fg-inactive: var(--ui-tab-fg-inactive);
+	--color-tabbar-bg: var(--ui-tabbar-bg);
+	--color-tab-btn-hover-active: var(--ui-tab-btn-hover-active);
+	--color-tab-btn-hover-inactive: var(--ui-tab-btn-hover-inactive);
+
+	/* Spacing */
+	--spacing-tab-h: var(--ui-tab-height);
+	--spacing-tab-w: var(--ui-tab-width);
+	--spacing-tab-min-w: var(--ui-tab-min-width);
+	--spacing-tab-pad-x: var(--ui-tab-padding-x);
+	--spacing-tab-gap: var(--ui-tab-gap);
+	--spacing-tabbar-h: var(--ui-tabbar-height);
+	--spacing-tabbar-pad-x: var(--ui-tabbar-padding-x);
+	--spacing-tab-title-max-w: var(--ui-tab-title-max-w);
+	--spacing-tab-icon-mr: var(--ui-tab-icon-mr);
+	--spacing-tab-close-pad: var(--ui-tab-close-pad);
+
+	/* Sizes */
+	--size-tab-icon: var(--ui-tab-icon-size);
+	--size-tab-item-icon: var(--ui-tab-item-icon-size);
+	--size-tab-close-icon: var(--ui-tab-close-icon-size);
+	--size-tab-new-btn: var(--ui-tab-new-button-size);
+
+	/* Radius */
+	--radius-tab: var(--ui-tab-radius);
+}

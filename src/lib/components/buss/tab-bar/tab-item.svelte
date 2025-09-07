@@ -74,30 +74,27 @@
 <ContextMenu.Root>
 	<ContextMenu.Trigger
 		class={cn(
-			"relative flex h-tab-item-height cursor-pointer items-center px-tab-item-padding-x text-sm",
-			isCompact ? "justify-center" : "justify-between gap-2",
-			stretch ? "w-auto min-w-tab-item-min-width" : "w-tab-item-width",
+			"relative flex h-tab-h cursor-pointer items-center rounded-tab px-tab-pad-x text-sm",
+			isCompact ? "justify-center" : "justify-between gap-tab-gap",
+			stretch ? "w-auto min-w-tab-min-w" : "w-tab-w",
 			isActive
-				? "bg-tab-item-bg text-tab-item-text"
-				: "border-transparent bg-tab-item-bg-inactive text-tab-item-text-inactive hover:bg-tab-item-hover",
+				? "bg-tab-active text-tab-fg-active"
+				: "border-transparent bg-tab-inactive text-tab-fg-inactive hover:bg-tab-hover",
 			"overflow-hidden",
 			className,
 		)}
-		style="border-radius: 0.375rem !important;"
 		onclick={() => onTabClick(tab)}
 		role="button"
 		tabindex={0}
 	>
 		<div bind:this={triggerRef} class="contents">
 			{#if tab.icon && !isCompact}
-				<div
-					class="mr-tab-item-icon-margin-right flex size-tab-item-icon-size shrink-0 items-center justify-center"
-				>
+				<div class="mr-tab-icon-mr flex size-tab-item-icon shrink-0 items-center justify-center">
 					{@render tab.icon()}
 				</div>
 			{/if}
 			{#if !isCompact}
-				<span class="max-w-tab-item-max-title-width min-w-0 flex-1 truncate">{tab.title}</span>
+				<span class="max-w-tab-title-max-w min-w-0 flex-1 truncate">{tab.title}</span>
 			{/if}
 			{#if tab.closable !== false}
 				<ButtonWithTooltip
@@ -106,15 +103,15 @@
 					variant="ghost"
 					size="icon"
 					class={cn(
-						"h-auto w-auto shrink-0 rounded bg-transparent p-tab-close-button-padding transition-colors hover:bg-transparent",
-						isActive ? "hover:!bg-tab-button-hover-active" : "hover:!bg-tab-button-hover-inactive",
+						"h-auto w-auto shrink-0 rounded bg-transparent p-tab-close-pad transition-colors hover:bg-transparent",
+						isActive ? "hover:bg-tab-btn-hover-active" : "hover:bg-tab-btn-hover-inactive",
 					)}
 					onclick={(e) => {
 						e.stopPropagation();
 						onTabClose(tab);
 					}}
 				>
-					<X class="size-tab-close-icon-size" />
+					<X class="size-tab-close-icon" />
 				</ButtonWithTooltip>
 			{/if}
 		</div>
