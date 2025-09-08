@@ -45,5 +45,9 @@
 	"settings_everyConversation": "每次对话",
 	"settings_off": "关闭",
 	"apply": "应用",
-	"reset": "重置"
+	"reset": "重置",
+	"settings_slow": "慢速",
+	"settings_normal": "正常",
+	"settings_fast": "快速",
+	"settings_streamOutputSpeed": "输出速度"
 }

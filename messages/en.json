@@ -45,5 +45,9 @@
 	"settings_everyConversation": "Every Conversation",
 	"settings_off": "Off",
 	"apply": "Apply",
-	"reset": "Reset"
+	"reset": "Reset",
+	"settings_slow": "Slow",
+	"settings_normal": "Normal",
+	"settings_fast": "Fast",
+	"settings_streamOutputSpeed": "Stream Speed"
 }
