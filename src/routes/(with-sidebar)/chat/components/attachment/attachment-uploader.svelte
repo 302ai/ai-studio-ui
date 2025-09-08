@@ -14,20 +14,59 @@
 	let fileInput: HTMLInputElement;
 
 	async function generatePreview(file: File): Promise<string | undefined> {
-		if (!file.type.startsWith("image/")) {
+		if (file.type.startsWith("image/")) {
+			return new Promise((resolve) => {
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					resolve(e.target?.result as string);
+				};
+				reader.onerror = () => {
+					resolve(undefined);
+				};
+				reader.readAsDataURL(file);
+			});
+		}
+
+		if (file.type.startsWith("video/")) {
+			return new Promise((resolve) => {
+				const video = document.createElement("video");
+				const canvas = document.createElement("canvas");
+				const ctx = canvas.getContext("2d");
+
+				video.onloadeddata = () => {
+					canvas.width = video.videoWidth;
+					canvas.height = video.videoHeight;
+
+					if (ctx) {
+						ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+						const thumbnailUrl = canvas.toDataURL("image/jpeg", 0.8);
+						resolve(thumbnailUrl);
+					} else {
+						resolve(undefined);
+					}
+
+					URL.revokeObjectURL(video.src);
+				};
+
+				video.onerror = () => {
+					try {
+						resolve(URL.createObjectURL(file));
+					} catch {
+						resolve(undefined);
+					}
+				};
+
+				video.src = URL.createObjectURL(file);
+				video.currentTime = 0.1;
+				video.load();
+			});
+		}
+
+		if (file.type.startsWith("audio/")) {
 			return undefined;
 		}
 
-		return new Promise((resolve) => {
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				resolve(e.target?.result as string);
-			};
-			reader.onerror = () => {
-				resolve(undefined);
-			};
-			reader.readAsDataURL(file);
-		});
+		return undefined;
 	}
 
 	async function handleFileSelect(event: Event) {
@@ -72,7 +111,7 @@
 	type="file"
 	multiple
 	class="hidden"
-	accept="image/*,text/*,.pdf,.doc,.docx,.json,.csv,.xlsx,.xls"
+	accept="image/*,text/*,audio/*,video/*,.pdf,.doc,.docx,.json,.csv,.xlsx,.xls"
 	onchange={handleFileSelect}
 />
 

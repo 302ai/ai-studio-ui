@@ -18,6 +18,7 @@
 		ImageViewer,
 		TextViewer,
 		UnknownViewer,
+		VideoViewer,
 	} from "./index";
 	import { formatFileSize, getViewerType } from "./viewer-utils";
 
@@ -45,6 +46,8 @@
 					<ImageViewer src={attachment.preview} alt={attachment.name} />
 				{:else if viewerType === "audio"}
 					<AudioViewer src={attachment.preview} />
+				{:else if viewerType === "video"}
+					<VideoViewer src={URL.createObjectURL(attachment.file)} />
 				{:else if viewerType === "code"}
 					<CodeViewer {attachment} fileName={attachment.name} />
 				{:else if viewerType === "document"}
@@ -52,7 +55,7 @@
 				{:else if viewerType === "text"}
 					<TextViewer {attachment} />
 				{:else}
-					<UnknownViewer fileName={attachment.name} fileType={attachment.type} />
+					<UnknownViewer />
 				{/if}
 			</div>
 		</div>

@@ -4,13 +4,14 @@
 	import {
 		Eye,
 		File,
-		FileAudio,
 		FileCode,
 		FileImage,
 		FileJson,
 		FileSpreadsheet,
 		FileText,
+		Headphones,
 		Trash2,
+		Video,
 	} from "@lucide/svelte";
 	import { ViewerPanel } from "./viewer/index.js";
 
@@ -33,7 +34,12 @@
 
 		// Audio files
 		if (type.startsWith("audio/")) {
-			return FileAudio;
+			return Headphones;
+		}
+
+		// Video files
+		if (type.startsWith("video/")) {
+			return Video;
 		}
 
 		// JSON files

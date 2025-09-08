@@ -5,21 +5,25 @@
 </script>
 
 <script lang="ts">
+	import { Headphones } from "@lucide/svelte";
+	import ErrorState from "./error-state.svelte";
 	import ViewerBase from "./viewer-base.svelte";
 
 	let { src }: AudioViewerProps = $props();
 </script>
 
 <ViewerBase>
-	{#snippet children()}
-		<div class="flex h-full items-center justify-center p-6">
-			<div class="text-center">
-				<p class="text-lg font-medium">Audio Viewer</p>
-				<p class="mt-2 text-sm text-muted-foreground">Audio viewer will be implemented here</p>
-				{#if src}
-					<p class="mt-2 text-xs text-muted-foreground">Source: {src}</p>
-				{/if}
+	<div class="flex h-full items-center justify-center p-6">
+		{#if src}
+			<div class="flex w-full max-w-md flex-col items-center gap-y-8">
+				<div class="rounded-full bg-muted p-4">
+					<Headphones class="h-10 w-10 " />
+				</div>
+
+				<audio {src} class="w-full" controls preload="metadata"> </audio>
 			</div>
-		</div>
-	{/snippet}
+		{:else}
+			<ErrorState />
+		{/if}
+	</div>
 </ViewerBase>

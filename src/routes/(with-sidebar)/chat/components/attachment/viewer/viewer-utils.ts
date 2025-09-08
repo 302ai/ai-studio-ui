@@ -1,6 +1,6 @@
 import type { AttachmentFile } from "@/stores/chat-state.svelte";
 
-export type ViewerType = "image" | "audio" | "code" | "document" | "text" | "unknown";
+export type ViewerType = "image" | "audio" | "video" | "code" | "document" | "text" | "unknown";
 
 export function formatFileSize(bytes: number): string {
 	if (bytes < 1024) return `${bytes}B`;
@@ -19,6 +19,10 @@ export function getViewerType(attachment: AttachmentFile): ViewerType {
 		return "audio";
 	}
 
+	if (type.startsWith("video/")) {
+		return "video";
+	}
+
 	if (
 		type.includes("javascript") ||
 		type.includes("typescript") ||
@@ -30,12 +34,43 @@ export function getViewerType(attachment: AttachmentFile): ViewerType {
 		name.endsWith(".java") ||
 		name.endsWith(".cpp") ||
 		name.endsWith(".c") ||
+		name.endsWith(".h") ||
+		name.endsWith(".cs") ||
+		name.endsWith(".php") ||
+		name.endsWith(".rb") ||
+		name.endsWith(".go") ||
+		name.endsWith(".rs") ||
+		name.endsWith(".swift") ||
+		name.endsWith(".kt") ||
+		name.endsWith(".scala") ||
 		name.endsWith(".css") ||
+		name.endsWith(".scss") ||
+		name.endsWith(".sass") ||
+		name.endsWith(".less") ||
 		name.endsWith(".html") ||
-		name.endsWith(".json") ||
+		name.endsWith(".htm") ||
 		name.endsWith(".xml") ||
+		name.endsWith(".json") ||
+		name.endsWith(".jsonc") ||
 		name.endsWith(".yml") ||
-		name.endsWith(".yaml")
+		name.endsWith(".yaml") ||
+		name.endsWith(".toml") ||
+		name.endsWith(".ini") ||
+		name.endsWith(".cfg") ||
+		name.endsWith(".conf") ||
+		name.endsWith(".sh") ||
+		name.endsWith(".bat") ||
+		name.endsWith(".ps1") ||
+		name.endsWith(".sql") ||
+		name.endsWith(".dockerfile") ||
+		name.endsWith(".makefile") ||
+		name.endsWith(".gradle") ||
+		name.endsWith(".maven") ||
+		name.endsWith(".r") ||
+		name.endsWith(".m") ||
+		name.endsWith(".dart") ||
+		name.endsWith(".vue") ||
+		name.endsWith(".svelte")
 	) {
 		return "code";
 	}
@@ -57,7 +92,17 @@ export function getViewerType(attachment: AttachmentFile): ViewerType {
 		return "document";
 	}
 
-	if (type.startsWith("text/") || name.endsWith(".txt") || name.endsWith(".md")) {
+	if (
+		type.startsWith("text/") ||
+		name.endsWith(".txt") ||
+		name.endsWith(".md") ||
+		name.endsWith(".markdown") ||
+		name.endsWith(".rst") ||
+		name.endsWith(".log") ||
+		name.endsWith(".csv") ||
+		name.endsWith(".tsv") ||
+		name.endsWith(".rtf")
+	) {
 		return "text";
 	}
 
