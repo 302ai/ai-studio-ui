@@ -64,8 +64,9 @@
     Fallbacks keep the dynamic color-mix behavior for future flexibility.
   */
 	--ui-tab-hover-bg: var(--color-muted);
-	--ui-tab-btn-hover-active: var(--accent-hover);
+	--ui-tab-btn-hover-active: var(--hover-2);
 	--ui-tab-btn-hover-inactive: var(--hover-2);
+	--ui-tab-btn-hover-fg: var(--hover-fg);
 	--ui-tabbar-bg: var(--ui-surface-muted);
 
 	/* Settings — exposed minimal knobs (concrete defaults; avoid cycles) */
@@ -115,6 +116,7 @@
 	--color-tabbar-bg: var(--ui-tabbar-bg);
 	--color-tab-btn-hover-active: var(--ui-tab-btn-hover-active);
 	--color-tab-btn-hover-inactive: var(--ui-tab-btn-hover-inactive);
+	--color-tab-btn-hover-fg: var(--ui-tab-btn-hover-fg);
 
 	/* Spacing */
 	--spacing-tab-h: var(--ui-tab-height);
