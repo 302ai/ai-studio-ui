@@ -11,6 +11,7 @@
 		options: SelectOption[];
 		placeholder?: string;
 		class?: string;
+		onValueChange?: (value: string) => void;
 	}
 </script>
 
@@ -18,14 +19,21 @@
 	import * as Select from "$lib/components/ui/select/index.js";
 	import { cn } from "$lib/utils";
 
-	let { name, value = $bindable(), options, placeholder, class: className }: Props = $props();
+	let {
+		name,
+		value = $bindable(),
+		options,
+		placeholder,
+		class: className,
+		onValueChange,
+	}: Props = $props();
 
 	function getLabel(val: string) {
 		return options.find((option) => option.value === val)?.label || val;
 	}
 </script>
 
-<Select.Root type="single" {name} bind:value>
+<Select.Root type="single" {name} bind:value {onValueChange}>
 	<Select.Trigger
 		class={cn("w-full !bg-settings-item-bg data-[size=default]:h-settings-item", className)}
 	>
