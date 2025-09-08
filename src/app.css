@@ -26,6 +26,7 @@
 	--accent-foreground: #8e47f0;
 	--accent-hover: #ece9ff;
 	--hover-2: #e6e6e6;
+	--hover-fg: #000000;
 
 	--overlay: #f9f9f9;
 	--overlay-foreground: #333333;
@@ -87,6 +88,7 @@
 	--accent-foreground: #e6e6e6;
 	--accent-hover: #503a6c;
 	--hover-2: #383838;
+	--hover-fg: #e6e6e6;
 
 	--settings-item-bg: #1a1a1a;
 

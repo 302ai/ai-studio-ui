@@ -103,8 +103,10 @@
 					variant="ghost"
 					size="icon"
 					class={cn(
-						"h-auto w-auto shrink-0 rounded bg-transparent p-tab-close transition-colors hover:bg-transparent",
-						isActive ? "hover:bg-tab-btn-hover-active" : "hover:bg-tab-btn-hover-inactive",
+						"h-auto w-auto shrink-0 rounded bg-transparent p-tab-close transition-colors",
+						isActive
+							? "hover:bg-tab-btn-hover-active dark:hover:bg-tab-btn-hover-active"
+							: "hover:bg-tab-btn-hover-inactive hover:text-tab-btn-hover-fg dark:hover:bg-tab-btn-hover-inactive",
 					)}
 					onclick={(e) => {
 						e.stopPropagation();
