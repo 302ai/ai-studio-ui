@@ -12,12 +12,10 @@
 </script>
 
 <script lang="ts">
-	import { Button } from "@/components/ui/button";
 	import * as Dialog from "@/components/ui/dialog";
-	import { Download, X } from "@lucide/svelte";
 	import { ImageViewer } from "svelte-image-viewer";
 
-	let { attachment, isOpen, onClose, onDownload }: ViewerPanelProps = $props();
+	let { attachment, isOpen, onClose }: ViewerPanelProps = $props();
 
 	function formatFileSize(bytes: number): string {
 		if (bytes < 1024) return `${bytes}B`;
@@ -83,45 +81,26 @@
 	}
 
 	let viewerType = $derived(getViewerType(attachment));
-
-	function handleDownload() {
-		onDownload?.(attachment);
-	}
 </script>
 
 <Dialog.Root open={isOpen} onOpenChange={onClose}>
-	<Dialog.Content
-		class="h-auto max-h-[95vh] w-fit max-w-[95vw] min-w-[60vw] gap-0 p-0"
-		showCloseButton={false}
-	>
+	<Dialog.Content class="w-fit max-w-[95vw] min-w-[60vw] gap-0 rounded-[10px] p-0">
 		<div
-			class="relative z-10 flex items-center justify-between rounded-[10px] border-b bg-muted/50 px-6 py-4"
+			class="bg-chat-attachment-viewer flex items-center gap-2 rounded-t-[10px] border-b p-4 text-sm"
 		>
-			<div class="flex min-w-0 flex-1 flex-col gap-1">
-				<h2 class="truncate text-lg font-semibold" title={attachment.name}>
-					{attachment.name}
-				</h2>
-				<p class="text-sm text-muted-foreground">
-					{formatFileSize(attachment.size)}
-				</p>
-			</div>
-
-			<div class="ml-4 flex items-center gap-2">
-				<Button variant="outline" size="sm" onclick={handleDownload} disabled={!onDownload}>
-					<Download class="h-4 w-4" />
-				</Button>
-
-				<Button variant="outline" size="sm" onclick={onClose}>
-					<X class="h-4 w-4" />
-				</Button>
-			</div>
+			<span class="truncate" title={attachment.name}>
+				{attachment.name}
+			</span>
+			<span class="text-muted-foreground">
+				{formatFileSize(attachment.size)}
+			</span>
 		</div>
 
-		<div class="relative z-0 flex flex-1 items-center justify-center overflow-hidden">
+		<div class="flex flex-1 items-center justify-center overflow-hidden">
 			{#if viewerType === "image" && attachment.preview}
 				<div
-					class="relative bg-black/5"
-					style="height: 70vh; width: 70vw; border: 1px solid white; position: relative; z-index: 0; user-select: none;"
+					class="bg-chat-attachment-viewer rounded-b-[10px]"
+					style="height: 70vh; width: 70vw; position: relative; user-select: none;"
 				>
 					<ImageViewer
 						src={attachment.preview}
