@@ -1,27 +1,36 @@
 <script lang="ts">
 	import { cn } from "@/utils";
-	import { type Icon as IconType } from "@lucide/svelte";
+	import { Badge } from "@/components/ui/badge";
+	import { Code, Palette } from "@lucide/svelte";
+	import { m } from "$lib/paraglide/messages.js";
 	import { onMount } from "svelte";
 
-	interface SegmentedOption {
-		key: string;
-		icon?: typeof IconType;
-		label: string;
-		iconSize?: number;
-	}
-
 	interface Props {
-		options: SegmentedOption[];
-		selectedKey: string | null;
-		onSelect: (key: string) => void;
+		checked?: boolean;
 	}
 
-	let { options, selectedKey, onSelect }: Props = $props();
+	let { checked = $bindable(false) }: Props = $props();
+
+	const options = [
+		{
+			key: "visual",
+			icon: Palette,
+			label: m.theme_visual_editor(),
+			badge: { text: m.theme_recommended(), variant: "secondary" as const },
+		},
+		{
+			key: "code",
+			icon: Code,
+			label: m.theme_code_editor(),
+			badge: { text: m.theme_advanced(), variant: "outline" as const },
+		},
+	];
 
 	let thumbStyle: { left: string; width: string } = $state({ left: "", width: "" });
 	let itemElements: HTMLElement[] = $state([]);
 	let containerElement: HTMLElement | null = $state(null);
 
+	let selectedKey = $derived(checked ? "code" : "visual");
 	let selectedIndex = $derived(options.findIndex((o) => o.key === selectedKey));
 
 	async function updateThumbPosition() {
@@ -51,7 +60,7 @@
 	});
 
 	function handleSelect(key: string) {
-		onSelect(key);
+		checked = key === "code";
 	}
 </script>
 
@@ -79,11 +88,9 @@
 				onmousedown={() => handleSelect(option.key)}
 				aria-pressed={isActive}
 			>
-				{#if option.icon}
-					<!-- {@html option.icon} -->
-					<option.icon size={option.iconSize} />
-				{/if}
+				<option.icon class="h-4 w-4" />
 				<span>{option.label}</span>
+				<Badge variant={option.badge.variant} class="text-xs">{option.badge.text}</Badge>
 			</button>
 		{/each}
 	</div>
