@@ -1,6 +1,6 @@
 <script lang="ts" module>
 	export interface ViewerBaseProps {
-		children: import('svelte').Snippet;
+		children: import("svelte").Snippet;
 		class?: string;
 	}
 </script>

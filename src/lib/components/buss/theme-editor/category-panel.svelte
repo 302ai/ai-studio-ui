@@ -12,6 +12,7 @@
 	import ColorEditor from "./color-editor.svelte";
 	import NumericEditor from "./numeric-editor.svelte";
 	import { Badge } from "@/components/ui/badge";
+	import { Palette, Ruler, Move, Circle, BarChart3, Type, Settings } from "@lucide/svelte";
 	import { m } from "$lib/paraglide/messages.js";
 
 	let { category, onVariableChange }: Props = $props();
@@ -26,22 +27,22 @@
 		return category.variables.length;
 	}
 
-	function getVariableTypeIcon(type: string): string {
+	function getVariableTypeIcon(type: string) {
 		switch (type) {
 			case "color":
-				return "🎨";
+				return Palette;
 			case "size":
-				return "📏";
+				return Ruler;
 			case "spacing":
-				return "📐";
+				return Move;
 			case "radius":
-				return "⭕";
+				return Circle;
 			case "density":
-				return "📊";
+				return BarChart3;
 			case "text":
-				return "📝";
+				return Type;
 			default:
-				return "⚙️";
+				return Settings;
 		}
 	}
 
@@ -96,22 +97,26 @@
 		{/if}
 	</Accordion.Trigger>
 
-	<Accordion.Content class="space-y-6 pt-2">
+	<Accordion.Content class="space-y-4 pt-4">
 		{#each category.variables as variable (variable.name)}
-			<div class="rounded-lg border border-border bg-card p-4">
-				<div class="mb-3 flex items-start gap-2">
-					<span class="text-lg" title={variable.type}>
-						{getVariableTypeIcon(variable.type)}
-					</span>
+			{@const IconComponent = getVariableTypeIcon(variable.type)}
+			<div class="rounded-lg border border-border/50 bg-card p-5">
+				<div class="mb-4 flex items-start gap-3">
+					<div
+						class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-md bg-muted/50 text-muted-foreground"
+						title={variable.type}
+					>
+						<IconComponent class="h-4 w-4" />
+					</div>
 					<div class="min-w-0 flex-1">
-						<div class="mb-1 flex items-center gap-2">
-							<h4 class="text-sm font-medium">{variable.label}</h4>
-							<Badge variant="outline" class="font-mono text-xs">
+						<div class="mb-2 flex items-center gap-3">
+							<h4 class="text-sm font-medium text-foreground">{variable.label}</h4>
+							<Badge variant="outline" class="shrink-0 font-mono text-xs">
 								{variable.name}
 							</Badge>
 						</div>
 						{#if variable.description}
-							<p class="mb-3 text-xs text-muted-foreground">{variable.description}</p>
+							<p class="text-xs text-muted-foreground">{variable.description}</p>
 						{/if}
 					</div>
 				</div>
