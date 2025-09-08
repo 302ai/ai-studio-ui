@@ -99,9 +99,10 @@
 	--ui-chat-button-bar-gap: 0.5rem; /* gap-x-2 */
 	--ui-chat-icon-size: 1rem; /* size-4 */
 	--ui-chat-container-radius: 1.25rem; /* rounded-[20px] */
+	--ui-chat-send-message-button: var(--primary);
 	--ui-chat-action-hover: #f3f2ff;
 	--ui-chat-action-active: #f3f2ff;
-	--ui-chat-attachment-viewer-bg: var(--ui-surface-muted);
+	--ui-chat-attachment-viewer: var(--popover);
 }
 
 .dark {
@@ -192,7 +193,6 @@
 	--spacing-chat-container-padding: var(--ui-chat-container-padding);
 	--spacing-chat-button-bar-height: var(--ui-chat-button-bar-h);
 	--spacing-chat-button-bar-gap: var(--ui-chat-button-bar-gap);
-	/* Aliases for shorter utilities */
 	--spacing-chat-max-w: var(--ui-chat-container-max-w);
 	--spacing-chat-max-h: var(--ui-chat-container-max-h);
 	--spacing-chat-min-h: var(--ui-chat-container-min-h);
@@ -201,13 +201,12 @@
 	--spacing-chat-bar: var(--ui-chat-button-bar-h);
 	--spacing-chat-bar-gap: var(--ui-chat-button-bar-gap);
 	--size-chat-icon-size: var(--ui-chat-icon-size);
-	/* Simplified alias */
 	--size-chat-icon: var(--ui-chat-icon-size);
 	--radius-chat-container: var(--ui-chat-container-radius);
-	/* Alias */
 	--radius-chat: var(--ui-chat-container-radius);
 	--color-chat-action-hover: var(--ui-chat-action-hover);
 	--color-chat-action-active: var(--ui-chat-action-active);
 	--color-chat-icon-active: var(--ui-chat-icon-active);
 	--color-chat-send-message-button: var(--ui-chat-send-message-button);
+	--color-chat-attachment-viewer-bg: var(--ui-chat-attachment-viewer-bg);
 }

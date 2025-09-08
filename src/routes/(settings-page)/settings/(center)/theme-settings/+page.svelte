@@ -3,17 +3,22 @@
 	import { Label } from "$lib/components/ui/label/index.js";
 	import { Textarea } from "$lib/components/ui/textarea/index.js";
 	import { Button } from "$lib/components/ui/button/index.js";
+	import { ThemeEditor } from "$lib/components/buss/theme-editor/index.js";
+	import ThemeModeSwitch from "$lib/components/buss/settings/theme-mode-switch.svelte";
 	import { applyRawUserCss } from "$lib/theme/user-theme";
 	import { m } from "$lib/paraglide/messages.js";
 
 	let raw = $state("");
+	let isCodeMode = $state(false);
 	const LS_KEY = "user-ui-vars-raw";
 
 	function apply() {
 		applyRawUserCss(raw);
 		try {
 			localStorage.setItem(LS_KEY, raw);
-		} catch {}
+		} catch {
+			// Ignore localStorage errors
+		}
 	}
 
 	function reset() {
@@ -21,7 +26,9 @@
 		applyRawUserCss("");
 		try {
 			localStorage.removeItem(LS_KEY);
-		} catch {}
+		} catch {
+			// Ignore localStorage errors
+		}
 	}
 
 	onMount(() => {
@@ -31,34 +38,54 @@
 				raw = saved;
 				applyRawUserCss(raw);
 			}
-		} catch {}
+		} catch {
+			// Ignore localStorage errors
+		}
 	});
 </script>
 
-<div class="flex flex-col gap-2">
-	<Label class="text-label-fg">Theme Tokens (safe, use --ui-*)</Label>
-	<Textarea
-		bind:value={raw}
-		placeholder="--ui-accent: #8e47f0;\n--ui-accent-fg: #fff;\n--ui-radius: 0.5rem;\n--ui-density: 1;\n--ui-tab-height: 2rem; /* optional per-component */"
-		class="min-h-40"
-	/>
+<div class="space-y-6">
+	<!-- Theme mode selector -->
+	<ThemeModeSwitch bind:checked={isCodeMode} />
 
-	<div class="flex gap-2">
-		<Button onclick={apply}>{m?.apply?.() ?? "Apply"}</Button>
-		<Button variant="secondary" onclick={reset}>{m?.reset?.() ?? "Reset"}</Button>
-	</div>
+	<!-- Visual Theme Editor -->
+	{#if !isCodeMode}
+		<ThemeEditor />
+	{/if}
 
-	<div class="text-sm text-muted-foreground">
-		<p>Notes:</p>
-		<ul class="list-disc space-y-1 pl-5">
-			<li>Only <code>--ui-*</code> variables are applied for safety.</li>
-			<li>
-				Examples: <code>--ui-accent</code>, <code>--ui-accent-fg</code>, <code>--ui-radius</code>,
-				<code>--ui-density</code>.
-			</li>
-			<li>
-				You can also override component-level <code>--ui-*</code> like tabs, settings, and chat.
-			</li>
-		</ul>
-	</div>
+	<!-- Code Editor (Legacy) -->
+	{#if isCodeMode}
+		<div class="flex flex-col gap-4">
+			<div>
+				<Label class="text-sm font-medium">{m.theme_code_title()}</Label>
+				<p class="mt-1 text-xs text-muted-foreground">
+					{m.theme_code_description()}
+				</p>
+			</div>
+
+			<Textarea
+				bind:value={raw}
+				placeholder="--ui-accent: #8e47f0;\n--ui-accent-fg: #fff;\n--ui-radius: 0.5rem;\n--ui-density: 1;\n--ui-tab-height: 2rem; /* optional per-component */"
+				class="min-h-40 font-mono text-sm"
+			/>
+
+			<div class="flex gap-2">
+				<Button onclick={apply}>{m?.apply?.() ?? "Apply"}</Button>
+				<Button variant="secondary" onclick={reset}>{m?.reset?.() ?? "Reset"}</Button>
+			</div>
+
+			<div class="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
+				<p class="mb-2 font-medium">{m.theme_code_usage_notes()}</p>
+				<ul class="list-disc space-y-1 pl-5">
+					<li>{m.theme_code_note_1()}</li>
+					<li>{m.theme_code_note_2()}</li>
+					<li>{m.theme_code_note_3()}</li>
+					<li class="text-amber-600 dark:text-amber-400">
+						<strong>Tip:</strong>
+						{m.theme_code_tip()}
+					</li>
+				</ul>
+			</div>
+		</div>
+	{/if}
 </div>
