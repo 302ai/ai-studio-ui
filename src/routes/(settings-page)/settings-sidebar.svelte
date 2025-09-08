@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Sidebar from "$lib/components/ui/sidebar";
 	import { page } from "$app/state";
+	import * as Sidebar from "$lib/components/ui/sidebar";
 
 	const items = [
 		{
@@ -18,6 +18,10 @@
 		{
 			title: "model-settings",
 			url: "/settings/model-settings",
+		},
+		{
+			title: "data",
+			url: "/settings/data",
 		},
 	];
 </script>
