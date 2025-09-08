@@ -31,6 +31,7 @@
 	}));
 </script>
 
-<Label id="language" class="text-label-fg">{m.language()}</Label>
-
-<SettingSelect name="language" bind:value {options} placeholder={m.select_language()} />
+<div class="flex flex-col gap-settings-gap">
+	<Label id="language" class="text-label-fg">{m.language()}</Label>
+	<SettingSelect name="language" bind:value {options} placeholder={m.select_language()} />
+</div>

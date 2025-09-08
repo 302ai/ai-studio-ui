@@ -22,7 +22,7 @@
 	</Button>
 {/snippet}
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-settings-gap">
 	<Label class="text-label-fg">{m.settings_importData()}</Label>
 	<SettingInfoItem label={m.settings_importFromBackup()} action={importButton} />
 </div>

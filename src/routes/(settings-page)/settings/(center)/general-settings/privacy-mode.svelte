@@ -6,7 +6,7 @@
 	let autoInherit = $state(false);
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-settings-gap">
 	<Label id="privacy-mode" class="text-label-fg">{m.privacyMode()}</Label>
 	<SettingSwitchItem label={m.autoInherit()} bind:checked={autoInherit} />
 </div>

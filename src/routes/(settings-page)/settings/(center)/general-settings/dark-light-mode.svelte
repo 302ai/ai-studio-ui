@@ -33,6 +33,7 @@
 	}
 </script>
 
-<Label class="text-label-fg">{m.settings_theme()}</Label>
-
-<SegButton options={themeOptions} {selectedKey} onSelect={handleSelect} />
+<div class="flex flex-col gap-settings-gap">
+	<Label class="text-label-fg">{m.settings_theme()}</Label>
+	<SegButton options={themeOptions} {selectedKey} onSelect={handleSelect} />
+</div>

@@ -6,7 +6,7 @@
 	let autoStreamOutput = $state(false);
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-settings-gap">
 	<Label class="text-label-fg">{m.settings_displayAppStore()}</Label>
 	<SettingSwitchItem label={m.settings_DisplayAppStoreEnable()} bind:checked={autoStreamOutput} />
 </div>

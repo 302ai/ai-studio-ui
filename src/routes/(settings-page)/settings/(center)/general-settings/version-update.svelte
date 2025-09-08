@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { SettingInfoItem, SettingSwitchItem } from "$lib/components/buss/settings";
-	import { Label } from "$lib/components/ui/label/index.js";
 	import { Button } from "$lib/components/ui/button/index.js";
+	import { Label } from "$lib/components/ui/label/index.js";
 	import { m } from "$lib/paraglide/messages.js";
 	let autoInherit = $state(false);
 
@@ -10,7 +10,7 @@
 	}
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-settings-gap">
 	<Label class="text-label-fg">{m.versionUpdate()}</Label>
 	<SettingSwitchItem label={m.autoUpdate()} bind:checked={autoInherit} />
 	{#snippet updateButton()}

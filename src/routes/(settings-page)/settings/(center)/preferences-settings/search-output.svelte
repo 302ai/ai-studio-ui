@@ -13,7 +13,7 @@
 	let value = $state("search1api");
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-settings-gap">
 	<Label class="text-label-fg">{m.settings_searchProvider()}</Label>
 	<SettingSelect
 		name="searchProvider"

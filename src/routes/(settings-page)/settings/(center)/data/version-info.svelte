@@ -4,7 +4,7 @@
 	import Label from "@/components/ui/label/label.svelte";
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-settings-gap">
 	<Label class="text-label-fg">{m.versionInformation()}</Label>
 	<SettingInfoItem label={m.settings_currentVersion()} value="25.35.4" />
 </div>

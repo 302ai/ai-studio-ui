@@ -81,6 +81,7 @@
 	--ui-settings-layout-max-w: 33rem; /* max-w-[528px] */
 	--ui-settings-layout-min-w: 33rem; /* min-w-[528px] */
 	--ui-settings-layout-pt: 1.125rem; /* pt-[18px] */
+	--ui-settings-gap: 0.5rem; /* 8px — gap-2 equivalent */
 
 	/* Segmented button (concrete defaults) */
 	--ui-seg-btn-thumb-h: 2rem; /* h-[32px] */
@@ -163,6 +164,7 @@
 	--spacing-settings-item-height: var(--ui-settings-item-h);
 	--spacing-settings-item-padding-x: var(--ui-settings-item-px);
 	--spacing-settings-item-padding-y: var(--ui-settings-item-py);
+	--spacing-settings-gap: var(--ui-settings-gap);
 	/* Simplified aliases */
 	--spacing-settings-item: var(--ui-settings-item-h);
 	--spacing-settings-item-x: var(--ui-settings-item-px);
@@ -170,6 +172,7 @@
 	--spacing-settings-layout-max-width: var(--ui-settings-layout-max-w);
 	--spacing-settings-layout-min-width: var(--ui-settings-layout-min-w);
 	--spacing-settings-layout-padding-top: var(--ui-settings-layout-pt);
+	--spacing-settings-gap: var(--ui-settings-gap);
 	/* Simplified aliases (both max/min can use same token by default) */
 	--spacing-settings-layout: var(--ui-settings-layout-max-w);
 	--spacing-settings-layout-pt: var(--ui-settings-layout-pt);

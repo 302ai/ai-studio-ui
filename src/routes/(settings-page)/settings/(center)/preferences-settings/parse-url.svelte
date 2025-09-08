@@ -6,7 +6,7 @@
 	let autoParseUrl = $state(false);
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-settings-gap">
 	<Label class="text-label-fg">{m.settings_parseUrl()}</Label>
 	<SettingSwitchItem label={m.settings_ParseUrlDesc()} bind:checked={autoParseUrl} />
 </div>
