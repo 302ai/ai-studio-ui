@@ -48,7 +48,17 @@
 			name.endsWith(".js") ||
 			name.endsWith(".ts") ||
 			name.endsWith(".tsx") ||
-			name.endsWith(".jsx")
+			name.endsWith(".jsx") ||
+			name.endsWith(".py") ||
+			name.endsWith(".java") ||
+			name.endsWith(".cpp") ||
+			name.endsWith(".c") ||
+			name.endsWith(".css") ||
+			name.endsWith(".html") ||
+			name.endsWith(".json") ||
+			name.endsWith(".xml") ||
+			name.endsWith(".yml") ||
+			name.endsWith(".yaml")
 		) {
 			return FileCode;
 		}
@@ -98,12 +108,12 @@
 {#if attachments.length > 0}
 	<div class="flex gap-2 p-2">
 		{#each attachments as attachment (attachment.id)}
-			<div class="group relative">
+			<div class="group relative overflow-hidden rounded-lg border border-border">
 				<button
 					class={cn(
-						"relative size-14 overflow-hidden rounded-lg",
-						"flex cursor-pointer items-center justify-center",
-						attachment.preview ? "bg-muted" : "",
+						"relative size-14",
+						"flex items-center justify-center",
+						attachment.preview ? "" : "bg-muted",
 					)}
 					onclick={() => openViewer(attachment)}
 				>
@@ -128,7 +138,7 @@
 
 				<div
 					class={cn(
-						"pointer-events-none absolute inset-0 rounded-lg bg-black/70",
+						"pointer-events-none absolute inset-0 bg-black/70 text-white",
 						"flex flex-col items-center justify-center",
 						"opacity-0 transition-opacity duration-200 group-hover:opacity-100",
 					)}
@@ -141,9 +151,9 @@
 
 				<button
 					onclick={() => handleRemove(attachment.id)}
-					class="pointer-events-auto absolute top-0.5 right-0.5 size-4 text-destructive opacity-0 group-hover:opacity-100"
+					class="pointer-events-auto absolute top-0.5 right-0 size-4 text-destructive opacity-0 group-hover:opacity-100"
 				>
-					<Trash2 class="size-4 hover:text-destructive/80" />
+					<Trash2 class="size-3.5 hover:text-destructive/80" />
 				</button>
 			</div>
 		{/each}

@@ -1,0 +1,42 @@
+<script lang="ts" module>
+	import type { AttachmentFile } from "@/stores/chat-state.svelte";
+
+	export interface TextViewerProps {
+		attachment: AttachmentFile;
+	}
+</script>
+
+<script lang="ts">
+	import * as ScrollArea from "@/components/ui/scroll-area";
+	import { loadTextContent } from "./viewer-utils";
+
+	let { attachment }: TextViewerProps = $props();
+
+	let content = $state<string>("");
+
+	async function loadContent() {
+		try {
+			content = await loadTextContent(attachment);
+		} catch (error) {
+			console.error("Failed to load text content:", error);
+			content = "Error loading text content";
+		}
+	}
+
+	// Load content when component mounts
+	$effect(() => {
+		loadContent();
+	});
+</script>
+
+<div class="h-full w-full rounded-b-[10px] bg-background">
+	<ScrollArea.Root class="h-full w-full">
+		<ScrollArea.Scrollbar
+			orientation="vertical"
+			class="flex touch-none p-0.5 transition-colors duration-100 select-none"
+		></ScrollArea.Scrollbar>
+
+		<pre
+			class="cursor-text px-4 py-2 font-mono text-sm leading-relaxed break-words whitespace-pre-wrap text-foreground select-text">{content}</pre>
+	</ScrollArea.Root>
+</div>
