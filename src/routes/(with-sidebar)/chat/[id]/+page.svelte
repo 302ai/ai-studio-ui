@@ -87,8 +87,8 @@
 
 				<button
 					class={cn(
-						"flex size-9 items-center justify-center rounded-[10px] bg-primary text-foreground hover:!bg-primary/80",
-						"disabled:cursor-not-allowed disabled:bg-chat-send-message-disabled disabled:hover:!bg-chat-send-message-disabled",
+						"flex size-9 items-center justify-center rounded-[10px] bg-chat-send-message-button text-foreground hover:!bg-chat-send-message-button/80",
+						"disabled:cursor-not-allowed disabled:bg-chat-send-message-button/50 disabled:hover:!bg-chat-send-message-button/50",
 					)}
 					onclick={chatState.sendMessage}
 					disabled={sendMessageDisabled}
