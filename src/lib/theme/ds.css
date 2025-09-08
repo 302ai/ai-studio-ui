@@ -103,6 +103,7 @@
 	--ui-chat-send-message-button: var(--primary);
 	--ui-chat-action-hover: #f3f2ff;
 	--ui-chat-action-active: #f3f2ff;
+	--ui-chat-action-active-fg: var(--primary);
 	--ui-chat-attachment-viewer: var(--popover);
 }
 
@@ -209,7 +210,7 @@
 	--radius-chat: var(--ui-chat-container-radius);
 	--color-chat-action-hover: var(--ui-chat-action-hover);
 	--color-chat-action-active: var(--ui-chat-action-active);
-	--color-chat-icon-active: var(--ui-chat-icon-active);
+	--color-chat-action-active-fg: var(--ui-chat-action-active-fg);
 	--color-chat-send-message-button: var(--ui-chat-send-message-button);
 	--color-chat-attachment-viewer-bg: var(--ui-chat-attachment-viewer-bg);
 }

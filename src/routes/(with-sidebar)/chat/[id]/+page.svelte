@@ -48,7 +48,7 @@
 						tooltip={actionDisabled ? m.chat_unsupportAction() : m.chat_thinking()}
 						onclick={() => chatState.handleThinkingActiveChange(!chatState.isThinkingActive)}
 					>
-						<Lightbulb class={cn(chatState.isThinkingActive && "!text-chat-icon-active")} />
+						<Lightbulb class={cn(chatState.isThinkingActive && "!text-chat-action-active-fg")} />
 					</ButtonWithTooltip>
 					<ButtonWithTooltip
 						class={cn(
@@ -60,7 +60,7 @@
 						onclick={() =>
 							chatState.handleOnlineSearchActiveChange(!chatState.isOnlineSearchActive)}
 					>
-						<Globe class={cn(chatState.isOnlineSearchActive && "!text-chat-icon-active")} />
+						<Globe class={cn(chatState.isOnlineSearchActive && "!text-chat-action-active-fg")} />
 					</ButtonWithTooltip>
 					<ButtonWithTooltip
 						class={cn(

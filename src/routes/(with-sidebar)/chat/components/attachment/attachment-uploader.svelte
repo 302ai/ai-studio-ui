@@ -39,7 +39,7 @@
 
 					if (ctx) {
 						ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-						const thumbnailUrl = canvas.toDataURL("image/jpeg", 0.8);
+						const thumbnailUrl = canvas.toDataURL("image/jpeg");
 						resolve(thumbnailUrl);
 					} else {
 						resolve(undefined);
@@ -60,10 +60,6 @@
 				video.currentTime = 0.1;
 				video.load();
 			});
-		}
-
-		if (file.type.startsWith("audio/")) {
-			return undefined;
 		}
 
 		return undefined;
