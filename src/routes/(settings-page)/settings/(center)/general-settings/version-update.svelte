@@ -1,21 +1,21 @@
 <script lang="ts">
+	import { SettingInfoItem, SettingSwitchItem } from "$lib/components/buss/settings";
 	import { Label } from "$lib/components/ui/label/index.js";
-	import { m } from "$lib/paraglide/messages.js";
-	import { SettingSwitchItem } from "$lib/components/buss/settings";
 	import { Button } from "$lib/components/ui/button/index.js";
+	import { m } from "$lib/paraglide/messages.js";
 	let autoInherit = $state(false);
+
+	function handleCheckUpdate() {
+		console.log("Checking for updates...");
+	}
 </script>
 
 <div class="flex flex-col gap-2">
 	<Label class="text-label-fg">{m.versionUpdate()}</Label>
 	<SettingSwitchItem label={m.autoUpdate()} bind:checked={autoInherit} />
-	<div
-		class="flex h-settings-item w-full items-center justify-between rounded-settings-item bg-settings-item-bg px-settings-item-x py-settings-item-y"
-	>
-		<div class=" flex items-center gap-2">
-			<Label class="text-sm">{m.versionInformation()}</Label>
-			<Label class="text-sm text-muted-foreground">25.35.4</Label>
-		</div>
-		<Button size="sm">{m.checkUpdate()}</Button>
-	</div>
+	{#snippet updateButton()}
+		<Button size="sm" onclick={handleCheckUpdate}>{m.checkUpdate()}</Button>
+	{/snippet}
+
+	<SettingInfoItem label={m.versionInformation()} value="25.35.4" action={updateButton} />
 </div>

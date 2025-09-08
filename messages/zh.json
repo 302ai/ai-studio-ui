@@ -49,5 +49,13 @@
 	"settings_slow": "慢速",
 	"settings_normal": "正常",
 	"settings_fast": "快速",
-	"settings_streamOutputSpeed": "输出速度"
+	"settings_streamOutputSpeed": "输出速度",
+	"settings_exportLabel": "导出",
+	"settings_exportData": "导出数据",
+	"setting_exportData": "导出数据",
+	"settings_exportAsJson": "将所有应用数据导出为 JSON 文件",
+	"settings_importLabel": "导入",
+	"settings_importData": "导入数据",
+	"settings_importFromBackup": "从备份文件恢复应用数据",
+	"settings_currentVersion": "当前版本"
 }

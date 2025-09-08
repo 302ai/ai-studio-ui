@@ -49,5 +49,12 @@
 	"settings_slow": "Slow",
 	"settings_normal": "Normal",
 	"settings_fast": "Fast",
-	"settings_streamOutputSpeed": "Stream Speed"
+	"settings_streamOutputSpeed": "Stream Speed",
+	"settings_exportLabel": "Export",
+	"setting_exportData": "Export Data",
+	"settings_exportAsJson": "Export all application data as a JSON file",
+	"settings_importLabel": "Import",
+	"settings_importData": "Import Data",
+	"settings_importFromBackup": "Import From Backup",
+	"settings_currentVersion": "Current Version"
 }
