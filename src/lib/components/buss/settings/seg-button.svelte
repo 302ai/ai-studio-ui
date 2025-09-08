@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cn } from "@/utils";
-	import { onMount } from "svelte";
 	import { type Icon as IconType } from "@lucide/svelte";
+	import { onMount } from "svelte";
 
 	interface SegmentedOption {
 		key: string;
@@ -61,7 +61,7 @@
 >
 	{#if thumbStyle.left}
 		<div
-			class="absolute z-1 h-seg-thumb rounded-md bg-accent transition-all duration-400 ease-in-out"
+			class="absolute z-1 h-seg-thumb rounded-md bg-accent !transition-all duration-400 ease-in-out"
 			style="left: {thumbStyle.left}; width: {thumbStyle.width};"
 		></div>
 	{/if}
