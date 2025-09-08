@@ -100,5 +100,8 @@
 	"theme_code_usage_notes": "Usage Notes:",
 	"theme_code_note_1": "Only --ui-* variables are applied for safety.",
 	"theme_code_note_2": "Examples: --ui-accent, --ui-accent-fg, --ui-radius, --ui-density.",
-	"theme_code_note_3": "You can also override component-level --ui-* like tabs, settings, and chat."
+	"theme_code_note_3": "You can also override component-level --ui-* like tabs, settings, and chat.",
+	"chat_selectModel": "Select a Model",
+	"modelSelect_placeholder": "Search a Model...",
+	"modelSelect_trigger": "Select a Model"
 }

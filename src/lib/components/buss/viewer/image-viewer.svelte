@@ -13,15 +13,13 @@
 </script>
 
 <ViewerBase>
-	{#snippet children()}
-		<ImageViewer
-			{src}
-			{alt}
-			targetOffsetX={0}
-			targetOffsetY={0}
-			targetScale={0.5}
-			minScale={0.1}
-			maxScale={5}
-		/>
-	{/snippet}
+	<ImageViewer
+		{src}
+		{alt}
+		targetOffsetX={0}
+		targetOffsetY={0}
+		targetScale={0.5}
+		minScale={0.1}
+		maxScale={5}
+	/>
 </ViewerBase>

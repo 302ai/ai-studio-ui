@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ViewerPanel } from "$lib/components/buss/viewer/index.js";
 	import { chatState, type AttachmentFile } from "@/stores/chat-state.svelte";
 	import { cn } from "@/utils";
 	import {
@@ -13,7 +14,6 @@
 		Trash2,
 		Video,
 	} from "@lucide/svelte";
-	import { ViewerPanel } from "./viewer/index.js";
 
 	let attachments = $derived(chatState.attachments);
 	let selectedAttachment = $state<AttachmentFile | null>(null);

@@ -1,7 +1,10 @@
 <script lang="ts">
 	import sendMessageIcon from "$lib/assets/send-message.svg";
 	import { m } from "$lib/paraglide/messages.js";
+	import ModelSelect from "@/components/buss/model-select.svelte";
+	import { Button } from "@/components/ui/button";
 	import ButtonWithTooltip from "@/components/ui/button-with-tooltip.svelte";
+	import { Separator } from "@/components/ui/separator";
 	import { Textarea } from "@/components/ui/textarea";
 	import { chatState } from "@/stores/chat-state.svelte";
 	import { cn } from "@/utils";
@@ -85,16 +88,31 @@
 					</ButtonWithTooltip>
 				</div>
 
-				<button
-					class={cn(
-						"flex size-9 items-center justify-center rounded-[10px] bg-chat-send-message-button text-foreground hover:!bg-chat-send-message-button/80",
-						"disabled:cursor-not-allowed disabled:bg-chat-send-message-button/50 disabled:hover:!bg-chat-send-message-button/50",
-					)}
-					onclick={chatState.sendMessage}
-					disabled={sendMessageDisabled}
-				>
-					<img src={sendMessageIcon} alt="plane" class="size-5" />
-				</button>
+				<div class="flex items-center gap-2">
+					<ModelSelect onModelSelect={(model) => chatState.handleSelectedModelChange(model)}>
+						{#snippet trigger({ onclick })}
+							<Button variant="ghost" class="text-xs hover:!bg-chat-action-hover" {onclick}>
+								{chatState.selectedModel?.name ?? m.chat_selectModel()}
+							</Button>
+						{/snippet}
+					</ModelSelect>
+
+					<Separator
+						orientation="vertical"
+						class="rounded-2xl data-[orientation=vertical]:h-1/2 data-[orientation=vertical]:w-0.5"
+					/>
+
+					<button
+						class={cn(
+							"flex size-9 items-center justify-center rounded-[10px] bg-chat-send-message-button text-foreground hover:!bg-chat-send-message-button/80",
+							"disabled:cursor-not-allowed disabled:bg-chat-send-message-button/50 disabled:hover:!bg-chat-send-message-button/50",
+						)}
+						onclick={chatState.sendMessage}
+						disabled={sendMessageDisabled}
+					>
+						<img src={sendMessageIcon} alt="plane" class="size-5" />
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

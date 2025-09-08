@@ -11,6 +11,13 @@ export interface AttachmentFile {
 	preview?: string;
 }
 
+export interface Model {
+	id: string;
+	provider: string;
+	name: string;
+	type: "llm" | "tts" | "text-embedding" | "rerank" | "speech-to-text";
+}
+
 class ChatState {
 	inputValue = $state("");
 	attachments = $state<AttachmentFile[]>([]);
@@ -19,6 +26,7 @@ class ChatState {
 	isThinkingActive = $state(false);
 	isOnlineSearchActive = $state(false);
 	isMCPActive = $state(false);
+	selectedModel = $state<Model | null>(null);
 
 	setInputValue(value: string) {
 		this.inputValue = value;
@@ -51,6 +59,10 @@ class ChatState {
 
 	handleMCPActiveChange(active: boolean) {
 		this.isMCPActive = active;
+	}
+
+	handleSelectedModelChange(model: Model | null) {
+		this.selectedModel = model;
 	}
 }
 

@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	const MAX_ATTACHMENT_COUNT = 5;
+	export const MAX_ATTACHMENT_COUNT = 5;
 </script>
 
 <script lang="ts">

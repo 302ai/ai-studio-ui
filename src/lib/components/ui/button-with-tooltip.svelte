@@ -1,5 +1,6 @@
 <script lang="ts" module>
-	import type { ButtonVariant, ButtonSize } from "$lib/components/ui/button/index.js";
+	import type { ButtonSize, ButtonVariant } from "$lib/components/ui/button/index.js";
+	import type { Snippet } from "svelte";
 
 	export interface ButtonWithTooltipProps {
 		tooltip: string;
@@ -9,17 +10,17 @@
 		class?: string;
 		disabled?: boolean;
 		onclick?: (event: MouseEvent) => void;
-		children?: import("svelte").Snippet;
+		children?: Snippet;
 	}
 </script>
 
 <script lang="ts">
-	import { buttonVariants } from "$lib/components/ui/button/index.js";
+	import { buttonVariants } from "$lib/components/ui/button";
 	import {
 		Tooltip,
 		TooltipContent,
-		TooltipTrigger,
 		TooltipProvider,
+		TooltipTrigger,
 	} from "$lib/components/ui/tooltip/index.js";
 	import { cn } from "$lib/utils.js";
 

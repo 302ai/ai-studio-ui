@@ -32,22 +32,20 @@
 </script>
 
 <ViewerBase class="bg-background">
-	{#snippet children()}
-		<ScrollArea.Root class="h-full w-full">
-			<ScrollArea.Scrollbar
-				orientation="vertical"
-				class="flex touch-none p-0.5 transition-colors duration-100 select-none"
-			></ScrollArea.Scrollbar>
+	<ScrollArea.Root class="h-full w-full">
+		<ScrollArea.Scrollbar
+			orientation="vertical"
+			class="flex touch-none p-0.5 transition-colors duration-100 select-none"
+		></ScrollArea.Scrollbar>
 
-			<div class="p-4">
-				{#if fileName}
-					<div class="mb-4 border-b pb-2 text-sm font-medium text-muted-foreground">
-						{fileName}
-					</div>
-				{/if}
-				<pre
-					class="cursor-text font-mono text-sm leading-relaxed break-words whitespace-pre-wrap text-foreground select-text">{content}</pre>
-			</div>
-		</ScrollArea.Root>
-	{/snippet}
+		<div class="p-4">
+			{#if fileName}
+				<div class="mb-4 border-b pb-2 text-sm font-medium text-muted-foreground">
+					{fileName}
+				</div>
+			{/if}
+			<pre
+				class="cursor-text font-mono text-sm leading-relaxed break-words whitespace-pre-wrap text-foreground select-text">{content}</pre>
+		</div>
+	</ScrollArea.Root>
 </ViewerBase>
