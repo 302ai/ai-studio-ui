@@ -3,6 +3,7 @@
 	import Label from "@/components/ui/label/label.svelte";
 	import { m } from "@/paraglide/messages";
 	import { Laptop, Moon, Sun } from "@lucide/svelte";
+	import { setMode } from "mode-watcher";
 
 	let selectedKey = "system";
 	const themeOptions = [
@@ -28,6 +29,7 @@
 
 	async function handleSelect(key: string) {
 		selectedKey = key;
+		setMode(key as "light" | "dark" | "system");
 	}
 </script>
 
