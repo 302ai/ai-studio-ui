@@ -2,6 +2,7 @@
 	import { chatState, type AttachmentFile } from "@/stores/chat-state.svelte";
 	import { cn } from "@/utils";
 	import {
+		Eye,
 		File,
 		FileAudio,
 		FileCode,
@@ -11,8 +12,10 @@
 		FileText,
 		Trash2,
 	} from "@lucide/svelte";
+	import { ViewerPanel } from "./viewer/index.js";
 
 	let attachments = $derived(chatState.attachments);
+	let selectedAttachment = $state<AttachmentFile | null>(null);
 
 	function formatFileSize(bytes: number): string {
 		if (bytes < 1024) return `${bytes}B`;
@@ -82,18 +85,27 @@
 	function handleRemove(id: string) {
 		chatState.removeAttachment(id);
 	}
+
+	function openViewer(attachment: AttachmentFile) {
+		selectedAttachment = attachment;
+	}
+
+	function closeViewer() {
+		selectedAttachment = null;
+	}
 </script>
 
 {#if attachments.length > 0}
 	<div class="flex gap-2 p-2">
 		{#each attachments as attachment (attachment.id)}
 			<div class="group relative">
-				<div
+				<button
 					class={cn(
 						"relative size-14 overflow-hidden rounded-lg",
-						"flex items-center justify-center",
+						"flex cursor-pointer items-center justify-center",
 						attachment.preview ? "bg-muted" : "",
 					)}
+					onclick={() => openViewer(attachment)}
 				>
 					{#if attachment.preview}
 						<img
@@ -112,30 +124,37 @@
 							</span>
 						</div>
 					{/if}
-				</div>
+				</button>
 
-				<!-- Overlay with preview and file size -->
 				<div
 					class={cn(
-						"absolute inset-0 rounded-lg bg-black/70 text-white",
+						"pointer-events-none absolute inset-0 rounded-lg bg-black/70",
 						"flex flex-col items-center justify-center",
 						"opacity-0 transition-opacity duration-200 group-hover:opacity-100",
 					)}
 				>
-					<!-- File size -->
-					<div class="absolute right-0 bottom-0 left-0 px-1.5 text-center text-xs font-medium">
+					<Eye class="size-4" />
+					<div class="absolute right-0 bottom-0 left-0 px-1.5 text-center text-xs">
 						{formatFileSize(attachment.size)}
 					</div>
 				</div>
 
-				<!-- Remove button -->
 				<button
 					onclick={() => handleRemove(attachment.id)}
-					class="absolute top-0.5 right-0.5 size-4 text-destructive opacity-0 group-hover:opacity-100"
+					class="pointer-events-auto absolute top-0.5 right-0.5 size-4 text-destructive opacity-0 group-hover:opacity-100"
 				>
 					<Trash2 class="size-4 hover:text-destructive/80" />
 				</button>
 			</div>
 		{/each}
 	</div>
+{/if}
+
+<!-- Viewer Panel Modal -->
+{#if selectedAttachment}
+	<ViewerPanel
+		attachment={selectedAttachment}
+		isOpen={selectedAttachment !== null}
+		onClose={closeViewer}
+	/>
 {/if}

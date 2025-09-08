@@ -26,6 +26,9 @@ importers:
       svelte-dnd-action:
         specifier: ^0.9.64
         version: 0.9.64(svelte@5.38.6)
+      svelte-image-viewer:
+        specifier: ^5.0.0
+        version: 5.0.0(svelte@5.38.6)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5
@@ -1878,6 +1881,11 @@ packages:
     peerDependenciesMeta:
       svelte:
         optional: true
+
+  svelte-image-viewer@5.0.0:
+    resolution: {integrity: sha512-2BANC/OPfIZFPEJGJEYIPuvFPzg1PlIS8CQL+Z/vLlraOIwP3aTHzigxqODOBCSCvLAb4/utxiE5yZNfDMPdxA==}
+    peerDependencies:
+      svelte: ^5.0.0
 
   svelte-sonner@1.0.5:
     resolution: {integrity: sha512-9dpGPFqKb/QWudYqGnEz93vuY+NgCEvyNvxoCLMVGw6sDN/3oVeKV1xiEirW2E1N3vJEyj5imSBNOGltQHA7mg==}
@@ -3736,6 +3744,10 @@ snapshots:
       postcss-scss: 4.0.9(postcss@8.5.6)
       postcss-selector-parser: 7.1.0
     optionalDependencies:
+      svelte: 5.38.6
+
+  svelte-image-viewer@5.0.0(svelte@5.38.6):
+    dependencies:
       svelte: 5.38.6
 
   svelte-sonner@1.0.5(svelte@5.38.6):
