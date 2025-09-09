@@ -47,10 +47,10 @@
 
 		if (info.trigger === TRIGGERS.DRAG_STARTED) {
 			draggedElementId = info.id;
-			// Set the dragged provider as active
+			// Set the dragged provider as active and trigger click handler
 			const draggedProvider = providers.find((provider) => provider.id === info.id);
 			if (draggedProvider) {
-				activeProviderId = draggedProvider.id;
+				onProviderClick?.(draggedProvider);
 			}
 		}
 

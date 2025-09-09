@@ -36,12 +36,22 @@
 </script>
 
 <div class="flex size-full overflow-hidden">
-	<ScrollArea class="h-full w-80 flex-shrink-0 border-r p-4">
-		<div class="space-y-4">
+	<div class="flex h-full w-80 flex-shrink-0 flex-col border-r">
+		<div class="flex-shrink-0 p-4">
 			<Header />
-			<ProviderList bind:providers bind:activeProviderId onProviderClick={handleProviderClick} />
 		</div>
-	</ScrollArea>
+		<div class="min-h-0 flex-1">
+			<ScrollArea class="h-full">
+				<div class="px-4 pb-4">
+					<ProviderList
+						bind:providers
+						bind:activeProviderId
+						onProviderClick={handleProviderClick}
+					/>
+				</div>
+			</ScrollArea>
+		</div>
+	</div>
 
 	{@render children()}
 </div>
