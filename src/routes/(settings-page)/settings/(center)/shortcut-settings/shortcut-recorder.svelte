@@ -200,23 +200,30 @@
 </script>
 
 <div class={cn("relative", className)}>
-	<button
-		type="button"
-		onclick={() => {
-			if (!isRecording && !disabled) {
-				startRecording();
-			}
-		}}
+	<div
 		class={cn(
 			"flex h-settings-item w-full items-center justify-between rounded-settings-item bg-settings-item-bg px-settings-item-x py-settings-item-y",
-
 			"focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none",
 			value.length === 0 && "text-muted-fg",
 			disabled && "cursor-not-allowed opacity-50",
 			isRecording && "border-primary ring-1 ring-ring",
 			!isRecording && !disabled && "cursor-text",
 		)}
-		{disabled}
+		onclick={() => {
+			if (!isRecording && !disabled) {
+				startRecording();
+			}
+		}}
+		role="button"
+		tabindex={disabled ? -1 : 0}
+		onkeydown={(e) => {
+			if (e.key === "Enter" || e.key === " ") {
+				e.preventDefault();
+				if (!isRecording && !disabled) {
+					startRecording();
+				}
+			}
+		}}
 	>
 		<span class="flex-1 text-left text-settings-shortcut-size">{displayValue()}</span>
 
@@ -243,5 +250,5 @@
 				{t("reset")}
 			</button>
 		{/if}
-	</button>
+	</div>
 </div>
