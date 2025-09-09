@@ -28,6 +28,7 @@
 	let hoveredItemId = $state<string | null>(null);
 	let listRef = $state<HTMLElement | null>(null);
 	let scrollTop = $state(0);
+
 	const triggerProps: TriggerProps = {
 		onclick: () => (isOpen = true),
 	};

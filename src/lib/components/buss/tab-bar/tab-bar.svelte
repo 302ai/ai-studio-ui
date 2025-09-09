@@ -203,7 +203,7 @@
 				tooltipSide="bottom"
 				variant="ghost"
 				size="icon"
-				class="size-tab-new bg-transparent transition-colors hover:bg-tab-btn-hover-inactive hover:text-current"
+				class="size-tab-new bg-transparent transition-colors hover:!bg-tab-btn-hover-inactive"
 				onclick={handleNewTab}
 			>
 				<Plus class="size-tab-icon" />

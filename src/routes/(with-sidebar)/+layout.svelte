@@ -1,5 +1,11 @@
 <script lang="ts">
 	import * as Sidebar from "$lib/components/ui/sidebar";
+	import ButtonWithTooltip from "@/components/ui/button-with-tooltip.svelte";
+	import { useSidebar } from "@/components/ui/sidebar";
+	import { m } from "@/paraglide/messages";
+	import { chatState } from "@/stores/chat-state.svelte";
+	import { cn } from "@/utils";
+	import { Ghost, Settings } from "@lucide/svelte";
 	import AppSidebar from "./app-sidebar.svelte";
 
 	let { children } = $props();
@@ -7,9 +13,42 @@
 
 <Sidebar.Provider class="h-full min-h-fit">
 	<AppSidebar />
-	<Sidebar.Inset class="flex-1">
-		<div class="flex h-8 items-center border-b bg-background px-4">
-			<Sidebar.Trigger />
+
+	{@const sidebarState = useSidebar()}
+	<Sidebar.Inset class="relative flex-1">
+		<div class="absolute flex h-12 w-full flex-row items-center justify-between bg-background px-2">
+			<ButtonWithTooltip
+				tooltip={sidebarState.state === "expanded" ? m.sidebar_close() : m.sidebar_open()}
+				tooltipSide="bottom"
+			>
+				<Sidebar.Trigger class="size-9 hover:!bg-icon-btn-hover [&_svg]:!size-5" />
+			</ButtonWithTooltip>
+
+			<div class="flex flex-row items-center gap-2">
+				<ButtonWithTooltip
+					class={cn(
+						"hover:!bg-icon-btn-hover",
+						chatState.isPrivateChatActive && "!bg-icon-btn-active hover:!bg-icon-btn-active",
+					)}
+					tooltipSide="bottom"
+					tooltip={m.chat_privateChat()}
+					onclick={() => chatState.handlePrivateChatActiveChange(!chatState.isPrivateChatActive)}
+				>
+					<Ghost
+						class={cn("size-5", chatState.isPrivateChatActive && "!text-icon-btn-active-fg")}
+					/>
+				</ButtonWithTooltip>
+
+				<a href="/settings/general-settings">
+					<ButtonWithTooltip
+						tooltip={m.settings()}
+						class="hover:!bg-icon-btn-hover"
+						tooltipSide="bottom"
+					>
+						<Settings class="size-5" />
+					</ButtonWithTooltip>
+				</a>
+			</div>
 		</div>
 		<div class="flex-1 overflow-auto p-6">
 			{@render children()}

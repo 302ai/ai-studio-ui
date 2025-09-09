@@ -27,10 +27,7 @@ class ChatState {
 	isOnlineSearchActive = $state(false);
 	isMCPActive = $state(false);
 	selectedModel = $state<Model | null>(null);
-
-	setInputValue(value: string) {
-		this.inputValue = value;
-	}
+	isPrivateChatActive = $state(false);
 
 	sendMessage = () => {
 		this.inputValue = "";
@@ -63,6 +60,10 @@ class ChatState {
 
 	handleSelectedModelChange(model: Model | null) {
 		this.selectedModel = model;
+	}
+
+	handlePrivateChatActiveChange(active: boolean) {
+		this.isPrivateChatActive = active;
 	}
 }
 

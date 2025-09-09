@@ -28,6 +28,10 @@
 	--ui-text: var(--foreground);
 	--ui-text-muted: var(--muted-foreground);
 
+	--ui-icon-btn-hover: #f3f2ff;
+	--ui-icon-btn-active: #f3f2ff;
+	--ui-icon-btn-active-fg: var(--primary);
+
 	/* Accent & focus */
 	--ui-accent: var(--accent);
 	--ui-accent-fg: var(--accent-foreground);
@@ -101,19 +105,26 @@
 	--ui-chat-icon-size: 1rem; /* size-4 */
 	--ui-chat-container-radius: 1.25rem; /* rounded-[20px] */
 	--ui-chat-send-message-button: var(--primary);
-	--ui-chat-action-hover: #f3f2ff;
-	--ui-chat-action-active: #f3f2ff;
-	--ui-chat-action-active-fg: var(--primary);
+	--ui-chat-action-hover: var(--ui-icon-btn-hover);
+	--ui-chat-action-active: var(--ui-icon-btn-active);
+	--ui-chat-action-active-fg: var(--ui-icon-btn-active-fg);
 	--ui-chat-attachment-viewer: var(--popover);
 }
 
 .dark {
-	--ui-chat-action-hover: #383838;
-	--ui-chat-action-active: rgba(142, 71, 240, 0.2);
+	--ui-icon-btn-hover: #383838;
+	--ui-icon-btn-active: rgba(142, 71, 240, 0.2);
+
+	--ui-chat-action-hover: var(--ui-icon-btn-hover);
+	--ui-chat-action-active: var(--ui-icon-btn-active);
 }
 
 /* 2) Tailwind v4 theme bridge: generates utilities like bg-*, h-*, px-*, gap-*, size-*, rounded-* */
 @theme inline {
+	--color-icon-btn-hover: var(--ui-icon-btn-hover);
+	--color-icon-btn-active: var(--ui-icon-btn-active);
+	--color-icon-btn-active-fg: var(--ui-icon-btn-active-fg);
+
 	/* Colors */
 	--color-tab-active: var(--ui-tab-bg-active);
 	--color-tab-inactive: var(--ui-tab-bg-inactive);

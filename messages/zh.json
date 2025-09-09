@@ -50,6 +50,7 @@
 	"settings_normal": "正常",
 	"settings_fast": "快速",
 	"settings_streamOutputSpeed": "输出速度",
+	"chat_attachment_viewer_error": "无法查看，附件类型不支持或文件已损坏",
 	"settings_exportLabel": "导出",
 	"settings_exportData": "导出数据",
 	"setting_exportData": "导出数据",
@@ -101,8 +102,11 @@
 	"theme_code_note_1": "为了安全起见，只有 --ui-* 变量会被应用。",
 	"theme_code_note_2": "示例：--ui-accent、--ui-accent-fg、--ui-radius、--ui-density。",
 	"theme_code_note_3": "您还可以重写组件级别的 --ui-* 变量，如标签页、设置和聊天相关的变量。",
-	"chat_attachment_viewer_error": "无法查看，附件类型不支持或文件已损坏",
 	"chat_selectModel": "设置模型",
 	"modelSelect_placeholder": "搜索模型...",
-	"modelSelect_trigger": "选择模型"
+	"modelSelect_trigger": "选择模型",
+	"sidebar_close": "关闭边栏",
+	"sidebar_open": "打开边栏",
+	"chat_privateChat": "无痕模式",
+	"settings": "设置"
 }
