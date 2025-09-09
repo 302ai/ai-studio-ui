@@ -26,7 +26,8 @@
 	let searchValue = $state("");
 	let collapsedProviders = $state<Record<string, boolean>>({});
 	let hoveredItemId = $state<string | null>(null);
-
+	let listRef = $state<HTMLElement | null>(null);
+	let scrollTop = $state(0);
 	const triggerProps: TriggerProps = {
 		onclick: () => (isOpen = true),
 	};
@@ -63,6 +64,9 @@
 	}
 
 	function toggleProvider(provider: string) {
+		if (listRef) {
+			scrollTop = listRef.scrollTop;
+		}
 		collapsedProviders[provider] = !collapsedProviders[provider];
 	}
 
@@ -95,6 +99,34 @@
 			});
 		}
 	});
+
+	$effect(() => {
+		if (!isOpen) {
+			scrollTop = 0;
+		}
+	});
+
+	$effect(() => {
+		if (isOpen && listRef) {
+			setTimeout(() => {
+				if (!listRef) return;
+
+				if (selectedModel) {
+					const selectedItem = listRef.querySelector(
+						`[data-model-id="${selectedModel.id}"]`,
+					) as HTMLElement;
+					if (selectedItem) {
+						selectedItem.scrollIntoView({
+							behavior: "instant",
+							block: "center",
+						});
+					}
+				} else if (scrollTop > 0) {
+					listRef.scrollTop = scrollTop;
+				}
+			}, 10);
+		}
+	});
 </script>
 
 {#if trigger}
@@ -105,7 +137,7 @@
 
 <Command.Dialog bind:open={isOpen}>
 	<Command.Input bind:value={searchValue} placeholder={m.modelSelect_placeholder()} />
-	<Command.List onmouseleave={handleListMouseLeave}>
+	<Command.List bind:ref={listRef} onmouseleave={handleListMouseLeave}>
 		{#each Object.entries(groupedModels()) as [provider, models] (provider)}
 			<div class="px-2 py-1">
 				<button
@@ -128,6 +160,7 @@
 						<Command.Item
 							onSelect={() => handleModelSelect(model)}
 							value={model.name}
+							data-model-id={model.id}
 							class={cn(
 								"my-1",
 								selectedModel?.id === model.id ? "!bg-accent !text-accent-foreground" : "",
