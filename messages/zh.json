@@ -108,5 +108,8 @@
 	"sidebar_close": "关闭边栏",
 	"sidebar_open": "打开边栏",
 	"chat_privateChat": "无痕模式",
-	"settings": "设置"
+	"settings": "设置",
+	"model_settings_title": "模型提供商",
+	"model_settings_add": "添加",
+	"model_settings_add_tooltip": "添加模型"
 }

@@ -107,5 +107,8 @@
 	"sidebar_close": "Close Sidebar",
 	"sidebar_open": "Open Sidebar",
 	"chat_privateChat": "Incognito Mode",
-	"settings": "Settings"
+	"settings": "Settings",
+	"model_settings_title": "Model Providers",
+	"model_settings_add": "Add",
+	"model_settings_add_tooltip": "Add Model"
 }
