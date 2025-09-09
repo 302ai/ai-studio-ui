@@ -4,6 +4,7 @@
 	import { ProviderList, type Provider } from "@/components/buss/provider-list";
 	import { ScrollArea } from "@/components/ui/scroll-area";
 	import { mockProviders } from "@/datas/providers";
+	import { nanoid } from "nanoid";
 	import { onMount } from "svelte";
 	import Header from "./header.svelte";
 
@@ -27,6 +28,19 @@
 		goto(`/settings/model-settings/${provider.name}`);
 	}
 
+	function handleAddProvider() {
+		const newProvider: Provider = {
+			id: nanoid(),
+			name: `custom-${Date.now()}`,
+			title: "New Provider",
+			description: "Custom provider configuration",
+		};
+
+		providers = [...providers, newProvider];
+		activeProviderId = newProvider.id;
+		goto(`/settings/model-settings/${newProvider.name}`);
+	}
+
 	onMount(() => {
 		// If no provider is selected, redirect to the first provider
 		if (!page.params.provider && providers.length > 0) {
@@ -38,7 +52,7 @@
 <div class="flex size-full overflow-hidden">
 	<div class="flex h-full w-80 flex-shrink-0 flex-col border-r">
 		<div class="flex-shrink-0 p-4">
-			<Header />
+			<Header onClick={handleAddProvider} />
 		</div>
 		<div class="min-h-0 flex-1">
 			<ScrollArea class="h-full">
