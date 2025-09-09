@@ -21,6 +21,7 @@
 <script lang="ts">
 	import { ModelIcon } from "$lib/components/buss/model-icon/index.js";
 	import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
+	import { providerState } from "$lib/stores/provider-state.svelte.js";
 	import { cn } from "$lib/utils";
 	import { AlertCircle, Cloud, X } from "@lucide/svelte";
 	import { m } from "$lib/paraglide/messages.js";
@@ -39,9 +40,8 @@
 			return m.provider_not_configured();
 		}
 
-		// If configured, show model count (placeholder for now)
-		// TODO: In a real implementation, this would come from actual model data
-		const modelCount = provider.enabled ? Math.floor(Math.random() * 20) + 5 : 0;
+		// If configured, show real model count from store
+		const modelCount = providerState.models.filter((m) => m.providerId === provider.id).length;
 		return m.provider_models_count({ count: modelCount.toString() });
 	});
 </script>

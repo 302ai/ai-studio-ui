@@ -6,6 +6,7 @@
 		providers: ModelProvider[];
 		activeProviderId?: string;
 		onProviderClick?: (provider: ModelProvider) => void;
+		onReorder?: (providers: ModelProvider[]) => void;
 		class?: string;
 	}
 
@@ -31,6 +32,7 @@
 		providers = $bindable<ModelProvider[]>(),
 		activeProviderId = $bindable<string>(),
 		onProviderClick,
+		onReorder,
 		class: className,
 	}: Props = $props();
 
@@ -64,6 +66,8 @@
 		try {
 			draggedElementId = null;
 			providers = e.detail.items;
+			// Call onReorder callback to persist the new order
+			onReorder?.(e.detail.items);
 		} catch (error) {
 			console.error("Error finalizing drag operation:", error);
 		} finally {

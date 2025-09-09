@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { page } from "$app/state";
 	import { IconPicker } from "$lib/components/buss/icon-picker/index.js";
+	import { ModelList, type Model } from "$lib/components/buss/model-list/index.js";
 	import { Button } from "$lib/components/ui/button/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
 	import * as Select from "$lib/components/ui/select/index.js";
+	import { m } from "$lib/paraglide/messages.js";
 	import { providerState } from "$lib/stores/provider-state.svelte.js";
 	import type { ModelProvider } from "$lib/types/provider.js";
-	import { m } from "$lib/paraglide/messages.js";
 	import { Eye, EyeOff } from "@lucide/svelte";
 
 	let providerParam = $derived(page.params.provider);
@@ -51,25 +52,9 @@
 				status: currentProvider.status,
 				websites: { ...currentProvider.websites },
 			};
-		} else {
-			// 如果没有找到供应商，重置表单
-			formData = {
-				id: "",
-				name: "",
-				apiType: "openai",
-				apiKey: "",
-				baseUrl: "",
-				enabled: true,
-				custom: false,
-				status: "pending",
-				websites: {
-					official: "",
-					apiKey: "",
-					docs: "",
-					models: "",
-					defaultBaseUrl: "",
-				},
-			};
+
+			// 加载该供应商的排序后模型
+			modelsState = providerState.getSortedModelsByProvider(currentProvider.id);
 		}
 	});
 
@@ -82,7 +67,7 @@
 		{ value: "gemini", label: "Google Gemini" },
 		{ value: "azure", label: "Azure OpenAI" },
 		{ value: "ollama", label: "Ollama" },
-		{ value: "custom", label: "自定义" },
+		{ value: "custom", label: m.common_custom() },
 	];
 
 	function handleIconChange(iconKey: string) {
@@ -90,9 +75,42 @@
 		saveFormData();
 	}
 
-	function handleGetModels() {
-		// TODO: 实现获取模型逻辑
-		console.log("获取模型列表");
+	async function handleGetModels() {
+		console.log("Getting models for provider:", providerParam);
+
+		if (!currentProvider) {
+			console.error("No current provider found");
+			return;
+		}
+
+		console.log("Current provider:", currentProvider);
+		console.log("Provider details:", {
+			id: currentProvider.id,
+			name: currentProvider.name,
+			apiType: currentProvider.apiType,
+			apiKey: currentProvider.apiKey ? "***" : "empty",
+			baseUrl: currentProvider.baseUrl,
+			enabled: currentProvider.enabled,
+		});
+
+		isLoadingModels = true;
+		try {
+			const success = await providerState.fetchModelsForProvider(currentProvider);
+			console.log("Fetch result:", success);
+
+			if (success) {
+				// 获取该供应商的排序后模型并更新UI
+				const sortedModels = providerState.getSortedModelsByProvider(currentProvider.id);
+				console.log("Sorted models:", sortedModels);
+				modelsState = sortedModels;
+			} else {
+				console.error("Failed to fetch models");
+			}
+		} catch (error) {
+			console.error("Error fetching models:", error);
+		} finally {
+			isLoadingModels = false;
+		}
 	}
 
 	function handleAddModel() {
@@ -100,9 +118,56 @@
 		console.log("添加模型");
 	}
 
-	function handleClearModels() {
-		// TODO: 实现清空模型逻辑
-		console.log("清空模型");
+	// 根据API类型生成完整的聊天请求URL
+	function getChatEndpointUrl(baseUrl: string, apiType: string): string {
+		const cleanBaseUrl = baseUrl.replace(/\/$/, ""); // 移除尾部斜杠
+
+		switch (apiType.toLowerCase()) {
+			case "openai":
+			case "302ai":
+				if (cleanBaseUrl.endsWith("/v1")) {
+					return `${cleanBaseUrl}/chat/completions`;
+				}
+				return `${cleanBaseUrl}/v1/chat/completions`;
+			case "anthropic":
+				return `${cleanBaseUrl}/v1/messages`;
+			case "gemini":
+			case "google":
+				return `${cleanBaseUrl}/v1beta/generateContent`;
+			default:
+				// 默认使用OpenAI兼容格式
+				if (cleanBaseUrl.endsWith("/v1")) {
+					return `${cleanBaseUrl}/chat/completions`;
+				}
+				return `${cleanBaseUrl}/v1/chat/completions`;
+		}
+	}
+
+	function handleModelEdit(model: Model) {
+		// 可以打开编辑模态框或跳转到编辑页面
+		console.log("编辑模型", model);
+	}
+
+	function handleModelDelete(model: Model) {
+		const success = providerState.removeModel(model.id);
+		if (success) {
+			// 更新UI中的模型列表
+			modelsState = modelsState.filter((m) => m.id !== model.id);
+		}
+	}
+
+	let modelsState = $state<Model[]>([]);
+	let isLoadingModels = $state(false);
+
+	function handleModelToggleCollected(model: Model) {
+		const success = providerState.toggleModelCollected(model.id);
+		if (success) {
+			// 更新UI中的模型状态
+			const index = modelsState.findIndex((m) => m.id === model.id);
+			if (index !== -1) {
+				modelsState[index].collected = !modelsState[index].collected;
+			}
+		}
 	}
 
 	// 保存表单数据到状态管理
@@ -131,19 +196,19 @@
 	}
 </script>
 
-<div class="flex-1 p-6">
-	<div class="space-y-6">
-		<!-- 配置标题 -->
-		<div class="flex flex-col gap-1">
-			<h2 class="max-w-full break-all whitespace-normal">
-				{m.provider_configure({
-					name: formData.name || (formData.custom ? m.provider_custom_name() : "未命名供应商"),
-				})}
-			</h2>
-		</div>
+<div class="flex flex-1 flex-col overflow-hidden p-6">
+	<!-- 配置标题 -->
+	<div class="mb-6 flex flex-shrink-0 flex-col gap-1">
+		<h2 class="max-w-full break-all whitespace-normal">
+			{m.provider_configure({
+				name: formData.name || (formData.custom ? m.provider_custom_name() : m.provider_unnamed()),
+			})}
+		</h2>
+	</div>
 
+	<div class="flex min-h-0 flex-1 flex-col gap-6">
 		<!-- 表单 -->
-		<div class="space-y-4">
+		<div class="flex-shrink-0 space-y-4">
 			{#if formData.custom}
 				<!-- 图标和名称（自定义供应商） -->
 				<div class="flex items-end gap-4">
@@ -170,14 +235,14 @@
 				<Input
 					id="baseUrl"
 					bind:value={formData.baseUrl}
-					placeholder={formData.custom
-						? m.provider_baseurl_placeholder()
-						: "接口请求英文：/chat/completions"}
+					placeholder={formData.custom ? m.provider_baseurl_placeholder() : ""}
 					oninput={handleInputChange}
 				/>
-				{#if !formData.custom && currentProvider?.websites?.defaultBaseUrl}
+				{#if formData.baseUrl}
 					<p class="text-xs text-muted-foreground">
-						默认请求英文：{currentProvider.websites.defaultBaseUrl}
+						{m.provider_baseurl_request_to({
+							url: getChatEndpointUrl(formData.baseUrl, formData.apiType),
+						})}
 					</p>
 				{/if}
 			</div>
@@ -207,13 +272,9 @@
 						{/if}
 					</Button>
 				</div>
-				{#if !formData.custom && currentProvider?.websites?.apiKey}
+				{#if !formData.custom && formData.websites.apiKey}
 					<p class="text-xs text-muted-foreground">
-						<a
-							href={currentProvider.websites.apiKey}
-							target="_blank"
-							class="text-primary hover:underline"
-						>
+						<a href={formData.websites.apiKey} target="_blank" class="text-primary hover:underline">
 							{m.provider_get_apikey()}
 						</a>
 					</p>
@@ -247,41 +308,21 @@
 
 			<!-- 操作按钮 -->
 			<div class="flex gap-3 pt-4">
-				<Button variant="default" onclick={handleGetModels}>{m.provider_get_models()}</Button>
+				<Button variant="default" onclick={handleGetModels} disabled={isLoadingModels}>
+					{isLoadingModels ? m.provider_get_models_loading() : m.provider_get_models()}
+				</Button>
 				<Button variant="outline" onclick={handleAddModel}>{m.provider_add_model()}</Button>
 			</div>
 		</div>
 
 		<!-- 模型列表区域 -->
-		<div class="rounded-lg border p-6">
-			<div class="mb-4 flex items-center justify-between">
-				<div>
-					<h3 class="font-medium">{m.provider_models_header()}</h3>
-					<div class="flex gap-8 text-sm text-muted-foreground">
-						<span>{m.provider_models_type()}</span>
-						<span>{m.provider_models_capability()}</span>
-						<span>{m.provider_models_action()}</span>
-					</div>
-				</div>
-				<Button variant="destructive" size="sm" onclick={handleClearModels}
-					>{m.provider_clear_models()}</Button
-				>
-			</div>
-
-			<!-- 空状态 -->
-			<div class="flex flex-col items-center justify-center py-12 text-muted-foreground">
-				<div class="mb-2 rounded-lg bg-muted/50 p-3">
-					<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="1.5"
-							d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-						/>
-					</svg>
-				</div>
-				<p class="text-sm">{m.provider_models_empty()}</p>
-			</div>
+		<div class="min-h-0 flex-1">
+			<ModelList
+				models={modelsState}
+				onModelEdit={handleModelEdit}
+				onModelDelete={handleModelDelete}
+				onModelToggleCollected={handleModelToggleCollected}
+			/>
 		</div>
 	</div>
 </div>
