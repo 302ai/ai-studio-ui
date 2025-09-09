@@ -23,6 +23,7 @@
 	import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
 	import { cn } from "$lib/utils";
 	import { AlertCircle, Cloud, X } from "@lucide/svelte";
+	import { m } from "$lib/paraglide/messages.js";
 
 	let { provider, isActive = false, onProviderClick, class: className }: Props = $props();
 
@@ -30,18 +31,18 @@
 	const description = $derived.by(() => {
 		// Check for error status first
 		if (provider.status === "error") {
-			return "供应商错误";
+			return m.provider_error();
 		}
 
 		// Check if not configured (no API key)
 		if (!provider.apiKey || provider.apiKey.trim() === "") {
-			return "尚未配置";
+			return m.provider_not_configured();
 		}
 
 		// If configured, show model count (placeholder for now)
 		// TODO: In a real implementation, this would come from actual model data
 		const modelCount = provider.enabled ? Math.floor(Math.random() * 20) + 5 : 0;
-		return `${modelCount}个模型`;
+		return m.provider_models_count({ count: modelCount.toString() });
 	});
 </script>
 
