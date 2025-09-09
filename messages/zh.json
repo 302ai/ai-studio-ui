@@ -200,5 +200,7 @@
 	"settings_shortcut_hints_switchToTab9": "切换到标签页9",
 	"settings_shortcut_hints_tabSwitchingGroup": "快速切换到指定标签页",
 	"settings_titleGenerationModel": "会话标题生成模型",
-	"settings_titleGenerationModel_placeholder": "选择会话标题生成模型"
+	"settings_titleGenerationModel_placeholder": "选择会话标题生成模型",
+	"settings_newSessionModel": "新会话模型",
+	"settings_newSessionModelPlaceholder": "选择新会话模型"
 }

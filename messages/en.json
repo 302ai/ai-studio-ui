@@ -198,5 +198,7 @@
 	"settings_shortcut_hints_switchToTab9": "Quick switch to tab 9",
 	"settings_shortcut_hints_tabSwitchingGroup": "Use Cmd/Ctrl + 1-9 to quickly switch between tabs",
 	"settings_titleGenerationModel": "Conversation Title Generation Model",
-	"settings_titleGenerationModel_placeholder": "Select a conversation title generation model"
+	"settings_titleGenerationModel_placeholder": "Select a conversation title generation model",
+	"settings_newSessionModel": "New Session Model",
+	"settings_newSessionModelPlaceholder": "Select a new session model"
 }
