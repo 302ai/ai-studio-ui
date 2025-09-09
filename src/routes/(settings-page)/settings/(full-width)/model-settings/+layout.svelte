@@ -34,10 +34,9 @@
 		goto(`/settings/model-settings/${newProvider.id}`);
 	}
 
-	// TODO: 实现拖拽重排序功能
-	// function handleReorderProviders(newOrder: ModelProvider[]) {
-	// 	providerState.reorderProviders(newOrder);
-	// }
+	function handleReorderProviders(newOrder: ModelProvider[]) {
+		providerState.reorderProviders(newOrder);
+	}
 
 	onMount(() => {
 		// If no provider is selected, redirect to the first provider
@@ -59,6 +58,7 @@
 						bind:providers={providerState.providers}
 						bind:activeProviderId
 						onProviderClick={handleProviderClick}
+						onReorder={handleReorderProviders}
 						class="h-full"
 					/>
 				</div>
