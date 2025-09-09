@@ -4,6 +4,7 @@
 	import ParseUrl from "./parse-url.svelte";
 	import SearchSettings from "./search-output.svelte";
 	import StreamSetting from "./stream-setting.svelte";
+	import TitleGenerationModel from "./title-generation-model.svelte";
 	import TitleGenerationTiming from "./title-generation-timing.svelte";
 </script>
 
@@ -12,4 +13,5 @@
 <ParseUrl />
 <StreamSetting />
 <EnableSupermarket />
+<TitleGenerationModel />
 <TitleGenerationTiming />
