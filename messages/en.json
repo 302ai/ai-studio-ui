@@ -103,5 +103,8 @@
 	"chat_attachment_viewer_error": "Unable to view. The attachment type is not supported or the file is corrupted.",
 	"chat_selectModel": "Select a Model",
 	"modelSelect_placeholder": "Search a Model...",
-	"modelSelect_trigger": "Select a Model"
+	"modelSelect_trigger": "Select a Model",
+	"model_settings_title": "Model Providers",
+	"model_settings_add": "Add",
+	"model_settings_add_tooltip": "Add Model"
 }

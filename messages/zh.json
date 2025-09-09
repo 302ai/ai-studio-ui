@@ -104,5 +104,8 @@
 	"chat_attachment_viewer_error": "无法查看，附件类型不支持或文件已损坏",
 	"chat_selectModel": "设置模型",
 	"modelSelect_placeholder": "搜索模型...",
-	"modelSelect_trigger": "选择模型"
+	"modelSelect_trigger": "选择模型",
+	"model_settings_title": "模型提供商",
+	"model_settings_add": "添加",
+	"model_settings_add_tooltip": "添加模型"
 }
