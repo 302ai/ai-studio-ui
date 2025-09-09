@@ -89,7 +89,10 @@
 				</div>
 
 				<div class="flex items-center gap-2">
-					<ModelSelect onModelSelect={(model) => chatState.handleSelectedModelChange(model)}>
+					<ModelSelect
+						selectedModel={chatState.selectedModel}
+						onModelSelect={(model) => chatState.handleSelectedModelChange(model)}
+					>
 						{#snippet trigger({ onclick })}
 							<Button variant="ghost" class="text-xs hover:!bg-chat-action-hover" {onclick}>
 								{chatState.selectedModel?.name ?? m.chat_selectModel()}

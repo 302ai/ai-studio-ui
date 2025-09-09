@@ -7,6 +7,7 @@
 
 	export interface ModelSelectProps {
 		trigger?: Snippet<[TriggerProps]>;
+		selectedModel: Model | null;
 		onModelSelect: (model: Model) => void;
 	}
 </script>
@@ -18,12 +19,13 @@
 	import { m } from "@/paraglide/messages";
 	import { type Model } from "@/stores/chat-state.svelte";
 	import { cn } from "@/utils";
-	import { ChevronRight } from "@lucide/svelte";
+	import { Check, ChevronRight } from "@lucide/svelte";
 
-	let { trigger, onModelSelect }: ModelSelectProps = $props();
+	let { trigger, selectedModel, onModelSelect }: ModelSelectProps = $props();
 	let isOpen = $state(false);
 	let searchValue = $state("");
 	let collapsedProviders = $state<Record<string, boolean>>({});
+	let hoveredItemId = $state<string | null>(null);
 
 	const triggerProps: TriggerProps = {
 		onclick: () => (isOpen = true),
@@ -55,14 +57,6 @@
 		return groups;
 	});
 
-	$effect(() => {
-		if (searchValue) {
-			Object.keys(groupedModels()).forEach((provider) => {
-				collapsedProviders[provider] = false;
-			});
-		}
-	});
-
 	function handleModelSelect(model: Model) {
 		onModelSelect(model);
 		isOpen = false;
@@ -71,6 +65,36 @@
 	function toggleProvider(provider: string) {
 		collapsedProviders[provider] = !collapsedProviders[provider];
 	}
+
+	function handleItemMouseEnter(modelId: string) {
+		hoveredItemId = modelId;
+	}
+
+	function handleItemMouseLeave() {
+		hoveredItemId = null;
+	}
+
+	function handleListMouseLeave() {
+		hoveredItemId = null;
+	}
+
+	$effect(() => {
+		if (searchValue) {
+			Object.keys(groupedModels()).forEach((provider) => {
+				collapsedProviders[provider] = false;
+			});
+		}
+	});
+
+	$effect(() => {
+		if (isOpen && selectedModel) {
+			Object.entries(groupedModels()).forEach(([provider, models]) => {
+				if (models.some((model) => model.id === selectedModel.id)) {
+					collapsedProviders[provider] = false;
+				}
+			});
+		}
+	});
 </script>
 
 {#if trigger}
@@ -78,9 +102,10 @@
 {:else}
 	<Button {...triggerProps}>{m.modelSelect_trigger()}</Button>
 {/if}
+
 <Command.Dialog bind:open={isOpen}>
 	<Command.Input bind:value={searchValue} placeholder={m.modelSelect_placeholder()} />
-	<Command.List>
+	<Command.List onmouseleave={handleListMouseLeave}>
 		{#each Object.entries(groupedModels()) as [provider, models] (provider)}
 			<div class="px-2 py-1">
 				<button
@@ -99,19 +124,31 @@
 					{/if}
 				</button>
 				{#if !collapsedProviders[provider] || searchValue}
-					<div class="space-y-1">
-						{#each models as model (model.id)}
-							<Command.Item
-								onSelect={() => handleModelSelect(model)}
-								value="{model.name} {model.type}"
-							>
-								<div class="flex flex-row gap-2 pl-2">
-									<span class="font-medium">{model.name}</span>
+					{#each models as model (model.id)}
+						<Command.Item
+							onSelect={() => handleModelSelect(model)}
+							value={model.name}
+							class={cn(
+								"my-1",
+								selectedModel?.id === model.id ? "!bg-accent !text-accent-foreground" : "",
+								selectedModel?.id !== model.id && hoveredItemId !== model.id
+									? "aria-selected:bg-transparent aria-selected:text-foreground"
+									: "",
+							)}
+							onmouseenter={() => handleItemMouseEnter(model.id)}
+							onmouseleave={handleItemMouseLeave}
+						>
+							<div class="flex w-full flex-row items-center justify-between pl-2">
+								<div class="flex flex-row gap-2">
+									{model.name}
 									<span class="text-sm text-muted-foreground">{model.type}</span>
 								</div>
-							</Command.Item>
-						{/each}
-					</div>
+								{#if selectedModel?.id === model.id}
+									<Check class="h-4 w-4" />
+								{/if}
+							</div>
+						</Command.Item>
+					{/each}
 				{/if}
 			</div>
 		{/each}
