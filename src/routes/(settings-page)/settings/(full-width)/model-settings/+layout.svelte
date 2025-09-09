@@ -1,39 +1,51 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { page } from "$app/state";
-	import { ProviderList, type Provider } from "@/components/buss/provider-list";
+	import { ProviderList } from "@/components/buss/provider-list";
 	import { ScrollArea } from "@/components/ui/scroll-area";
-	import { mockProviders } from "@/datas/providers";
+	import { DEFAULT_PROVIDERS } from "@/datas/providers";
+	import type { ModelProvider } from "@/types/provider";
 	import { nanoid } from "nanoid";
 	import { onMount } from "svelte";
 	import Header from "./header.svelte";
 
 	let { children } = $props();
-	let providers = $state(mockProviders);
+	let providers = $state(DEFAULT_PROVIDERS);
 	let activeProviderId = $state<string>();
 
 	// Set active provider based on current route
 	$effect(() => {
 		const currentProvider = page.params.provider;
 		if (currentProvider) {
-			const provider = providers.find((p) => p.name === currentProvider);
+			const provider = providers.find((p: ModelProvider) => p.name === currentProvider);
 			if (provider) {
 				activeProviderId = provider.id;
 			}
 		}
 	});
 
-	function handleProviderClick(provider: Provider) {
+	function handleProviderClick(provider: ModelProvider) {
 		activeProviderId = provider.id;
 		goto(`/settings/model-settings/${provider.name}`);
 	}
 
 	function handleAddProvider() {
-		const newProvider: Provider = {
+		const newProvider: ModelProvider = {
 			id: nanoid(),
 			name: `custom-${Date.now()}`,
-			title: "New Provider",
-			description: "Custom provider configuration",
+			apiType: "openai",
+			apiKey: "",
+			baseUrl: "",
+			enabled: true,
+			custom: true,
+			status: "pending",
+			websites: {
+				official: "",
+				apiKey: "",
+				docs: "",
+				models: "",
+				defaultBaseUrl: "",
+			},
 		};
 
 		providers = [...providers, newProvider];
@@ -56,11 +68,12 @@
 		</div>
 		<div class="min-h-0 flex-1">
 			<ScrollArea class="h-full">
-				<div class="px-4 pb-4">
+				<div class="h-full px-4 pb-4">
 					<ProviderList
 						bind:providers
 						bind:activeProviderId
 						onProviderClick={handleProviderClick}
+						class="h-full"
 					/>
 				</div>
 			</ScrollArea>

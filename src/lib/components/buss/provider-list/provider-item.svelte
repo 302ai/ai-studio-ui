@@ -1,4 +1,5 @@
 <script lang="ts" module>
+	import type { ModelProvider } from "$lib/types/provider.js";
 	import type { Snippet } from "svelte";
 
 	export type Provider = {
@@ -10,19 +11,38 @@
 	};
 
 	interface Props {
-		provider: Provider;
+		provider: ModelProvider;
 		isActive?: boolean;
-		onProviderClick?: (provider: Provider) => void;
+		onProviderClick?: (provider: ModelProvider) => void;
 		class?: string;
 	}
 </script>
 
 <script lang="ts">
+	import { ModelIcon } from "$lib/components/buss/model-icon/index.js";
 	import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
 	import { cn } from "$lib/utils";
-	import { Cloud, X } from "@lucide/svelte";
+	import { AlertCircle, Cloud, X } from "@lucide/svelte";
 
 	let { provider, isActive = false, onProviderClick, class: className }: Props = $props();
+
+	// Create a description based on provider data
+	const description = $derived.by(() => {
+		// Check for error status first
+		if (provider.status === "error") {
+			return "供应商错误";
+		}
+
+		// Check if not configured (no API key)
+		if (!provider.apiKey || provider.apiKey.trim() === "") {
+			return "尚未配置";
+		}
+
+		// If configured, show model count (placeholder for now)
+		// TODO: In a real implementation, this would come from actual model data
+		const modelCount = provider.enabled ? Math.floor(Math.random() * 20) + 5 : 0;
+		return `${modelCount}个模型`;
+	});
 </script>
 
 <ContextMenu.Root>
@@ -37,24 +57,28 @@
 		onclick={() => onProviderClick?.(provider)}
 		role="button"
 		tabindex={0}
-		aria-label={provider.title}
+		aria-label={provider.name}
 	>
 		<!-- Icon -->
 		<div class="flex size-provider-icon shrink-0 items-center justify-center">
-			{#if provider.icon}
-				{@render provider.icon()}
-			{:else}
-				<Cloud class="size-provider-icon-size text-current opacity-70" />
-			{/if}
+			<ModelIcon modelName={provider.apiType} className="h-6 w-6" />
 		</div>
 
 		<!-- Content -->
 		<div class="min-w-0 flex-1">
 			<div class="truncate leading-tight font-medium">
-				{provider.title}
+				{provider.name}
 			</div>
-			<div class="mt-0.5 truncate text-xs leading-tight opacity-70">
-				{provider.description}
+			<div
+				class={cn(
+					"mt-0.5 flex items-baseline gap-1 text-xs leading-tight",
+					provider.status === "error" ? "text-red-600 dark:text-red-400" : "opacity-70",
+				)}
+			>
+				{#if provider.status === "error"}
+					<AlertCircle class="h-3 w-3 shrink-0" />
+				{/if}
+				<span class="truncate">{description}</span>
 			</div>
 		</div>
 	</ContextMenu.Trigger>

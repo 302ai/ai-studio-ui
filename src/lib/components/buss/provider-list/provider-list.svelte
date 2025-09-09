@@ -1,11 +1,11 @@
 <script lang="ts" module>
+	import type { ModelProvider } from "$lib/types/provider.js";
 	import type { DndEvent } from "svelte-dnd-action";
-	import { type Provider } from "./provider-item.svelte";
 
 	interface Props {
-		providers: Provider[];
+		providers: ModelProvider[];
 		activeProviderId?: string;
-		onProviderClick?: (provider: Provider) => void;
+		onProviderClick?: (provider: ModelProvider) => void;
 		class?: string;
 	}
 
@@ -16,7 +16,7 @@
 		SPRING_CONFIG: { stiffness: 0.2, damping: 0.7 },
 	} as const;
 
-	type ProviderDndEvent = DndEvent<Provider>;
+	type ProviderDndEvent = DndEvent<ModelProvider>;
 </script>
 
 <script lang="ts">
@@ -28,7 +28,7 @@
 	import ProviderItem from "./provider-item.svelte";
 
 	let {
-		providers = $bindable<Provider[]>(),
+		providers = $bindable<ModelProvider[]>(),
 		activeProviderId = $bindable<string>(),
 		onProviderClick,
 		class: className,
@@ -37,7 +37,7 @@
 	let draggedElementId = $state<string | null>(null);
 	let isDndFinalizing = $state(false);
 
-	function handleProviderClick(provider: Provider) {
+	function handleProviderClick(provider: ModelProvider) {
 		activeProviderId = provider.id;
 		onProviderClick?.(provider);
 	}
@@ -95,7 +95,7 @@
 
 <div class={cn("flex w-full flex-col", className)} role="list" aria-label="Model providers">
 	<div
-		class="flex w-full flex-col gap-provider-list-gap"
+		class="flex h-full w-full flex-col gap-provider-list-gap"
 		use:dndzone={{
 			items: providers,
 			flipDurationMs: 200,
@@ -114,7 +114,7 @@
 				class="flex w-full min-w-0 items-center"
 				data-id={provider.id}
 				role="presentation"
-				aria-label={provider.title}
+				aria-label={provider.name}
 				animate:flip={{ duration: 200 }}
 				in:scale={draggedElementId || isDndFinalizing
 					? { duration: 0 }

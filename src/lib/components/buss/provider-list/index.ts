@@ -2,6 +2,7 @@ import Root from "./provider-list.svelte";
 import Item from "./provider-item.svelte";
 
 export { type Provider } from "./provider-item.svelte";
+export type { ModelProvider } from "$lib/types/provider.js";
 
 export {
 	Root,
