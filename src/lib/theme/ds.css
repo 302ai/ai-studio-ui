@@ -87,6 +87,10 @@
 	--ui-settings-layout-pt: 1.125rem; /* pt-[18px] */
 	--ui-settings-gap: 0.5rem; /* 8px — gap-2 equivalent */
 
+	/* Settings shortcut text */
+	--ui-settings-shortcut-text-size: 0.875rem; /* text-sm */
+	--ui-settings-shortcut-hint-color: #aaaaaa; /* hint text color - light mode */
+
 	/* Segmented button (concrete defaults) */
 	--ui-seg-btn-thumb-h: 2rem; /* h-[32px] */
 	--ui-seg-btn-container-h: 2.75rem; /* h-11 */
@@ -136,6 +140,9 @@
 
 	--ui-chat-action-hover: var(--ui-icon-btn-hover);
 	--ui-chat-action-active: var(--ui-icon-btn-active);
+
+	/* Settings shortcut text - dark mode */
+	--ui-settings-shortcut-hint-color: #5c5c5c;
 }
 
 /* 2) Tailwind v4 theme bridge: generates utilities like bg-*, h-*, px-*, gap-*, size-*, rounded-* */
@@ -207,6 +214,10 @@
 	/* Simplified aliases (both max/min can use same token by default) */
 	--spacing-settings-layout: var(--ui-settings-layout-max-w);
 	--spacing-settings-layout-pt: var(--ui-settings-layout-pt);
+
+	/* Settings shortcut text bridge */
+	--text-settings-shortcut-size: var(--ui-settings-shortcut-text-size);
+	--color-settings-shortcut-hint: var(--ui-settings-shortcut-hint-color);
 
 	/* Segmented button bridge */
 	--spacing-seg-button-thumb-height: var(--ui-seg-btn-thumb-h);

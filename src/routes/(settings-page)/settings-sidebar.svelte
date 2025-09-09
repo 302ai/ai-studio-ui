@@ -23,6 +23,10 @@
 			title: "data",
 			url: "/settings/data",
 		},
+		{
+			title: "shortcut-settings",
+			url: "/settings/shortcut-settings",
+		},
 	];
 </script>
 
