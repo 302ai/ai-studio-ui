@@ -5,7 +5,8 @@
 	import { TabBar, type Tab } from "@/components/buss/tab-bar";
 	import { page } from "$app/state";
 	import { goto } from "$app/navigation";
-	import { Home, Layout, Settings, MessageCircle } from "@lucide/svelte";
+	import { Home, Layout, Settings, MessageCircle, Ghost } from "@lucide/svelte";
+	import { chatState } from "@/stores/chat-state.svelte";
 
 	let { children } = $props();
 
@@ -102,7 +103,11 @@
 {/snippet}
 
 {#snippet messageIcon()}
-	<MessageCircle class="h-full w-full" />
+	{#if chatState.isPrivateChatActive}
+		<Ghost class="h-full w-full" />
+	{:else}
+		<MessageCircle class="h-full w-full" />
+	{/if}
 {/snippet}
 
 <ModeWatcher />
