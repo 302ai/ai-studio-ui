@@ -26,7 +26,7 @@ class ChatState {
 				id: nanoid(),
 				role: "user",
 				content: this.inputValue,
-				timestamp: new Date(),
+				createAt: new Date(),
 				status: "success",
 				attachments: this.attachments,
 				model: currentModel,
@@ -40,7 +40,7 @@ class ChatState {
 					id: nanoid(),
 					role: "assistant",
 					content: "",
-					timestamp: new Date(),
+					createAt: new Date(),
 					status: "pending",
 					model: currentModel,
 				};
@@ -52,7 +52,7 @@ class ChatState {
 						id: typingMessage.id,
 						role: "assistant",
 						content: `Current time: ${new Date().toLocaleString()}`,
-						timestamp: new Date(),
+						createAt: new Date(),
 						status: "success",
 						model: currentModel,
 					};

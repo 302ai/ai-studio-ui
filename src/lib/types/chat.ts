@@ -30,7 +30,7 @@ export interface ChatMessage {
 	role: "user" | "assistant";
 	content: string;
 	status: messageStatus;
-	timestamp: Date;
 	model: Model;
 	attachments?: AttachmentFile[];
+	createAt: Date;
 }

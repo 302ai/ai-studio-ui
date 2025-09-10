@@ -22,10 +22,10 @@
 </script>
 
 <script lang="ts">
-	import ButtonWithTooltip from "$lib/components/ui/button-with-tooltip.svelte";
 	import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
 	import { m } from "$lib/paraglide/messages.js";
 	import { cn } from "$lib/utils";
+	import ButtonWithTooltip from "@/components/buss/button-with-tooltip.svelte";
 	import { X, XCircle } from "@lucide/svelte";
 	import type { Snippet } from "svelte";
 	import { onDestroy } from "svelte";

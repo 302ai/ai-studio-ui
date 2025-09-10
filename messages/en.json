@@ -267,6 +267,19 @@
 	"toast_empty_message": "Message content is empty",
 	"toast_no_model": "No model selected",
 	"toast_unknown_error": "An unknown error occurred",
+	"text_alert_chat_error": "Reply failed!",
+	"text_alert_chat_error_description": "The AI ​​response failed, please try again...",
+	"text_chat_pending": "AI is thinking",
+	"provider_fetch_models_success": "Successfully fetched {count} models from {provider}",
+	"provider_fetch_models_error": "Failed to fetch models from {provider}",
+	"provider_fetch_models_unknown_error": "Unknown error occurred",
+	"provider_fetch_models_network_error": "Network or API error",
 	"version_information": "Version",
-	"version_update": "Version update"
+	"version_update": "Version update",
+	"text_just_now": "Just Now",
+	"title_copy": "Copy",
+	"title_regenerate": "Regenerate",
+	"title_edit": "Edit",
+	"toast_copied_success": "Copied to clipboard",
+	"toast_copied_failed": "Failed to copy"
 }

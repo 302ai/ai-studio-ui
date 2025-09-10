@@ -263,6 +263,19 @@
 	"toast_empty_message": "消息内容为空",
 	"toast_no_model": "模型未配置",
 	"toast_unknown_error": "发生未知错误",
+	"text_alert_chat_error": "回复失败！",
+	"text_alert_chat_error_description": "AI响应失败，请重新尝试...",
+	"text_chat_pending": "AI正在思考中",
+	"provider_fetch_models_success": "成功从 {provider} 获取了 {count} 个模型",
+	"provider_fetch_models_error": "从 {provider} 获取模型失败",
+	"provider_fetch_models_unknown_error": "发生未知错误",
+	"provider_fetch_models_network_error": "网络或API错误",
 	"version_information": "版本信息",
-	"version_update": "版本更新"
+	"version_update": "版本更新",
+	"text_just_now": "刚刚",
+	"title_copy": "复制",
+	"title_regenerate": "重新生成",
+	"title_edit": "编辑",
+	"toast_copied_success": "已复制到剪贴板",
+	"toast_copied_failed": "复制失败"
 }

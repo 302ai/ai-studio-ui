@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Sidebar from "$lib/components/ui/sidebar";
-	import ButtonWithTooltip from "@/components/ui/button-with-tooltip.svelte";
+	import ButtonWithTooltip from "@/components/buss/button-with-tooltip.svelte";
 	import { useSidebar } from "@/components/ui/sidebar";
 	import { m } from "@/paraglide/messages";
 	import { chatState } from "@/stores/chat-state.svelte";

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from "$lib/components/ui/button/button.svelte";
-	import ThemeSwitcher from "$lib/components/ui/theme-switcher.svelte";
+	import ThemeSwitcher from "@/components/buss/theme-switcher.svelte";
 </script>
 
 <div class="container mx-auto p-8">

@@ -5,8 +5,8 @@
 </script>
 
 <script lang="ts">
-	import ButtonWithTooltip from "$lib/components/ui/button-with-tooltip.svelte";
 	import { m } from "$lib/paraglide/messages.js";
+	import ButtonWithTooltip from "@/components/buss/button-with-tooltip.svelte";
 
 	let { onClick }: HeaderProps = $props();
 </script>

@@ -30,7 +30,8 @@
 	<div
 		class="flex max-w-[80%] rounded-lg bg-chat-user-message-bg px-4 py-2 text-chat-user-message-fg"
 	>
-		<p class="text-sm whitespace-pre-wrap">{message.content}</p>
+		<span class="whitespace-pre-wrap">{message.content}</span>
+
 		{#if message.attachments.length > 0}
 			<div class="space-y-2">
 				{#each message.attachments as attachment (attachment.id)}
