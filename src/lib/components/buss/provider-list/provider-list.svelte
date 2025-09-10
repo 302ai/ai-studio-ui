@@ -7,6 +7,8 @@
 		activeProviderId?: string;
 		onProviderClick?: (provider: ModelProvider) => void;
 		onReorder?: (providers: ModelProvider[]) => void;
+		onConfigure?: (provider: ModelProvider) => void;
+		onRemove?: (provider: ModelProvider) => void;
 		class?: string;
 	}
 
@@ -33,6 +35,8 @@
 		activeProviderId = $bindable<string>(),
 		onProviderClick,
 		onReorder,
+		onConfigure,
+		onRemove,
 		class: className,
 	}: Props = $props();
 
@@ -131,6 +135,8 @@
 					{provider}
 					isActive={provider.id === activeProviderId}
 					onProviderClick={handleProviderClick}
+					{onConfigure}
+					{onRemove}
 				/>
 			</div>
 		{/each}

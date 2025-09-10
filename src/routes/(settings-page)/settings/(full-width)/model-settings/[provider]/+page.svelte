@@ -172,6 +172,25 @@
 		}
 	}
 
+	function handleModelDuplicate(model: Model) {
+		if (!currentProvider) return;
+
+		// 创建复制的模型
+		const duplicatedModel = providerState.addModel({
+			name: `${model.name} (Copy)`,
+			remark: model.remark ? `${model.remark} (Copy)` : "",
+			providerId: currentProvider.id,
+			capabilities: new Set(model.capabilities),
+			type: model.type,
+			custom: true, // 复制的模型标记为自定义
+			enabled: model.enabled,
+			collected: false, // 复制的模型默认不收藏
+		});
+
+		// 更新UI中的模型列表
+		modelsState = [...modelsState, duplicatedModel];
+	}
+
 	// 保存表单数据到状态管理
 	function saveFormData() {
 		if (formData.id) {
@@ -297,7 +316,7 @@
 							saveFormData();
 						}}
 					>
-						<Select.Trigger class="w-full">
+						<Select.Trigger class="w-full rounded-settings-item bg-settings-item-bg">
 							{apiTypes.find((t) => t.value === formData.apiType)?.label ||
 								m.provider_interface_type_placeholder()}
 						</Select.Trigger>
@@ -326,6 +345,7 @@
 				onModelEdit={handleModelEdit}
 				onModelDelete={handleModelDelete}
 				onModelToggleCollected={handleModelToggleCollected}
+				onModelDuplicate={handleModelDuplicate}
 			/>
 		</div>
 	</div>

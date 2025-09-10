@@ -6,6 +6,8 @@
 	import { providerState } from "$lib/stores/provider-state.svelte.js";
 	import type { ModelProvider } from "@/types/provider";
 	import { onMount } from "svelte";
+	import { toast } from "svelte-sonner";
+	import { m } from "$lib/paraglide/messages.js";
 	import Header from "./header.svelte";
 
 	let { children } = $props();
@@ -38,6 +40,31 @@
 		providerState.reorderProviders(newOrder);
 	}
 
+	function handleConfigureProvider(provider: ModelProvider) {
+		goto(`/settings/model-settings/${provider.id}`);
+	}
+
+	function handleRemoveProvider(provider: ModelProvider) {
+		if (!provider.custom) {
+			toast.error(m.provider_remove_builtin_error());
+			return;
+		}
+
+		// 删除供应商
+		providerState.removeProvider(provider.id);
+		// 删除该供应商的所有模型
+		const removedModelCount = providerState.removeModelsByProvider(provider.id);
+
+		toast.success(
+			`${m.provider_context_remove()}: ${provider.name}${removedModelCount > 0 ? ` (${removedModelCount} models removed)` : ""}`,
+		);
+
+		// 如果删除的是当前活跃的供应商，跳转到第一个可用供应商
+		if (provider.id === activeProviderId && providerState.providers.length > 0) {
+			goto(`/settings/model-settings/${providerState.providers[0].id}`);
+		}
+	}
+
 	onMount(() => {
 		// If no provider is selected, redirect to the first provider
 		if (!page.params.provider && providerState.providers.length > 0) {
@@ -59,6 +86,8 @@
 						bind:activeProviderId
 						onProviderClick={handleProviderClick}
 						onReorder={handleReorderProviders}
+						onConfigure={handleConfigureProvider}
+						onRemove={handleRemoveProvider}
 						class="h-full"
 					/>
 				</div>

@@ -5,6 +5,8 @@
 		provider: ModelProvider;
 		isActive?: boolean;
 		onProviderClick?: (provider: ModelProvider) => void;
+		onConfigure?: (provider: ModelProvider) => void;
+		onRemove?: (provider: ModelProvider) => void;
 		class?: string;
 	}
 </script>
@@ -17,7 +19,14 @@
 	import { AlertCircle, Cloud, X } from "@lucide/svelte";
 	import { m } from "$lib/paraglide/messages.js";
 
-	let { provider, isActive = false, onProviderClick, class: className }: Props = $props();
+	let {
+		provider,
+		isActive = false,
+		onProviderClick,
+		onConfigure,
+		onRemove,
+		class: className,
+	}: Props = $props();
 
 	// Create a description based on provider data
 	const description = $derived.by(() => {
@@ -35,6 +44,18 @@
 		const modelCount = providerState.models.filter((m) => m.providerId === provider.id).length;
 		return m.provider_models_count({ count: modelCount.toString() });
 	});
+
+	const handleConfigure = () => {
+		if (onConfigure) {
+			onConfigure(provider);
+		}
+	};
+
+	const handleRemove = () => {
+		if (onRemove) {
+			onRemove(provider);
+		}
+	};
 </script>
 
 <ContextMenu.Root>
@@ -75,13 +96,13 @@
 		</div>
 	</ContextMenu.Trigger>
 	<ContextMenu.Content class="w-48">
-		<ContextMenu.Item>
+		<ContextMenu.Item onclick={handleConfigure}>
 			<Cloud class="mr-2 h-4 w-4" />
-			Configure
+			{m.provider_context_configure()}
 		</ContextMenu.Item>
-		<ContextMenu.Item>
+		<ContextMenu.Item onclick={handleRemove} class="text-destructive focus:text-destructive">
 			<X class="mr-2 h-4 w-4" />
-			Remove
+			{m.provider_context_remove()}
 		</ContextMenu.Item>
 	</ContextMenu.Content>
 </ContextMenu.Root>

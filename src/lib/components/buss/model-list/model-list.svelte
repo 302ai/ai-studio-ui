@@ -6,6 +6,7 @@
 		onModelEdit?: (model: Model) => void;
 		onModelDelete?: (model: Model) => void;
 		onModelToggleCollected?: (model: Model) => void;
+		onModelDuplicate?: (model: Model) => void;
 	}
 </script>
 
@@ -14,7 +15,8 @@
 	import { VirtualList } from "$lib/components/ui/virtual-list/index.js";
 	import { ModelListItem } from "./index.js";
 
-	let { models, onModelEdit, onModelDelete, onModelToggleCollected }: Props = $props();
+	let { models, onModelEdit, onModelDelete, onModelToggleCollected, onModelDuplicate }: Props =
+		$props();
 
 	// 每个模型项的高度（固定）
 	const ITEM_HEIGHT = 50;
@@ -92,6 +94,7 @@
 								onEdit={() => onModelEdit?.(model)}
 								onDelete={() => onModelDelete?.(model)}
 								onToggleCollected={() => onModelToggleCollected?.(model)}
+								onDuplicate={() => onModelDuplicate?.(model)}
 							/>
 						{/snippet}
 					</VirtualList>
