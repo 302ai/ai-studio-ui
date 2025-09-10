@@ -7,17 +7,17 @@
 	const layouts = [
 		{
 			key: "default",
-			label: "默认",
+			label: m.default(),
 			value: "default",
 		},
 		{
 			key: "wide",
-			label: "宽",
+			label: m.wide(),
 			value: "wide",
 		},
 		{
 			key: "ultraWide",
-			label: "超宽",
+			label: m.ultraWide(),
 			value: "ultra-wide",
 		},
 	];
