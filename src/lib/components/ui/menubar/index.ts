@@ -34,7 +34,6 @@ export {
 	RadioGroup,
 	Label,
 	GroupHeading,
-	//
 	Root as Menubar,
 	CheckboxItem as MenubarCheckboxItem,
 	Content as MenubarContent,

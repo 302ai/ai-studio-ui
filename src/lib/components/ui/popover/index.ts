@@ -9,7 +9,6 @@ export {
 	Content,
 	Trigger,
 	Close,
-	//
 	Root as Popover,
 	Content as PopoverContent,
 	Trigger as PopoverTrigger,

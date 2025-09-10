@@ -32,14 +32,10 @@
 		presets = [],
 		onValueChange,
 	}: Props = $props();
-
-	// Parse current numeric value
 	function parseValue(val: string): number {
 		const numMatch = val.match(/^([0-9.]+)/);
 		return numMatch ? parseFloat(numMatch[1]) : 0;
 	}
-
-	// Format number back to string with unit
 	function formatValue(num: number): string {
 		const formattedNum = step < 1 ? num.toFixed(2).replace(/\.?0+$/, "") : num.toString();
 		return unit ? `${formattedNum}${unit}` : formattedNum;
@@ -48,17 +44,12 @@
 	let numericValue = $state(parseValue(value));
 	let inputValue = $state(value);
 	let isInitializing = $state(true);
-
-	// Update when external value changes
 	$effect(() => {
 		numericValue = parseValue(value);
 		inputValue = value;
 	});
-
-	// Mark initialization as complete after first render
 	$effect(() => {
 		if (isInitializing) {
-			// Use setTimeout to ensure this runs after component mount
 			setTimeout(() => {
 				isInitializing = false;
 			}, 0);
@@ -66,7 +57,6 @@
 	});
 
 	function handleSliderChange(newValue: number) {
-		// Don't trigger changes during initialization
 		if (isInitializing) return;
 
 		numericValue = newValue;
@@ -83,7 +73,6 @@
 			value = inputValue;
 			onValueChange?.(inputValue);
 		} else {
-			// Reset to current valid value if input is invalid
 			inputValue = value;
 		}
 	}

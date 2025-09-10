@@ -16,15 +16,11 @@
 	let searchQuery = $state("");
 	let isLoading = $state(true);
 	let loadError = $state<string | null>(null);
-
-	// Storage key for user theme
 	const STORAGE_KEY = "user-theme-variables";
 
 	onMount(async () => {
 		try {
 			themeConfig = await getThemeConfig();
-
-			// Ensure all variables have proper currentValue initialization
 			for (const category of themeConfig.categories) {
 				for (const variable of category.variables) {
 					if (variable.currentValue === undefined) {
@@ -47,7 +43,7 @@
 			const saved = localStorage.getItem(STORAGE_KEY);
 			if (saved) {
 				const userVars = JSON.parse(saved);
-				// Apply saved values to theme config
+
 				for (const category of themeConfig.categories) {
 					for (const variable of category.variables) {
 						if (userVars[variable.name]) {
@@ -55,7 +51,7 @@
 						}
 					}
 				}
-				// Apply to CSS
+
 				applyUserVars(userVars);
 			}
 		} catch (error) {
@@ -131,7 +127,6 @@
 		reader.onload = (e) => {
 			const content = e.target?.result as string;
 			try {
-				// Parse CSS variables
 				const lines = content.split("\n");
 				const userVars: Record<string, string> = {};
 
@@ -142,8 +137,6 @@
 						userVars[name.trim()] = value.trim();
 					}
 				}
-
-				// Apply to theme config
 				for (const category of themeConfig.categories) {
 					for (const variable of category.variables) {
 						if (userVars[variable.name]) {
@@ -160,8 +153,6 @@
 		reader.readAsText(file);
 		input.value = "";
 	}
-
-	// Filter categories based on search
 	let filteredCategories = $derived(
 		themeConfig.categories.filter((category) => {
 			if (!searchQuery.trim()) return true;

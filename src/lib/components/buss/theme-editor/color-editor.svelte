@@ -15,8 +15,6 @@
 	import { m } from "$lib/paraglide/messages.js";
 
 	let { label, value = $bindable(""), description, onValueChange }: Props = $props();
-
-	// Color presets for quick selection
 	const colorPresets = [
 		"#000000",
 		"#ffffff",
@@ -38,8 +36,6 @@
 	let colorInputValue = $state(convertToHex(value));
 	let textInputValue = $state(value);
 	let isInitializing = $state(true);
-
-	// Mark initialization as complete after first render
 	$effect(() => {
 		if (isInitializing) {
 			setTimeout(() => {
@@ -47,8 +43,6 @@
 			}, 0);
 		}
 	});
-
-	// Convert various color formats to hex for color input
 	function convertToHex(colorValue: string): string {
 		const testElement = document.createElement("div");
 		testElement.style.color = colorValue;
@@ -63,8 +57,6 @@
 			const b = parseInt(match[3]).toString(16).padStart(2, "0");
 			return `#${r}${g}${b}`;
 		}
-
-		// Fallback for hex colors
 		if (colorValue.match(/^#[0-9a-fA-F]{6}$/)) {
 			return colorValue;
 		}
@@ -86,8 +78,6 @@
 
 		value = textInputValue;
 		onValueChange?.(textInputValue);
-
-		// Try to update color picker if valid hex
 		if (textInputValue.match(/^#[0-9a-fA-F]{6}$/)) {
 			colorInputValue = textInputValue;
 		}

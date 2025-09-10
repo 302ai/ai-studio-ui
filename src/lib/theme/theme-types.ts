@@ -5,18 +5,18 @@
 export type VariableType = "color" | "size" | "spacing" | "radius" | "density" | "text";
 
 export interface ThemeVariable {
-	name: string; // CSS variable name (e.g., "--ui-accent")
+	name: string;
 	type: VariableType;
-	category: string; // Group name (e.g., "Colors", "Typography", "Layout")
-	label: string; // Human-readable label
-	description?: string; // Optional description
-	defaultValue: string; // Default CSS value
-	currentValue?: string; // Current user-set value
-	min?: number; // For numeric values
-	max?: number; // For numeric values
-	step?: number; // For numeric values
-	unit?: string; // For size/spacing values (px, rem, etc.)
-	presets?: string[]; // Predefined common values
+	category: string;
+	label: string;
+	description?: string;
+	defaultValue: string;
+	currentValue?: string;
+	min?: number;
+	max?: number;
+	step?: number;
+	unit?: string;
+	presets?: string[];
 }
 
 export interface ThemeCategory {
@@ -49,27 +49,27 @@ export const TYPE_PATTERNS = {
 export const THEME_CATEGORIES = {
 	colors: {
 		name: "colors",
-		label: "Colors", // Fallback - should use i18n
-		description: "Color scheme and surface colors", // Fallback - should use i18n
+		label: "Colors",
+		description: "Color scheme and surface colors",
 	},
 	layout: {
 		name: "layout",
-		label: "Layout", // Fallback - should use i18n
-		description: "Spacing, sizing and layout properties", // Fallback - should use i18n
+		label: "Layout",
+		description: "Spacing, sizing and layout properties",
 	},
 	components: {
 		name: "components",
-		label: "Components", // Fallback - should use i18n
-		description: "Component-specific styling", // Fallback - should use i18n
+		label: "Components",
+		description: "Component-specific styling",
 	},
 	typography: {
 		name: "typography",
-		label: "Typography", // Fallback - should use i18n
-		description: "Text and font settings", // Fallback - should use i18n
+		label: "Typography",
+		description: "Text and font settings",
 	},
 	geometry: {
 		name: "geometry",
-		label: "Geometry", // Fallback - should use i18n
-		description: "Border radius and shape settings", // Fallback - should use i18n
+		label: "Geometry",
+		description: "Border radius and shape settings",
 	},
 } as const;

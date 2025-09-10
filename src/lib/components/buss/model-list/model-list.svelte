@@ -17,14 +17,10 @@
 
 	let { models, onModelEdit, onModelDelete, onModelToggleCollected, onModelDuplicate }: Props =
 		$props();
-
-	// 每个模型项的高度（固定）
 	const ITEM_HEIGHT = 50;
-	// 容器元素引用
-	let containerElement = $state<HTMLDivElement>();
-	let containerHeight = $state(400); // 默认高度
 
-	// 监听容器尺寸变化
+	let containerElement = $state<HTMLDivElement>();
+	let containerHeight = $state(400);
 	$effect(() => {
 		if (containerElement) {
 			const resizeObserver = new ResizeObserver((entries) => {

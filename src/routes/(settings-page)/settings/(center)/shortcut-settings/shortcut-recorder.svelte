@@ -23,8 +23,6 @@
 		allShortcuts = [],
 		onReset,
 	}: Props = $props();
-
-	// 翻译函数 - 这里需要根据你的 i18n 实现来调整
 	const t = (key: string) => {
 		const translations: Record<string, string> = {
 			"press-keys": "Press keys...",
@@ -66,11 +64,8 @@
 
 	const isValidShortcut = (keys: string[]): boolean => {
 		if (!hasModifierKey(keys)) {
-			// logger.info("isValidShortcut: no modifier key1", { keys });
 			return false;
 		}
-
-		// logger.info("isValidShortcut: has modifier key2", { keys });
 
 		const modifierKeys = ["Ctrl", "Cmd", "Alt", "Shift"];
 		const nonModifierKeys = keys.filter((key) => !modifierKeys.includes(key));
@@ -99,13 +94,9 @@
 
 		if (event.key && !["Control", "Meta", "Shift", "Alt"].includes(event.key)) {
 			let keyToAdd = event.key;
-
-			// 处理单字符按键
 			if (keyToAdd.length === 1) {
 				keyToAdd = keyToAdd.toUpperCase();
-			}
-			// 处理功能键名称映射
-			else if (keyToAdd === " ") {
+			} else if (keyToAdd === " ") {
 				keyToAdd = "Space";
 			} else if (keyToAdd === "Escape") {
 				keyToAdd = "Esc";
@@ -128,18 +119,12 @@
 		}
 
 		if (!isValidShortcut(currentKeys)) {
-			// toast.error(t("error.modifier-required"));
 			currentKeys = [];
 			isRecording = false;
 			onRecordingChange?.(false);
 			return;
 		}
-
-		// logger.info("handleKeyUp: currentKeys", { currentKeys });
-		// logger.info("handleKeyUp: allShortcuts", { allShortcuts });
-
 		if (checkShortcutConflict(currentKeys, allShortcuts)) {
-			// toast.error(t("error.shortcut-conflict"));
 			currentKeys = [];
 			isRecording = false;
 			onRecordingChange?.(false);
@@ -176,16 +161,12 @@
 	const formatKeys = (keys: string[]) => {
 		return formatShortcutKeys(keys);
 	};
-
-	// 计算显示值
 	const displayValue = $derived(() => {
 		if (isRecording) {
 			return currentKeys.length > 0 ? formatKeys(currentKeys) : "press-keys";
 		}
 		return value.length > 0 ? formatKeys(value) : placeholder || "placeholder";
 	});
-
-	// 事件监听器
 	$effect(() => {
 		if (!isRecording) return;
 

@@ -7,8 +7,6 @@
 
 <script lang="ts">
 	import { cn } from "$lib/utils";
-
-	// Import commonly used AI model provider icons from LobeHub
 	import adobeIcon from "@lobehub/icons-static-svg/icons/adobe-color.svg";
 	import ai302Icon from "@lobehub/icons-static-svg/icons/ai302-color.svg";
 	import anthropicIcon from "@lobehub/icons-static-svg/icons/anthropic.svg";
@@ -55,8 +53,6 @@
 	import zhipuIcon from "@lobehub/icons-static-svg/icons/zhipu-color.svg";
 
 	let { modelName, className }: Props = $props();
-
-	// Colored icons set - icons that should not be inverted in dark mode
 	const coloredIcons = new Set([
 		ai302Icon,
 		azureIcon,
@@ -85,15 +81,10 @@
 		mistralIcon,
 		zhipuIcon,
 	]);
-
-	// Icon mapping object
 	const iconMap: Record<string, string> = {
-		// 302.AI
 		"302": ai302Icon,
 		"302ai": ai302Icon,
 		ai302: ai302Icon,
-
-		// OpenAI
 		openai: openaiIcon,
 		gpt: openaiIcon,
 		"gpt-3": openaiIcon,
@@ -107,14 +98,10 @@
 		"dall-e": openaiIcon,
 		dalle: openaiIcon,
 		whisper: openaiIcon,
-
-		// Anthropic
 		anthropic: anthropicIcon,
 		claude: claudeIcon,
 		"claude-3": claudeIcon,
 		"claude-2": claudeIcon,
-
-		// Google
 		google: googleIcon,
 		gemini: geminiIcon,
 		gemma: googleIcon,
@@ -122,18 +109,12 @@
 		bard: googleIcon,
 		vertex: vertexaiIcon,
 		vertexai: vertexaiIcon,
-
-		// Meta
 		meta: metaIcon,
 		llama: metaIcon,
 		"llama-2": metaIcon,
 		"llama-3": metaIcon,
-
-		// Microsoft
 		azure: azureIcon,
 		microsoft: azureIcon,
-
-		// Chinese providers
 		qwen: qwenIcon,
 		tongyi: qwenIcon,
 		alibaba: qwenIcon,
@@ -157,8 +138,6 @@
 		sensenova: sensenovaIcon,
 		siliconcloud: siliconcloudIcon,
 		silicon: siliconcloudIcon,
-
-		// Other providers
 		deepseek: deepseekIcon,
 		moonshot: moonshotIcon,
 		kimi: moonshotIcon,
@@ -173,27 +152,17 @@
 		mistral: mistralIcon,
 		huggingface: huggingfaceIcon,
 		replicate: replicateIcon,
-
-		// Self-hosted/Local
 		ollama: ollamaIcon,
 		lmstudio: lmstudioIcon,
-
-		// API providers
 		together: togetherIcon,
 		fireworks: fireworksIcon,
 		openrouter: openrouterIcon,
 		workersai: workersaiIcon,
 		cloudflare: workersaiIcon,
-
-		// Cloud platforms
 		github: githubIcon,
 		vercel: vercelIcon,
 		upstage: upstageIcon,
-
-		// Adobe
 		adobe: adobeIcon,
-
-		// Default
 		default: ai302Icon,
 	};
 
@@ -202,31 +171,24 @@
 		isColorIcon: boolean;
 	} {
 		if (!modelName || typeof modelName !== "string") {
-			return { iconUrl: iconMap.default, isColorIcon: true }; // default is colored
+			return { iconUrl: iconMap.default, isColorIcon: true };
 		}
 
 		const modelNameLower = modelName.toLowerCase();
-		// Direct match first
+
 		if (iconMap[modelNameLower]) {
 			return {
 				iconUrl: iconMap[modelNameLower],
 				isColorIcon: coloredIcons.has(iconMap[modelNameLower]),
 			};
 		}
-
-		// Try to find a match by checking if model name contains any of the keys
 		for (const [key, icon] of Object.entries(iconMap)) {
 			if (key !== "default" && modelNameLower.includes(key)) {
 				return { iconUrl: icon, isColorIcon: coloredIcons.has(icon) };
 			}
 		}
 
-		// Try to extract provider from common patterns
-		// e.g., "openai/gpt-4" -> "openai", "claude-3-haiku" -> "claude"
-		const providerPatterns = [
-			/^([^/\-_]+)[/\-_]/, // Extract before first separator
-			/^(\w+)/, // Extract first word
-		];
+		const providerPatterns = [/^([^/\-_]+)[/\-_]/, /^(\w+)/];
 		for (const pattern of providerPatterns) {
 			const match = modelNameLower.match(pattern);
 			if (match?.[1] && iconMap[match[1]]) {
@@ -236,13 +198,12 @@
 				};
 			}
 		}
-		return { iconUrl: iconMap.default, isColorIcon: true }; // default is colored
+		return { iconUrl: iconMap.default, isColorIcon: true };
 	}
 
 	const { iconUrl, isColorIcon } = $derived(getIconFromModelName(modelName));
 
 	function handleError(event: Event) {
-		// Fallback to default icon if image fails to load
 		const target = event.target as HTMLImageElement;
 		if (target.src !== iconMap.default) {
 			target.src = iconMap.default;
@@ -254,7 +215,7 @@
 	src={iconUrl}
 	class={cn(
 		"h-4 w-4 rounded-full",
-		// Only apply dark mode filters to monochrome icons
+
 		!isColorIcon && "dark:brightness-0 dark:invert dark:filter",
 		className,
 	)}

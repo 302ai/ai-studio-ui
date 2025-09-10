@@ -12,8 +12,6 @@
 
 	let { children } = $props();
 	let activeProviderId = $state<string>();
-
-	// Set active provider based on current route
 	$effect(() => {
 		const currentProvider = page.params.provider;
 		if (currentProvider) {
@@ -49,24 +47,19 @@
 			toast.error(m.text_provider_remove_builtin_error());
 			return;
 		}
-
-		// 删除供应商
 		providerState.removeProvider(provider.id);
-		// 删除该供应商的所有模型
+
 		const removedModelCount = providerState.removeModelsByProvider(provider.id);
 
 		toast.success(
 			`${m.text_context_remove_provider()}: ${provider.name}${removedModelCount > 0 ? ` (${removedModelCount} models removed)` : ""}`,
 		);
-
-		// 如果删除的是当前活跃的供应商，跳转到第一个可用供应商
 		if (provider.id === activeProviderId && providerState.providers.length > 0) {
 			goto(`/settings/model-settings/${providerState.providers[0].id}`);
 		}
 	}
 
 	onMount(() => {
-		// If no provider is selected, redirect to the first provider
 		if (!page.params.provider && providerState.providers.length > 0) {
 			goto(`/settings/model-settings/${providerState.providers[0].id}`);
 		}

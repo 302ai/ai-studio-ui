@@ -24,8 +24,6 @@
 			content = null;
 		}
 	}
-
-	// Load content when component mounts
 	$effect(() => {
 		loadContent();
 	});

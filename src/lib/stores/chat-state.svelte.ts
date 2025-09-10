@@ -1,7 +1,5 @@
 import type { AttachmentFile, ChatMessage, MCPServer, Model } from "@/types/chat";
 import { nanoid } from "nanoid";
-
-// Re-export types for backward compatibility
 export type { AttachmentFile, ChatMessage, MCPServer, Model } from "@/types/chat";
 
 class ChatState {
@@ -37,8 +35,6 @@ class ChatState {
 			this.messages = [...this.messages, userMessage];
 			this.inputValue = "";
 			this.attachments = [];
-
-			// Auto-reply with typing simulation
 			setTimeout(() => {
 				const typingMessage: ChatMessage = {
 					id: nanoid(),
@@ -53,7 +49,7 @@ class ChatState {
 
 				setTimeout(() => {
 					const assistantMessage: ChatMessage = {
-						id: typingMessage.id, // Use same ID to replace
+						id: typingMessage.id,
 						role: "assistant",
 						content: `Current time: ${new Date().toLocaleString()}`,
 						timestamp: new Date(),

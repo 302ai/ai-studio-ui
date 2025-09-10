@@ -18,7 +18,6 @@
 	let { category, onVariableChange }: Props = $props();
 
 	function handleVariableChange(variable: ThemeVariable, value: string) {
-		// Update the variable's current value
 		variable.currentValue = value;
 		onVariableChange?.(variable, value);
 	}

@@ -135,7 +135,6 @@ export function getFileIcon(attachment: AttachmentFile): Component<IconProps, ob
 		case "code":
 			return FileCode;
 		case "document": {
-			// For document types, distinguish between spreadsheets and other documents
 			if (
 				type.includes("excel") ||
 				type.includes("spreadsheet") ||
@@ -158,17 +157,14 @@ export function getFileIcon(attachment: AttachmentFile): Component<IconProps, ob
 
 export async function loadTextContent(attachment: AttachmentFile): Promise<string> {
 	if (attachment.preview && typeof attachment.preview === "string") {
-		// If preview is a data URL, extract the content
 		if (attachment.preview.startsWith("data:text/")) {
 			const base64Content = attachment.preview.split(",")[1];
 			return atob(base64Content);
 		} else {
-			// If preview is a URL, fetch it
 			const response = await fetch(attachment.preview);
 			return await response.text();
 		}
 	} else if (attachment.file) {
-		// Read from File object
 		return await attachment.file.text();
 	}
 	throw new Error("No content available");

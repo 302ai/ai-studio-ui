@@ -4,8 +4,6 @@
 
 import type { ThemeConfig } from "./theme-types.js";
 import { parseThemeConfig } from "./theme-parser.js";
-
-// Import ds.css content as string (Vite will handle this)
 import dsCssContent from "./ds.css?inline";
 
 let cachedConfig: ThemeConfig | null = null;
@@ -19,7 +17,6 @@ export async function loadThemeConfig(): Promise<ThemeConfig> {
 	}
 
 	try {
-		// Parse the CSS content directly
 		cachedConfig = parseThemeConfig(dsCssContent);
 	} catch (error) {
 		console.warn("Failed to load theme configuration:", error);
@@ -145,7 +142,7 @@ const FALLBACK_CONFIG: ThemeConfig = {
 export async function getThemeConfig(): Promise<ThemeConfig> {
 	try {
 		const config = await loadThemeConfig();
-		// If no categories loaded, use fallback
+
 		if (config.categories.length === 0) {
 			return FALLBACK_CONFIG;
 		}

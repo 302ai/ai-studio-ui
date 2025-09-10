@@ -10,12 +10,8 @@ import { TYPE_PATTERNS, THEME_CATEGORIES } from "./theme-types.js";
  */
 export function parseCssVariables(cssContent: string): Record<string, string> {
 	const variables: Record<string, string> = {};
-
-	// Remove comments but keep structure
 	const cleanCss = cssContent.replace(/\/\*[\s\S]*?\*\//g, "");
 
-	// Extract variables from both :root blocks and .dark blocks
-	// Use a simpler approach - find all --ui-* variable declarations anywhere in CSS
 	const allVarMatches = cleanCss.matchAll(/(--ui-[a-zA-Z0-9_-]+)\s*:\s*([^;]+);/g);
 
 	for (const match of allVarMatches) {
@@ -23,15 +19,10 @@ export function parseCssVariables(cssContent: string): Record<string, string> {
 		if (name && value) {
 			const cleanName = name.trim();
 			const cleanValue = value.trim();
-
-			// Skip @theme variables as they're derived
 			if (!cleanValue.includes("@theme") && !cleanName.includes("bridge")) {
-				// Only set if not already set, or if this is a more specific/concrete value
-				// Avoid the "shorter is better" logic that was causing bugs
 				if (!variables[cleanName]) {
 					variables[cleanName] = cleanValue;
 				} else {
-					// Only override if the new value is more concrete (doesn't contain var() or calc())
 					const existingHasVar =
 						variables[cleanName].includes("var(") || variables[cleanName].includes("calc(");
 					const newHasVar = cleanValue.includes("var(") || cleanValue.includes("calc(");
@@ -56,7 +47,7 @@ function getVariableType(name: string): VariableType {
 			return type as VariableType;
 		}
 	}
-	return "spacing"; // default fallback
+	return "spacing";
 }
 
 /**
@@ -76,8 +67,6 @@ function getVariableCategory(name: string, type: VariableType): string {
 	if (type === "color") return THEME_CATEGORIES.colors.name;
 	if (type === "radius") return THEME_CATEGORIES.geometry.name;
 	if (type === "text") return THEME_CATEGORIES.typography.name;
-
-	// Component-specific variables
 	if (
 		name.includes("-tab-") ||
 		name.includes("-chat-") ||
@@ -122,7 +111,6 @@ function getNumericConstraints(
 	}
 
 	if (unit === "rem") {
-		// Use dynamic ranges based on current value to avoid truncating existing values
 		if (name.includes("radius")) {
 			const dynamicMax = currentValue ? Math.max(currentValue * 2, 2) : 2;
 			return { min: 0, max: dynamicMax, step: 0.125 };
@@ -131,8 +119,6 @@ function getNumericConstraints(
 			const dynamicMax = currentValue ? Math.max(currentValue * 1.5, 8) : 8;
 			return { min: 0, max: dynamicMax, step: 0.25 };
 		}
-
-		// For layout/width values, use dynamic max based on current value
 		if (
 			name.includes("width") ||
 			name.includes("-w") ||
@@ -142,13 +128,9 @@ function getNumericConstraints(
 			const dynamicMax = currentValue ? Math.max(currentValue * 1.5, 50) : 50;
 			return { min: 0, max: dynamicMax, step: 0.25 };
 		}
-
-		// For large values (> 10), use dynamic range
 		if (currentValue && currentValue > 10) {
 			return { min: 0, max: Math.max(currentValue * 1.5, 50), step: 0.25 };
 		}
-
-		// For other values, use dynamic range if current value exceeds default max
 		if (currentValue && currentValue > 4) {
 			return { min: 0, max: Math.max(currentValue * 1.5, 20), step: 0.125 };
 		}
@@ -192,10 +174,8 @@ function createThemeVariable(name: string, value: string): ThemeVariable {
 		category,
 		label,
 		defaultValue: value,
-		currentValue: value, // Ensure currentValue is always set to defaultValue initially
+		currentValue: value,
 	};
-
-	// Add numeric constraints for size/spacing variables
 	if (type === "size" || type === "spacing" || type === "density") {
 		const { num, unit } = parseNumericValue(value);
 		if (num > 0) {
@@ -204,8 +184,6 @@ function createThemeVariable(name: string, value: string): ThemeVariable {
 			Object.assign(variable, constraints);
 		}
 	}
-
-	// Add presets
 	const presets = getPresets(name, type);
 	if (presets) {
 		variable.presets = presets;
@@ -222,8 +200,6 @@ export function parseThemeConfig(cssContent: string): ThemeConfig {
 	const themeVariables = Object.entries(variables).map(([name, value]) =>
 		createThemeVariable(name, value),
 	);
-
-	// Group by category
 	const categoryMap = new Map<string, ThemeVariable[]>();
 
 	for (const variable of themeVariables) {
@@ -232,8 +208,6 @@ export function parseThemeConfig(cssContent: string): ThemeConfig {
 		}
 		categoryMap.get(variable.category)!.push(variable);
 	}
-
-	// Create category objects
 	const categories: ThemeCategory[] = [];
 
 	for (const [categoryName, vars] of categoryMap) {
@@ -247,8 +221,6 @@ export function parseThemeConfig(cssContent: string): ThemeConfig {
 			});
 		}
 	}
-
-	// Sort categories by importance
 	const categoryOrder = ["colors", "layout", "components", "typography", "geometry"];
 	categories.sort((a, b) => {
 		const aIndex = categoryOrder.indexOf(a.name);

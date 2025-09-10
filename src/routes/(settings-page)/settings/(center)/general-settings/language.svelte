@@ -16,14 +16,7 @@
 			nativeName: "English",
 			prefix: "🇺🇸",
 		},
-		// {
-		// 	key: "ja",
-		// 	nativeName: "日本語",
-		// 	prefix: "🇯🇵",
-		// },
 	];
-
-	// let value = $state(m.hello_world());
 
 	const options: SelectOption[] = languages.map((lang) => ({
 		key: lang.key,
@@ -32,7 +25,6 @@
 	}));
 
 	function handleLanguageChange(selectedValue: string) {
-		// value = selectedValue;
 		setLocale(selectedValue as "zh" | "en");
 	}
 </script>

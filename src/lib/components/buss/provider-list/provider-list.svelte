@@ -53,7 +53,7 @@
 
 		if (info.trigger === TRIGGERS.DRAG_STARTED) {
 			draggedElementId = info.id;
-			// Set the dragged provider as active and trigger click handler
+
 			const draggedProvider = providers.find((provider) => provider.id === info.id);
 			if (draggedProvider) {
 				onProviderClick?.(draggedProvider);
@@ -70,7 +70,7 @@
 		try {
 			draggedElementId = null;
 			providers = e.detail.items;
-			// Call onReorder callback to persist the new order
+
 			onReorder?.(e.detail.items);
 		} catch (error) {
 			console.error("Error finalizing drag operation:", error);

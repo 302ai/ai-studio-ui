@@ -62,7 +62,7 @@ export class RenderSnippetConfig<TProps> {
  * @returns A `RenderComponentConfig` object that helps svelte-table know how to render the header/cell component.
  * @example
  * ```ts
- * // +page.svelte
+ *
  * const defaultColumns = [
  *   columnHelper.accessor('name', {
  *     header: header => renderComponent(SortHeader, { label: 'Name', header }),
@@ -72,11 +72,10 @@ export class RenderSnippetConfig<TProps> {
  *   }),
  * ]
  * ```
- * @see {@link https://tanstack.com/table/latest/docs/guide/column-defs}
+ * @see {@link https:
  */
 export function renderComponent<
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	T extends Component<any>,
+	T extends Component<Record<string, unknown>>,
 	Props extends ComponentProps<T>,
 >(component: T, props: Props = {} as Props) {
 	return new RenderComponentConfig(component, props);
@@ -94,7 +93,7 @@ export function renderComponent<
  * @returns - A `RenderSnippetConfig` object that helps svelte-table know how to render the header/cell snippet.
  * @example
  * ```ts
- * // +page.svelte
+ *
  * const defaultColumns = [
  *   columnHelper.accessor('name', {
  *     cell: cell => renderSnippet(nameSnippet, { name: cell.row.name }),
@@ -104,7 +103,7 @@ export function renderComponent<
  *   }),
  * ]
  * ```
- * @see {@link https://tanstack.com/table/latest/docs/guide/column-defs}
+ * @see {@link https:
  */
 export function renderSnippet<TProps>(snippet: Snippet<[TProps]>, params: TProps = {} as TProps) {
 	return new RenderSnippetConfig(snippet, params);

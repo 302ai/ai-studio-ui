@@ -27,20 +27,13 @@
 		onRemove,
 		class: className,
 	}: Props = $props();
-
-	// Create a description based on provider data
 	const description = $derived.by(() => {
-		// Check for error status first
 		if (provider.status === "error") {
 			return m.text_provider_error();
 		}
-
-		// Check if not configured (no API key)
 		if (!provider.apiKey || provider.apiKey.trim() === "") {
 			return m.text_provider_not_configured();
 		}
-
-		// If configured, show real model count from store
 		const modelCount = providerState.models.filter((m) => m.providerId === provider.id).length;
 		return m.text_provider_models_count({ count: modelCount.toString() });
 	});

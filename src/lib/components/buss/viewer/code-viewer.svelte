@@ -24,8 +24,6 @@
 			content = "Error loading code content";
 		}
 	}
-
-	// Load content when component mounts
 	$effect(() => {
 		loadContent();
 	});

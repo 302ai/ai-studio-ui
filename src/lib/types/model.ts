@@ -15,6 +15,7 @@ export interface Model {
 }
 
 export interface ModelCreateInput {
+	id: string;
 	name: string;
 	remark?: string;
 	providerId: string;
@@ -26,6 +27,7 @@ export interface ModelCreateInput {
 }
 
 export interface ModelUpdateInput {
+	id?: string;
 	name?: string;
 	remark?: string;
 	providerId?: string;

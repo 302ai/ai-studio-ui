@@ -1,7 +1,5 @@
 import type { Model, Provider } from "@/types/chat";
 import { nanoid } from "nanoid";
-
-// Provider definitions
 const providers: Record<string, Provider> = {
 	openai: { id: nanoid(), name: "OpenAI" },
 	"302ai": { id: nanoid(), name: "302.AI" },
@@ -10,14 +8,11 @@ const providers: Record<string, Provider> = {
 };
 
 export const mockModels: Model[] = [
-	// OpenAI LLM Models
 	{ id: nanoid(), provider: providers.openai, name: "gpt-4o", type: "llm" },
 	{ id: nanoid(), provider: providers.openai, name: "gpt-4o-mini", type: "llm" },
 	{ id: nanoid(), provider: providers.openai, name: "gpt-4-turbo", type: "llm" },
 	{ id: nanoid(), provider: providers.openai, name: "gpt-4", type: "llm" },
 	{ id: nanoid(), provider: providers.openai, name: "gpt-3.5-turbo", type: "llm" },
-
-	// 302AI LLM Models
 	{ id: nanoid(), provider: providers["302ai"], name: "gpt-4o", type: "llm" },
 	{ id: nanoid(), provider: providers["302ai"], name: "gpt-4o-mini", type: "llm" },
 	{ id: nanoid(), provider: providers["302ai"], name: "gpt-4-turbo", type: "llm" },
@@ -67,12 +62,8 @@ export const mockModels: Model[] = [
 	{ id: nanoid(), provider: providers["302ai"], name: "doubao-pro-128k", type: "llm" },
 	{ id: nanoid(), provider: providers["302ai"], name: "doubao-lite-32k", type: "llm" },
 	{ id: nanoid(), provider: providers["302ai"], name: "doubao-lite-128k", type: "llm" },
-
-	// OpenAI TTS Models
 	{ id: nanoid(), provider: providers.openai, name: "tts-1", type: "tts" },
 	{ id: nanoid(), provider: providers.openai, name: "tts-1-hd", type: "tts" },
-
-	// 302AI TTS Models
 	{ id: nanoid(), provider: providers["302ai"], name: "azure-tts", type: "tts" },
 	{ id: nanoid(), provider: providers["302ai"], name: "elevenlabs-tts", type: "tts" },
 	{ id: nanoid(), provider: providers["302ai"], name: "edge-tts", type: "tts" },
@@ -81,8 +72,6 @@ export const mockModels: Model[] = [
 	{ id: nanoid(), provider: providers["302ai"], name: "watson-tts", type: "tts" },
 	{ id: nanoid(), provider: providers["302ai"], name: "fish-speech", type: "tts" },
 	{ id: nanoid(), provider: providers["302ai"], name: "coqui-tts", type: "tts" },
-
-	// OpenAI Text Embedding Models
 	{
 		id: nanoid(),
 		provider: providers.openai,
@@ -101,8 +90,6 @@ export const mockModels: Model[] = [
 		name: "text-embedding-3-large",
 		type: "text-embedding",
 	},
-
-	// 302AI Text Embedding Models
 	{
 		id: nanoid(),
 		provider: providers["302ai"],
@@ -146,8 +133,6 @@ export const mockModels: Model[] = [
 	},
 	{ id: nanoid(), provider: providers["302ai"], name: "voyage-large-2", type: "text-embedding" },
 	{ id: nanoid(), provider: providers["302ai"], name: "voyage-code-2", type: "text-embedding" },
-
-	// 302AI Rerank Models
 	{
 		id: nanoid(),
 		provider: providers["302ai"],
@@ -168,11 +153,7 @@ export const mockModels: Model[] = [
 	},
 	{ id: nanoid(), provider: providers["302ai"], name: "rankllama", type: "rerank" },
 	{ id: nanoid(), provider: providers["302ai"], name: "colbert-v2", type: "rerank" },
-
-	// OpenAI Speech to Text Models
 	{ id: nanoid(), provider: providers.openai, name: "whisper-1", type: "speech-to-text" },
-
-	// 302AI Speech to Text Models
 	{ id: nanoid(), provider: providers["302ai"], name: "whisper-large-v3", type: "speech-to-text" },
 	{ id: nanoid(), provider: providers["302ai"], name: "whisper-medium", type: "speech-to-text" },
 	{ id: nanoid(), provider: providers["302ai"], name: "whisper-small", type: "speech-to-text" },

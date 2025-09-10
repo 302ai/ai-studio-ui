@@ -180,6 +180,9 @@
 	[data-slot="dialog-content"] {
 		max-width: fit-content !important;
 	}
+	[data-slot="dialog-content"][data-model-dialog] {
+		max-width: 42rem !important;
+	}
 }
 
 /* Design System tokens for new buss components */

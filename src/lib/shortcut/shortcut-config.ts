@@ -10,11 +10,8 @@ type CreateShortcutData = {
 		| "deleteCurrentThread"
 		| "openSettings"
 		| "toggleSidebar"
-		// | "quick-navigation"
-		// | "command-palette"
 		| "stopGeneration"
 		| "newTab"
-		//  | "new-session"
 		| "regenerateResponse"
 		| "search"
 		| "createBranch"
@@ -25,7 +22,6 @@ type CreateShortcutData = {
 		| "toggleModelPanel"
 		| "toggleIncognitoMode"
 		| "branchAndSend"
-		// Tab navigation (1-9)
 		| "switchToTab1"
 		| "switchToTab2"
 		| "switchToTab3"
@@ -76,8 +72,6 @@ export const DEFAULT_SHORTCUTS: CreateShortcutData[] = [
 		keys: new Set(["Cmd", "F"]),
 		scope: "app",
 	},
-
-	// Tab Management
 	{
 		id: "newTab",
 		order: 20,
@@ -99,13 +93,7 @@ export const DEFAULT_SHORTCUTS: CreateShortcutData[] = [
 		keys: new Set(["Cmd", "Option", "W"]),
 		scope: "app",
 	},
-	// {
-	//   id: "restore-last-tab",
-	//   order: 24,
-	//   action: "restore-last-tab",
-	//   keys: new Set(["Cmd", "Shift", "T"]),
-	//   scope: "app",
-	// },
+
 	{
 		id: "nextTab",
 		order: 25,
@@ -120,8 +108,6 @@ export const DEFAULT_SHORTCUTS: CreateShortcutData[] = [
 		keys: new Set(["Ctrl", "Shift", "Tab"]),
 		scope: "app",
 	},
-
-	// Quick Tab Switching (1-9)
 	{
 		id: "switchToTab1",
 		order: 30,
@@ -185,8 +171,6 @@ export const DEFAULT_SHORTCUTS: CreateShortcutData[] = [
 		keys: new Set(["Cmd", "9"]),
 		scope: "app",
 	},
-
-	// UI Actions
 	{
 		id: "toggleSidebar",
 		order: 40,
@@ -208,8 +192,6 @@ export const DEFAULT_SHORTCUTS: CreateShortcutData[] = [
 		keys: new Set(["Cmd", "E"]),
 		scope: "app",
 	},
-
-	// System Actions
 	{
 		id: "openSettings",
 		order: 50,
@@ -237,7 +219,6 @@ export const SHORTCUT_MODES: Record<
 	ShortcutActionWithoutSendMessage,
 	"preset" | "record" | "display"
 > = {
-	// "send-message": "preset",
 	newChat: "record",
 	clearMessages: "record",
 	closeCurrentTab: "display",
@@ -245,11 +226,9 @@ export const SHORTCUT_MODES: Record<
 	deleteCurrentThread: "record",
 	openSettings: "display",
 	toggleSidebar: "display",
-	// "quick-navigation": "record",
-	// "command-palette": "record",
 	stopGeneration: "record",
 	newTab: "display",
-	// "new-session": "display",
+
 	regenerateResponse: "record",
 	search: "display",
 	createBranch: "record",
@@ -278,11 +257,8 @@ export type ShortcutAction =
 	| "deleteCurrentThread"
 	| "openSettings"
 	| "toggleSidebar"
-	// | "quick-navigation"
-	// | "command-palette"
 	| "stopGeneration"
 	| "newTab"
-	//  | "new-session"
 	| "regenerateResponse"
 	| "search"
 	| "createBranch"
@@ -293,7 +269,6 @@ export type ShortcutAction =
 	| "toggleModelPanel"
 	| "toggleIncognitoMode"
 	| "branchAndSend"
-	// Tab navigation (1-9)
 	| "switchToTab1"
 	| "switchToTab2"
 	| "switchToTab3"
@@ -314,16 +289,6 @@ export interface ShortcutOption {
 export type ShortcutActionWithoutSendMessage = Exclude<ShortcutAction, "send-message">;
 
 export const SHORTCUT_OPTIONS: Record<ShortcutActionWithoutSendMessage, ShortcutOption[]> = {
-	// Existing actions
-	// "send-message": [
-	//   { id: "enter", label: "Enter", keys: ["Enter"] },
-	//   { id: "shift-enter", label: "Shift+Enter", keys: ["Shift", "Enter"] },
-	//   {
-	//     id: "cmd-enter",
-	//     label: "Cmd+Enter",
-	//     keys: ["Cmd", "Enter"],
-	//   },
-	// ],
 	newChat: [],
 	clearMessages: [],
 	closeCurrentTab: [],
@@ -331,12 +296,10 @@ export const SHORTCUT_OPTIONS: Record<ShortcutActionWithoutSendMessage, Shortcut
 	deleteCurrentThread: [],
 	openSettings: [],
 	toggleSidebar: [],
-	// New navigation actions
-	// "quick-navigation": [],
-	// "command-palette": [],
+
 	stopGeneration: [],
 	newTab: [],
-	// "new-session": [],
+
 	regenerateResponse: [],
 	search: [],
 	createBranch: [],
@@ -347,7 +310,7 @@ export const SHORTCUT_OPTIONS: Record<ShortcutActionWithoutSendMessage, Shortcut
 	toggleModelPanel: [],
 	toggleIncognitoMode: [],
 	branchAndSend: [],
-	// Tab navigation (1-9)
+
 	switchToTab1: [],
 	switchToTab2: [],
 	switchToTab3: [],
@@ -358,8 +321,6 @@ export const SHORTCUT_OPTIONS: Record<ShortcutActionWithoutSendMessage, Shortcut
 	switchToTab8: [],
 	switchToTab9: [],
 };
-
-// export const platform = window.electron?.process?.platform;
 export const isMac = false;
 export const isWindows = true;
 export const isLinux = false;

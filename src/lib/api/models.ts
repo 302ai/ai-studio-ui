@@ -1,7 +1,6 @@
 import type { Model } from "$lib/types/model.js";
 import type { ModelProvider } from "$lib/types/provider.js";
 import { parseModelCapabilities } from "$lib/utils/model-capabilities.js";
-import { nanoid } from "nanoid";
 
 /**
  * Model API interface functions
@@ -23,25 +22,21 @@ export interface ModelListResponse {
  * Get the models endpoint URL based on provider configuration
  */
 function getModelsEndpoint(provider: ModelProvider): string {
-	const baseUrl = provider.baseUrl.replace(/\/$/, ""); // Remove trailing slash
+	const baseUrl = provider.baseUrl.replace(/\/$/, "");
 
 	switch (provider.apiType.toLowerCase()) {
 		case "openai":
 		case "302ai":
-			// OpenAI/302AI: if baseUrl already has /v1, use /models, otherwise /v1/models
 			if (baseUrl.endsWith("/v1")) {
 				return `${baseUrl}/models?llm=1`;
 			}
 			return `${baseUrl}/v1/models?llm=1`;
 		case "anthropic":
-			// Anthropic: https://api.anthropic.com/v1/models
 			return `${baseUrl}/v1/models`;
 		case "gemini":
 		case "google":
-			// Gemini: https://generativelanguage.googleapis.com/v1beta/models
 			return `${baseUrl}/v1beta/models`;
 		default:
-			// Default to OpenAI-compatible endpoint
 			if (baseUrl.endsWith("/v1")) {
 				return `${baseUrl}/models`;
 			}
@@ -61,17 +56,14 @@ function getRequestHeaders(provider: ModelProvider): Record<string, string> {
 		case "openai":
 		case "302ai":
 		default:
-			// OpenAI/302AI: Authorization: Bearer $API_KEY
 			headers["Authorization"] = `Bearer ${provider.apiKey}`;
 			break;
 		case "anthropic":
-			// Anthropic: x-api-key: $ANTHROPIC_API_KEY, anthropic-version: 2023-06-01
 			headers["x-api-key"] = provider.apiKey;
 			headers["anthropic-version"] = "2023-06-01";
 			break;
 		case "gemini":
 		case "google":
-			// Gemini uses API key in query parameter, not header
 			break;
 	}
 
@@ -91,27 +83,22 @@ function parseModelsResponse(
 		case "openai":
 		case "302ai":
 		default:
-			// OpenAI/302AI format: { "data": [{ "id": "model-name", ... }] }
 			modelNames = (data.data || []).map((model) => model.id);
 			break;
 
 		case "anthropic":
-			// Anthropic format: { "data": [{ "id": "model-id", "display_name": "...", ... }] }
 			modelNames = (data.data || []).map((model) => model.id);
 			break;
 
 		case "gemini":
 		case "google":
-			// Gemini format: { "models": [{ "name": "models/model-name", ... }] }
 			modelNames = (data.models || []).map((model) => model.name.replace("models/", ""));
 			break;
 	}
-
-	// 将模型名称转换为完整的Model对象
 	return modelNames.map((modelName) => {
 		const capabilities = parseModelCapabilities(modelName);
 		return {
-			id: nanoid(),
+			id: modelName,
 			name: modelName,
 			remark: "",
 			providerId: provider.id,
@@ -132,8 +119,6 @@ export async function getModelsByProvider(
 ): Promise<ModelApiResponse<ModelListResponse>> {
 	try {
 		const endpoint = getModelsEndpoint(provider);
-
-		// For Gemini, add API key as query parameter
 		let url = endpoint;
 		if (
 			provider.apiType.toLowerCase() === "gemini" ||

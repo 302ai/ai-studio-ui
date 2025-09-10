@@ -2,6 +2,8 @@
 	import { page } from "$app/state";
 	import { IconPicker } from "$lib/components/buss/icon-picker/index.js";
 	import { ModelList, type Model } from "$lib/components/buss/model-list/index.js";
+	import type { ModelCreateInput } from "$lib/types/model.js";
+	import { ModelDialog } from "$lib/components/buss/model-dialog/index.js";
 	import { Button } from "$lib/components/ui/button/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
@@ -13,13 +15,9 @@
 	import { toast } from "svelte-sonner";
 
 	let providerParam = $derived(page.params.provider);
-
-	// 从 providerState 中找到对应的供应商
 	let currentProvider = $derived(
 		providerParam ? providerState.getProviderByNameOrId(providerParam) : undefined,
 	);
-
-	// 表单状态
 	let formData = $state<ModelProvider>({
 		id: "",
 		name: "",
@@ -38,11 +36,8 @@
 		},
 		icon: undefined,
 	});
-
-	// 当 currentProvider 变化时更新表单数据
 	$effect(() => {
 		if (currentProvider) {
-			// 重新设置整个表单数据，确保状态完全同步
 			formData = {
 				id: currentProvider.id,
 				name: currentProvider.name,
@@ -55,15 +50,11 @@
 				websites: { ...currentProvider.websites },
 				icon: currentProvider.icon,
 			};
-
-			// 加载该供应商的排序后模型
 			modelsState = providerState.getSortedModelsByProvider(currentProvider.id);
 		}
 	});
 
 	let showApiKey = $state(false);
-
-	// API 类型选项
 	const apiTypes = [
 		{ value: "openai", label: "OpenAI" },
 		{ value: "anthropic", label: "Anthropic" },
@@ -102,7 +93,6 @@
 			console.log("Fetch result:", success);
 
 			if (success) {
-				// 获取该供应商的排序后模型并更新UI
 				const sortedModels = providerState.getSortedModelsByProvider(currentProvider.id);
 				console.log("Sorted models:", sortedModels);
 				modelsState = sortedModels;
@@ -117,13 +107,12 @@
 	}
 
 	function handleAddModel() {
-		// TODO: 实现添加模型逻辑
-		console.log("添加模型");
+		dialogMode = "add";
+		editingModel = undefined;
+		showModelDialog = true;
 	}
-
-	// 根据API类型生成完整的聊天请求URL
 	function getChatEndpointUrl(baseUrl: string, apiType: string): string {
-		const cleanBaseUrl = baseUrl.replace(/\/$/, ""); // 移除尾部斜杠
+		const cleanBaseUrl = baseUrl.replace(/\/$/, "");
 
 		switch (apiType.toLowerCase()) {
 			case "openai":
@@ -138,7 +127,6 @@
 			case "google":
 				return `${cleanBaseUrl}/v1beta/generateContent`;
 			default:
-				// 默认使用OpenAI兼容格式
 				if (cleanBaseUrl.endsWith("/v1")) {
 					return `${cleanBaseUrl}/chat/completions`;
 				}
@@ -147,14 +135,14 @@
 	}
 
 	function handleModelEdit(model: Model) {
-		// 可以打开编辑模态框或跳转到编辑页面
-		console.log("编辑模型", model);
+		dialogMode = "edit";
+		editingModel = model;
+		showModelDialog = true;
 	}
 
 	function handleModelDelete(model: Model) {
 		const success = providerState.removeModel(model.id);
 		if (success) {
-			// 更新UI中的模型列表
 			modelsState = modelsState.filter((m) => m.id !== model.id);
 		}
 	}
@@ -162,11 +150,65 @@
 	let modelsState = $state<Model[]>([]);
 	let isLoadingModels = $state(false);
 	let searchQuery = $state("");
+	let showModelDialog = $state(false);
+	let dialogMode = $state<"add" | "edit">("add");
+	let editingModel = $state<Model | undefined>(undefined);
+
+	function handleDialogClose() {
+		showModelDialog = false;
+		editingModel = undefined;
+	}
+
+	function handleDialogSave(data: Model | ModelCreateInput) {
+		if (!currentProvider) return;
+
+		try {
+			if (dialogMode === "add") {
+				const newModel = providerState.addModel({
+					id: data.id,
+					name: data.name,
+					remark: data.remark,
+					providerId: currentProvider.id,
+					capabilities: data.capabilities,
+					type: data.type,
+					custom: true,
+					enabled: data.enabled,
+					collected: false,
+				});
+
+				modelsState = [...modelsState, newModel];
+
+				toast.success(m.text_model_add_success({ name: newModel.name }));
+			} else if (editingModel) {
+				const success = providerState.updateModel(editingModel.id, {
+					id: data.id,
+					name: data.name,
+					remark: data.remark,
+					type: data.type,
+					enabled: data.enabled,
+					capabilities: data.capabilities,
+				});
+
+				if (success) {
+					const index = modelsState.findIndex((m) => m.id === editingModel!.id);
+					if (index !== -1) {
+						modelsState[index] = { ...modelsState[index], ...data };
+					}
+
+					toast.success(m.text_model_update_success({ name: data.name }));
+				} else {
+					toast.error(m.text_model_update_failed());
+				}
+			}
+		} catch (error) {
+			const message = error instanceof Error ? error.message : "An error occurred";
+			toast.error(message);
+		}
+	}
 
 	function handleModelToggleCollected(model: Model) {
 		const success = providerState.toggleModelCollected(model.id);
 		if (success) {
-			// 更新UI中的模型状态
 			const index = modelsState.findIndex((m) => m.id === model.id);
 			if (index !== -1) {
 				modelsState[index].collected = !modelsState[index].collected;
@@ -176,39 +218,34 @@
 
 	function handleModelDuplicate(model: Model) {
 		if (!currentProvider) return;
-
-		// 创建复制的模型
+		let newId = `${model.id}_copy`;
+		let counter = 1;
+		while (providerState.models.find((m) => m.id === newId)) {
+			newId = `${model.id}_copy_${counter}`;
+			counter++;
+		}
 		const duplicatedModel = providerState.addModel({
+			id: newId,
 			name: `${model.name} (Copy)`,
 			remark: model.remark ? `${model.remark} (Copy)` : "",
 			providerId: currentProvider.id,
 			capabilities: new Set(model.capabilities),
 			type: model.type,
-			custom: true, // 复制的模型标记为自定义
+			custom: true,
 			enabled: model.enabled,
-			collected: false, // 复制的模型默认不收藏
+			collected: false,
 		});
-
-		// 更新UI中的模型列表
 		modelsState = [...modelsState, duplicatedModel];
 	}
 
 	function handleClearModels() {
 		if (!currentProvider) return;
-
-		// 清空该供应商的所有模型
 		const clearedCount = providerState.clearModelsByProvider(currentProvider.id);
-
-		// 更新UI中的模型列表
 		modelsState = [];
-
-		// 显示成功提示
 		if (clearedCount > 0) {
 			toast.success(m.text_clear_models_success({ count: clearedCount.toString() }));
 		}
 	}
-
-	// 保存表单数据到状态管理
 	function saveFormData() {
 		if (formData.id) {
 			providerState.updateProvider(formData.id, {
@@ -224,17 +261,13 @@
 			});
 		}
 	}
-
-	// 监听表单变化并自动保存
 	let saveTimeout: NodeJS.Timeout;
 	function handleInputChange() {
 		clearTimeout(saveTimeout);
 		saveTimeout = setTimeout(() => {
 			saveFormData();
-		}, 500); // 防抖保存，500ms后保存
+		}, 500);
 	}
-
-	// 根据搜索查询过滤模型
 	let filteredModels = $derived(
 		modelsState.filter(
 			(model) =>
@@ -392,3 +425,13 @@
 		</div>
 	</div>
 </div>
+
+<!-- Model Dialog -->
+<ModelDialog
+	bind:open={showModelDialog}
+	mode={dialogMode}
+	model={editingModel}
+	providerId={currentProvider?.id || ""}
+	onClose={handleDialogClose}
+	onSave={handleDialogSave}
+/>

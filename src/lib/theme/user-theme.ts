@@ -38,11 +38,11 @@ export function applyRawUserCss(raw: string): void {
 		.split(/\r?\n/)
 		.map((l) => l.trim())
 		.filter(Boolean)
-		// keep only --ui-* declarations
+
 		.filter((l) => l.startsWith("--ui-"))
-		// strip trailing braces and unsafe characters
+
 		.map((l) => l.replace(/[{}]/g, ""))
-		// ensure trailing semicolon
+
 		.map((l) => (l.endsWith(";") ? l : l + ";"));
 
 	const css = lines.length ? `:root {\n  ${lines.join("\n  ")}\n}` : "";

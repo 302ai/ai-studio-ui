@@ -54,7 +54,6 @@ function main() {
 	let filesToProcess = [];
 
 	if (args.length === 0) {
-		// Process all JSON files in messages directory
 		const messagesDir = path.join(process.cwd(), "messages");
 		try {
 			const files = fs.readdirSync(messagesDir);
@@ -66,7 +65,6 @@ function main() {
 			process.exit(1);
 		}
 	} else {
-		// Process specified files
 		filesToProcess = args.map((file) => path.resolve(file));
 	}
 

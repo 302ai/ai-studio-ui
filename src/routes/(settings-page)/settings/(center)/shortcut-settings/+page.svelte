@@ -69,8 +69,6 @@
 			options: SHORTCUT_OPTIONS[shortcut.action],
 			hint: shortcutHints[shortcut.action as ShortcutActionWithoutSendMessage],
 		}));
-
-		// Group tab switching shortcuts
 		const tabSwitchActions = [
 			"switchToTab1",
 			"switchToTab2",
@@ -90,12 +88,10 @@
 		const otherSettings = allSettings.filter(
 			(setting) => !tabSwitchActions.includes(setting.action),
 		);
-
-		// Create grouped tab switching display
 		if (tabSwitchSettings.length > 0) {
 			const groupedTabSwitch: ShortcutSetting = {
 				id: "tab-switching-group",
-				action: "switchToTab1", // 使用第一个作为引用
+				action: "switchToTab1",
 				keys: [],
 				scope: "app",
 				mode: "display",
@@ -191,8 +187,7 @@
 			{/if}
 			{#if shortcut.hint}
 				<p class="mt-1 text-left text-xs text-settings-shortcut-hint">
-					{// @ts-expect-error - dynamic message key access
-					m[shortcut.hint]()}
+					{(m as unknown as Record<string, () => string>)[shortcut.hint]()}
 				</p>
 			{/if}
 		</div>
