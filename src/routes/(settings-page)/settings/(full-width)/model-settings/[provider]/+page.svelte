@@ -234,7 +234,9 @@
 	<div class="mb-6 flex flex-shrink-0 flex-col gap-1">
 		<h2 class="max-w-full break-all whitespace-normal">
 			{m.text_provider_configure({
-				name: formData.name || (formData.custom ? m.provider_custom_name() : m.provider_unnamed()),
+				name:
+					formData.name ||
+					(formData.custom ? m.text_provider_custom_name() : m.text_provider_unnamed()),
 			})}
 		</h2>
 	</div>

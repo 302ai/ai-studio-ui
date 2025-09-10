@@ -46,7 +46,7 @@
 
 	function handleRemoveProvider(provider: ModelProvider) {
 		if (!provider.custom) {
-			toast.error(m.provider_remove_builtin_error());
+			toast.error(m.text_provider_remove_builtin_error());
 			return;
 		}
 
