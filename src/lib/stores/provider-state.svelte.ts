@@ -244,7 +244,7 @@ class ProviderState {
 
 				// 显示成功提示
 				toast.success(
-					m.provider_fetch_models_success({
+					m.text_fetch_models_success({
 						count: result.data.models.length.toString(),
 						provider: provider.name,
 					}),
@@ -255,8 +255,8 @@ class ProviderState {
 				this.updateProvider(provider.id, { status: "error" });
 
 				// 显示错误提示
-				toast.error(m.provider_fetch_models_error({ provider: provider.name }), {
-					description: result.error || m.provider_fetch_models_unknown_error(),
+				toast.error(m.text_fetch_models_error({ provider: provider.name }), {
+					description: result.error || m.text_fetch_models_unknown_error(),
 				});
 				return false;
 			}
@@ -267,9 +267,8 @@ class ProviderState {
 			this.updateProvider(provider.id, { status: "error" });
 
 			// 显示错误提示
-			toast.error(m.provider_fetch_models_error({ provider: provider.name }), {
-				description:
-					error instanceof Error ? error.message : m.provider_fetch_models_network_error(),
+			toast.error(m.text_fetch_models_error({ provider: provider.name }), {
+				description: error instanceof Error ? error.message : m.text_fetch_models_network_error(),
 			});
 			return false;
 		}

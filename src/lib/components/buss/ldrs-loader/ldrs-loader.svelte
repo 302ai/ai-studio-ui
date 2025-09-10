@@ -23,13 +23,16 @@
 	onMount(async () => {
 		await match(type)
 			.with("dot-pulse", async () => {
-				await import("ldrs/dotPulse");
+				const { dotPulse } = await import("ldrs");
+				dotPulse.register();
 			})
 			.with("line-spinner", async () => {
-				await import("ldrs/lineSpinner");
+				const { lineSpinner } = await import("ldrs");
+				lineSpinner.register();
 			})
 			.with("waveform", async () => {
-				await import("ldrs/waveform");
+				const { waveform } = await import("ldrs");
+				waveform.register();
 			})
 			.exhaustive();
 	});

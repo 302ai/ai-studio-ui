@@ -132,7 +132,7 @@
 <div
 	class={cn("flex h-tabbar w-full items-center border-b bg-tabbar-bg/50", className)}
 	role="tablist"
-	aria-label={m.tab_new() ?? "Tab bar"}
+	aria-label={m.label_button_new_tab() ?? "Tab bar"}
 >
 	<div
 		class="flex w-full min-w-0 items-center gap-tab-gap overflow-x-hidden px-tabbar-x"
@@ -199,7 +199,7 @@
 				style="cursor: none !important;"
 			/>
 			<ButtonWithTooltip
-				tooltip={m.tab_new()}
+				tooltip={m.label_button_new_tab()}
 				tooltipSide="bottom"
 				variant="ghost"
 				size="icon"

@@ -98,7 +98,7 @@
 			{/if}
 			{#if tab.closable !== false}
 				<ButtonWithTooltip
-					tooltip={isCompact ? tab.title : m.tab_context_close()}
+					tooltip={isCompact ? tab.title : m.label_button_close()}
 					tooltipSide="bottom"
 					variant="ghost"
 					size="icon"
@@ -121,11 +121,11 @@
 	<ContextMenu.Content class="w-48">
 		<ContextMenu.Item onclick={() => onTabClose(tab)}>
 			<X class="mr-2 h-4 w-4" />
-			{m.tab_context_close()}
+			{m.label_button_close()}
 		</ContextMenu.Item>
 		<ContextMenu.Item onclick={() => onTabCloseAll()}>
 			<XCircle class="mr-2 h-4 w-4" />
-			{m.tab_context_close_all()}
+			{m.label_button_close_all()}
 		</ContextMenu.Item>
 	</ContextMenu.Content>
 </ContextMenu.Root>

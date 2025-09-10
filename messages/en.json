@@ -14,8 +14,13 @@
 	"common_copy": "Copy",
 	"common_custom": "Custom",
 	"common_duplicate": "Duplicate",
-	"default": "Default",
 	"hello_world": "Hello, {name} from en!",
+	"label_button_close": "Close",
+	"label_button_close_all": "Close All",
+	"label_button_default": "Default",
+	"label_button_new_tab": "New tab",
+	"label_button_ultra_wide": "Ultra Wide",
+	"label_button_wide": "Wide",
 	"language": "Language",
 	"layout": "Layout",
 	"placeholder_input_chat": "Enter your message here. Enter to send, Shift + Enter to line break",
@@ -130,9 +135,6 @@
 	"settings_titleGenerationTiming": "Generate Conversation Title",
 	"sidebar_close": "Close Sidebar",
 	"sidebar_open": "Open Sidebar",
-	"tab_context_close": "Close",
-	"tab_context_close_all": "Close All",
-	"tab_new": "New tab",
 	"text_alert_chat_error": "Reply failed!",
 	"text_alert_chat_error_description": "The AI ​​response failed, please try again...",
 	"text_base_url_request_info": "Interface will request to: {url}",
@@ -248,6 +250,5 @@
 	"toast_no_model": "No model selected",
 	"toast_unknown_error": "An unknown error occurred",
 	"version_information": "Version",
-	"version_update": "Version update",
-	"wide": "Wide"
+	"version_update": "Version update"
 }

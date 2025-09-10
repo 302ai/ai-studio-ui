@@ -7,17 +7,17 @@
 	const layouts = [
 		{
 			key: "default",
-			label: m.default(),
+			label: m.label_button_default(),
 			value: "default",
 		},
 		{
 			key: "wide",
-			label: m.wide(),
+			label: m.label_button_wide(),
 			value: "wide",
 		},
 		{
 			key: "ultraWide",
-			label: m.ultra_wide(),
+			label: m.label_button_ultra_wide(),
 			value: "ultra-wide",
 		},
 	];

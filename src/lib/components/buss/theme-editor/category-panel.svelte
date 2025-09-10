@@ -12,7 +12,7 @@
 	import ColorEditor from "./color-editor.svelte";
 	import NumericEditor from "./numeric-editor.svelte";
 	import { Badge } from "@/components/ui/badge";
-	import { Palette, Ruler, Move, Circle, BarChart3, Type, Settings } from "@lucide/svelte";
+	import { Palette, Ruler, Move, Circle, Grid3X3, Type, Settings } from "@lucide/svelte";
 	import { m } from "$lib/paraglide/messages.js";
 
 	let { category, onVariableChange }: Props = $props();
@@ -38,7 +38,7 @@
 			case "radius":
 				return Circle;
 			case "density":
-				return BarChart3;
+				return Grid3X3;
 			case "text":
 				return Type;
 			default:

@@ -112,7 +112,7 @@
 {/snippet}
 
 <ModeWatcher />
-<Toaster position="top-center" />
+<Toaster position="top-center" richColors />
 
 <div class="flex h-screen flex-col">
 	<TabBar
