@@ -224,5 +224,9 @@
 	"settings_newSessionModelPlaceholder": "选择新会话模型",
 	"chat_emptyMessage": "消息内容为空",
 	"chat_noModel": "模型未配置",
-	"chat_unknownError": "发生未知错误"
+	"chat_unknownError": "发生未知错误",
+	"provider_fetch_models_success": "成功从 {provider} 获取了 {count} 个模型",
+	"provider_fetch_models_error": "从 {provider} 获取模型失败",
+	"provider_fetch_models_unknown_error": "发生未知错误",
+	"provider_fetch_models_network_error": "网络或API错误"
 }

@@ -223,5 +223,9 @@
 	"settings_newSessionModelPlaceholder": "Select a new session model",
 	"chat_emptyMessage": "Message content is empty",
 	"chat_noModel": "No model selected",
-	"chat_unknownError": "An unknown error occurred"
+	"chat_unknownError": "An unknown error occurred",
+	"provider_fetch_models_success": "Successfully fetched {count} models from {provider}",
+	"provider_fetch_models_error": "Failed to fetch models from {provider}",
+	"provider_fetch_models_unknown_error": "Unknown error occurred",
+	"provider_fetch_models_network_error": "Network or API error"
 }

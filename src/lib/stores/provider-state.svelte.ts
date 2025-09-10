@@ -3,6 +3,8 @@ import type { ModelProvider } from "$lib/types/provider.js";
 import type { Model, ModelCreateInput, ModelUpdateInput } from "$lib/types/model.js";
 import { nanoid } from "nanoid";
 import { getModelsByProvider, getAllModels } from "$lib/api/models.js";
+import { toast } from "svelte-sonner";
+import { m } from "$lib/paraglide/messages.js";
 
 class ProviderState {
 	providers = $state<ModelProvider[]>([]);
@@ -229,17 +231,45 @@ class ProviderState {
 		try {
 			const result = await getModelsByProvider(provider);
 			if (result.success && result.data) {
+				// 更新供应商状态为已连接
+				this.updateProvider(provider.id, { status: "connected" });
+
 				// 移除该供应商的旧模型
 				this.removeModelsByProvider(provider.id);
 
 				// 添加新获取的模型（API已经返回完整的Model对象）
 				this.models = [...this.models, ...result.data.models];
 				this.saveToStorage();
+
+				// 显示成功提示
+				toast.success(
+					m.provider_fetch_models_success({
+						count: result.data.models.length.toString(),
+						provider: provider.name,
+					}),
+				);
 				return true;
+			} else {
+				// 更新供应商状态为错误
+				this.updateProvider(provider.id, { status: "error" });
+
+				// 显示错误提示
+				toast.error(m.provider_fetch_models_error({ provider: provider.name }), {
+					description: result.error || m.provider_fetch_models_unknown_error(),
+				});
+				return false;
 			}
-			return false;
 		} catch (error) {
 			console.error(`Failed to fetch models for provider ${provider.id}:`, error);
+
+			// 更新供应商状态为错误
+			this.updateProvider(provider.id, { status: "error" });
+
+			// 显示错误提示
+			toast.error(m.provider_fetch_models_error({ provider: provider.name }), {
+				description:
+					error instanceof Error ? error.message : m.provider_fetch_models_network_error(),
+			});
 			return false;
 		}
 	}
