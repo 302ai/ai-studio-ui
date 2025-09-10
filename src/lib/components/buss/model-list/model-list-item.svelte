@@ -94,7 +94,7 @@
 	const handleCopyModelName = async () => {
 		try {
 			await navigator.clipboard.writeText(model.remark || model.name);
-			toast.success(m.model_context_copy_name());
+			toast.success(m.text_context_copy_name());
 		} catch {
 			toast.error(m.model_copy_name_failed());
 		}
@@ -103,7 +103,7 @@
 	const handleCopyModelId = async () => {
 		try {
 			await navigator.clipboard.writeText(model.id);
-			toast.success(m.model_context_copy_id());
+			toast.success(m.text_context_copy_id());
 		} catch {
 			toast.error(m.model_copy_id_failed());
 		}
@@ -207,11 +207,11 @@
 	<ContextMenu.Content class="w-48">
 		<ContextMenu.Item onclick={handleCopyModelName}>
 			<Copy class="mr-2 h-4 w-4" />
-			{m.model_context_copy_name()}
+			{m.text_context_copy_name()}
 		</ContextMenu.Item>
 		<ContextMenu.Item onclick={handleCopyModelId}>
 			<Copy class="mr-2 h-4 w-4" />
-			{m.model_context_copy_id()}
+			{m.text_context_copy_id()}
 		</ContextMenu.Item>
 		<ContextMenu.Separator />
 		<ContextMenu.Item onclick={() => onToggleCollected?.()}>
@@ -226,7 +226,7 @@
 		{#if onDuplicate}
 			<ContextMenu.Item onclick={handleDuplicate}>
 				<Files class="mr-2 h-4 w-4" />
-				{m.model_context_duplicate()}
+				{m.text_context_duplicate()}
 			</ContextMenu.Item>
 		{/if}
 		<ContextMenu.Separator />

@@ -12,14 +12,14 @@
 </script>
 
 <div class="flex items-center justify-between">
-	<div>{m.model_settings_title()}</div>
+	<div>{m.text_model_settings_title()}</div>
 
 	<ButtonWithTooltip
-		tooltip={m.model_settings_add_tooltip()}
+		tooltip={m.title_button_add_provider()}
 		class="h-[30px] w-[76px] shrink-0"
 		variant="default"
 		onclick={onClick}
 	>
-		{m.model_settings_add()}
+		{m.text_button_add_provider()}
 	</ButtonWithTooltip>
 </div>
