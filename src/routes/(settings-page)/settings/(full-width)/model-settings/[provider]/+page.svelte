@@ -223,7 +223,7 @@
 							bind:value={formData.name}
 							placeholder={m.provider_name_placeholder()}
 							oninput={handleInputChange}
-							class="h-11 rounded-[10px]"
+							class="h-11 rounded-settings-item bg-settings-item-bg hover:ring-1 hover:ring-ring"
 						/>
 					</div>
 				</div>
@@ -237,6 +237,7 @@
 					bind:value={formData.baseUrl}
 					placeholder={formData.custom ? m.provider_baseurl_placeholder() : ""}
 					oninput={handleInputChange}
+					class="rounded-settings-item bg-settings-item-bg hover:ring-1 hover:ring-ring"
 				/>
 				{#if formData.baseUrl}
 					<p class="text-xs text-muted-foreground">
@@ -256,7 +257,7 @@
 						type={showApiKey ? "text" : "password"}
 						bind:value={formData.apiKey}
 						placeholder={m.provider_apikey_placeholder()}
-						class="pr-10"
+						class="rounded-settings-item bg-settings-item-bg pr-10 hover:ring-1 hover:ring-ring"
 						oninput={handleInputChange}
 					/>
 					<Button
