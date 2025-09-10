@@ -16,7 +16,9 @@
 
 	{@const sidebarState = useSidebar()}
 	<Sidebar.Inset class="relative flex-1">
-		<div class="absolute flex h-12 w-full flex-row items-center justify-between bg-background px-2">
+		<div
+			class="absolute z-50 flex h-12 w-full flex-row items-center justify-between bg-transparent px-2"
+		>
 			<ButtonWithTooltip
 				tooltip={sidebarState.state === "expanded" ? m.sidebar_close() : m.sidebar_open()}
 				tooltipSide="bottom"
@@ -50,7 +52,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="flex-1 overflow-auto p-6">
+		<div class="flex-1 overflow-auto p-8">
 			{@render children()}
 		</div>
 	</Sidebar.Inset>

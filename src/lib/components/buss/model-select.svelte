@@ -15,6 +15,7 @@
 <script lang="ts">
 	import { Button } from "@/components/ui/button";
 	import * as Command from "@/components/ui/command";
+	import * as ScrollArea from "@/components/ui/scroll-area";
 	import { mockModels } from "@/datas/models";
 	import { m } from "@/paraglide/messages";
 	import { type Model } from "@/stores/chat-state.svelte";
@@ -136,55 +137,59 @@
 	<Button {...triggerProps}>{m.modelSelect_trigger()}</Button>
 {/if}
 
-<Command.Dialog bind:open={isOpen}>
-	<Command.Input bind:value={searchValue} placeholder={m.modelSelect_placeholder()} />
-	<Command.List bind:ref={listRef} onmouseleave={handleListMouseLeave}>
-		{#each Object.entries(groupedModels()) as [provider, models] (provider)}
-			<div class="px-2 py-1">
-				<button
-					class="flex w-full items-center justify-between rounded-sm px-2 py-2 text-sm text-muted-foreground"
-					onclick={() => toggleProvider(provider)}
-					disabled={searchValue.length > 0}
-				>
-					{provider}
-					{#if !searchValue}
-						<ChevronRight
-							class={cn(
-								"h-4 w-4 transition-transform duration-200",
-								collapsedProviders[provider] ? "" : "rotate-90",
-							)}
-						/>
-					{/if}
-				</button>
-				{#if !collapsedProviders[provider] || searchValue}
-					{#each models as model (model.id)}
-						<Command.Item
-							onSelect={() => handleModelSelect(model)}
-							value={model.name}
-							data-model-id={model.id}
-							class={cn(
-								"my-1",
-								selectedModel?.id === model.id ? "!bg-accent !text-accent-foreground" : "",
-								selectedModel?.id !== model.id && hoveredItemId !== model.id
-									? "aria-selected:bg-transparent aria-selected:text-foreground"
-									: "",
-							)}
-							onmouseenter={() => handleItemMouseEnter(model.id)}
-							onmouseleave={handleItemMouseLeave}
-						>
-							<div class="flex w-full flex-row items-center justify-between pl-2">
-								<div class="flex flex-row gap-2">
-									{model.name}
-									<span class="text-sm text-muted-foreground">{model.type}</span>
+<Command.Dialog bind:open={isOpen} class="w-[638px]">
+	<div class="[&_[data-slot=command-input-wrapper]]:!h-12">
+		<Command.Input bind:value={searchValue} placeholder={m.modelSelect_placeholder()} />
+	</div>
+	<ScrollArea.Root class="max-h-[424px]">
+		<Command.List bind:ref={listRef} onmouseleave={handleListMouseLeave} class="max-h-full">
+			{#each Object.entries(groupedModels()) as [provider, models] (provider)}
+				<div class="px-2 py-1">
+					<button
+						class="flex w-full items-center justify-between rounded-sm px-2 py-2 text-sm text-muted-foreground"
+						onclick={() => toggleProvider(provider)}
+						disabled={searchValue.length > 0}
+					>
+						{provider}
+						{#if !searchValue}
+							<ChevronRight
+								class={cn(
+									"h-4 w-4 transition-transform duration-200",
+									collapsedProviders[provider] ? "" : "rotate-90",
+								)}
+							/>
+						{/if}
+					</button>
+					{#if !collapsedProviders[provider] || searchValue}
+						{#each models as model (model.id)}
+							<Command.Item
+								onSelect={() => handleModelSelect(model)}
+								value={model.name}
+								data-model-id={model.id}
+								class={cn(
+									"my-1 h-12",
+									selectedModel?.id === model.id ? "!bg-accent !text-accent-foreground" : "",
+									selectedModel?.id !== model.id && hoveredItemId !== model.id
+										? "aria-selected:bg-transparent aria-selected:text-foreground"
+										: "",
+								)}
+								onmouseenter={() => handleItemMouseEnter(model.id)}
+								onmouseleave={handleItemMouseLeave}
+							>
+								<div class="flex w-full flex-row items-center justify-between pl-2">
+									<div class="flex flex-row gap-2">
+										{model.name}
+										<span class="text-sm text-muted-foreground">{model.type}</span>
+									</div>
+									{#if selectedModel?.id === model.id}
+										<Check class="h-4 w-4" />
+									{/if}
 								</div>
-								{#if selectedModel?.id === model.id}
-									<Check class="h-4 w-4" />
-								{/if}
-							</div>
-						</Command.Item>
-					{/each}
-				{/if}
-			</div>
-		{/each}
-	</Command.List>
+							</Command.Item>
+						{/each}
+					{/if}
+				</div>
+			{/each}
+		</Command.List>
+	</ScrollArea.Root>
 </Command.Dialog>

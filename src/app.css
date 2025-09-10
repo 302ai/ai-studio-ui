@@ -177,7 +177,11 @@
 		/* Fallback for Tailwind v4 text sizing line-height var if needed */
 		--tw-leading: 1.5;
 	}
+	[data-slot="dialog-content"] {
+		max-width: fit-content !important;
+	}
 }
 
 /* Design System tokens for new buss components */
 @import "./lib/theme/ds.css";
+@import "./lib/theme/animation.css";
