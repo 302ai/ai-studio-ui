@@ -56,7 +56,7 @@
 		const removedModelCount = providerState.removeModelsByProvider(provider.id);
 
 		toast.success(
-			`${m.provider_context_remove()}: ${provider.name}${removedModelCount > 0 ? ` (${removedModelCount} models removed)` : ""}`,
+			`${m.text_context_remove_provider()}: ${provider.name}${removedModelCount > 0 ? ` (${removedModelCount} models removed)` : ""}`,
 		);
 
 		// 如果删除的是当前活跃的供应商，跳转到第一个可用供应商
