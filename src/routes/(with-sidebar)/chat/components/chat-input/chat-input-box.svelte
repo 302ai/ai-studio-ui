@@ -23,10 +23,10 @@
 			noModel: chatState.selectedModel === null,
 		})
 			.with({ isEmpty: true }, () => {
-				toast.warning(m.text_toast_empty_message());
+				toast.warning(m.toast_empty_message());
 			})
 			.with({ noModel: true }, () => {
-				toast.warning(m.text_toast_no_model(), {
+				toast.warning(m.toast_no_model(), {
 					action: {
 						label: m.text_button_select_model(),
 						onClick: () => openModelSelect?.(),
