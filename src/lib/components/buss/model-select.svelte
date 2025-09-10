@@ -45,10 +45,10 @@
 			)
 				return;
 
-			if (!groups[model.provider]) {
-				groups[model.provider] = [];
+			if (!groups[model.provider.name]) {
+				groups[model.provider.name] = [];
 			}
-			groups[model.provider].push(model);
+			groups[model.provider.name].push(model);
 		});
 
 		Object.keys(groups).forEach((key) => {

@@ -1,19 +1,18 @@
 <script lang="ts" module>
-	export interface Message {
-		id: string;
-		content: string;
-		timestamp: Date;
-		isTyping?: boolean;
-		model?: string;
-	}
+	import type { ChatMessage } from "@/stores/chat-state.svelte";
+
+	export type AssistantMessage = ChatMessage & {
+		role: "assistant";
+		isTyping: boolean;
+	};
 
 	interface Props {
-		message: Message;
+		message: AssistantMessage;
 	}
 </script>
 
 <script lang="ts">
-	import { Bot, Copy, Check } from "@lucide/svelte";
+	import { Bot, Check, Copy } from "@lucide/svelte";
 
 	let { message }: Props = $props();
 	let copied = $state(false);
@@ -74,9 +73,9 @@
 			</div>
 			<div class="mt-1 flex items-center gap-2">
 				<span class="text-xs text-gray-500">{formatTime(message.timestamp)}</span>
-				{#if message.model}
-					<span class="text-xs text-gray-400">" {message.model}</span>
-				{/if}
+				<span class="text-xs text-gray-400"
+					>· {message.model.provider.name} {message.model.name}</span
+				>
 			</div>
 		</div>
 	</div>

@@ -10,6 +10,8 @@
 	import { cn } from "@/utils";
 	import mcpIcon from "@lobehub/icons-static-svg/icons/mcp.svg";
 	import { Globe, Lightbulb, Settings2 } from "@lucide/svelte";
+	import { toast } from "svelte-sonner";
+	import { match } from "ts-pattern";
 	import { AttachmentThumbnailBar, AttachmentUploader } from "../attachment";
 
 	interface Props {
@@ -19,9 +21,7 @@
 	let { onSendMessage = chatState.sendMessage }: Props = $props();
 
 	let actionDisabled = $derived(chatState.providerType !== "302ai");
-	let sendMessageDisabled = $derived(
-		chatState.attachments.length === 0 && chatState.inputValue.trim() === "",
-	);
+	let openModelSelect = $state<() => void>();
 </script>
 
 <div class="w-full max-w-chat-max-w" data-layoutid="chat-input-container">
@@ -42,6 +42,34 @@
 			)}
 			bind:value={chatState.inputValue}
 			placeholder={m.chat_placeholder()}
+			onkeydown={(e) => {
+				if (e.key === "Enter" && !e.shiftKey) {
+					if (chatState.sendMessageEnabled) {
+						onSendMessage();
+					} else {
+						match({
+							isEmpty: chatState.inputValue.trim() === "" && chatState.attachments.length === 0,
+							noModel: chatState.selectedModel === null,
+						})
+							.with({ isEmpty: true }, () => {
+								toast.warning(m.chat_emptyMessage());
+							})
+							.with({ noModel: true }, () => {
+								toast.warning(m.chat_noModel(), {
+									action: {
+										label: m.chat_selectModel(),
+										onClick: () => openModelSelect?.(),
+									},
+								});
+							})
+							.otherwise(() => {
+								toast.error(m.chat_unknownError());
+							});
+					}
+
+					e.preventDefault();
+				}
+			}}
 		/>
 
 		<div class="mt-1.5 flex flex-row justify-between">
@@ -96,6 +124,7 @@
 					onModelSelect={(model) => chatState.handleSelectedModelChange(model)}
 				>
 					{#snippet trigger({ onclick })}
+						{((openModelSelect = onclick), "")}
 						<Button variant="ghost" class="text-xs hover:!bg-chat-action-hover" {onclick}>
 							{chatState.selectedModel?.name ?? m.chat_selectModel()}
 						</Button>
@@ -113,7 +142,7 @@
 						"disabled:cursor-not-allowed disabled:bg-chat-send-message-button/50 disabled:hover:!bg-chat-send-message-button/50",
 					)}
 					onclick={onSendMessage}
-					disabled={sendMessageDisabled}
+					disabled={!chatState.sendMessageEnabled}
 				>
 					<img src={sendMessageIcon} alt="plane" class="size-5" />
 				</button>

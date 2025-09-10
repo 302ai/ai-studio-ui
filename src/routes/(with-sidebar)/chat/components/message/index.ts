@@ -7,6 +7,7 @@ export { UserMessage, AssistantMessage, MessageList, MessageAttachment };
 
 // Export types
 export type { Message as UserMessageData } from "./user-message.svelte";
-export type { Message as AssistantMessageData } from "./assistant-message.svelte";
-export type { ChatMessage } from "./message-list.svelte";
+export type { AssistantMessage as AssistantMessageData } from "./assistant-message.svelte";
+import type { ChatMessage } from "@/stores/chat-state.svelte";
+export type { ChatMessage };
 export type { MessageAttachment as MessageAttachmentData } from "./message-attachment.svelte";

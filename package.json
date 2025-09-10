@@ -58,7 +58,8 @@
 		"mode-watcher": "^1.1.0",
 		"nanoid": "^5.1.5",
 		"svelte-dnd-action": "^0.9.64",
-		"svelte-image-viewer": "^5.0.0"
+		"svelte-image-viewer": "^5.0.0",
+		"ts-pattern": "^5.8.0"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [

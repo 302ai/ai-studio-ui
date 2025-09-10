@@ -220,5 +220,8 @@
 	"provider_baseurl_request_to": "Interface will request to: {url}",
 	"common_custom": "Custom",
 	"settings_newSessionModel": "New Session Model",
-	"settings_newSessionModelPlaceholder": "Select a new session model"
+	"settings_newSessionModelPlaceholder": "Select a new session model",
+	"chat_emptyMessage": "Message content is empty",
+	"chat_noModel": "No model selected",
+	"chat_unknownError": "An unknown error occurred"
 }

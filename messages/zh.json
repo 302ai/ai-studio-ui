@@ -221,5 +221,8 @@
 	"provider_baseurl_request_to": "接口将会请求至：{url}",
 	"common_custom": "自定义",
 	"settings_newSessionModel": "新会话模型",
-	"settings_newSessionModelPlaceholder": "选择新会话模型"
+	"settings_newSessionModelPlaceholder": "选择新会话模型",
+	"chat_emptyMessage": "消息内容为空",
+	"chat_noModel": "模型未配置",
+	"chat_unknownError": "发生未知错误"
 }

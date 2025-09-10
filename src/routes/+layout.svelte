@@ -7,6 +7,7 @@
 	import { goto } from "$app/navigation";
 	import { Home, Layout, Settings, MessageCircle, Ghost } from "@lucide/svelte";
 	import { chatState } from "@/stores/chat-state.svelte";
+	import { Toaster } from "@/components/ui/sonner";
 
 	let { children } = $props();
 
@@ -111,6 +112,7 @@
 {/snippet}
 
 <ModeWatcher />
+<Toaster />
 
 <div class="flex h-screen flex-col">
 	<TabBar

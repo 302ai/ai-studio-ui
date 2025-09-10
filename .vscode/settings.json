@@ -17,5 +17,6 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"i18n-ally.localesPaths": ["messages", "src/lib/paraglide/messages"],
-	"i18n-ally.sourceLanguage": "zh"
+	"i18n-ally.sourceLanguage": "zh",
+	"i18n-ally.keystyle": "nested"
 }
