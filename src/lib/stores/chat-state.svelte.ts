@@ -1,39 +1,8 @@
+import type { AttachmentFile, ChatMessage, MCPServer, Model } from "@/types/chat";
 import { nanoid } from "nanoid";
 
-export interface MCPServer {
-	id: string;
-}
-
-export interface AttachmentFile {
-	id: string;
-	name: string;
-	type: string;
-	size: number;
-	file: File;
-	preview?: string;
-}
-
-export interface ChatMessage {
-	id: string;
-	role: "user" | "assistant";
-	content: string;
-	timestamp: Date;
-	isTyping?: boolean;
-	model: Model;
-	attachments?: AttachmentFile[];
-}
-
-export interface Provider {
-	id: string;
-	name: string;
-}
-
-export interface Model {
-	id: string;
-	provider: Provider;
-	name: string;
-	type: "llm" | "tts" | "text-embedding" | "rerank" | "speech-to-text";
-}
+// Re-export types for backward compatibility
+export type { AttachmentFile, ChatMessage, MCPServer, Model } from "@/types/chat";
 
 class ChatState {
 	inputValue = $state("");
@@ -60,6 +29,7 @@ class ChatState {
 				role: "user",
 				content: this.inputValue,
 				timestamp: new Date(),
+				status: "success",
 				attachments: this.attachments,
 				model: currentModel,
 			};
@@ -75,7 +45,7 @@ class ChatState {
 					role: "assistant",
 					content: "",
 					timestamp: new Date(),
-					isTyping: true,
+					status: "pending",
 					model: currentModel,
 				};
 
@@ -87,7 +57,7 @@ class ChatState {
 						role: "assistant",
 						content: `Current time: ${new Date().toLocaleString()}`,
 						timestamp: new Date(),
-						isTyping: false,
+						status: "success",
 						model: currentModel,
 					};
 

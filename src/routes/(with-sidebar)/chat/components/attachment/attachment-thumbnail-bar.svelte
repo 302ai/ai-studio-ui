@@ -1,102 +1,13 @@
 <script lang="ts">
 	import { ViewerPanel } from "$lib/components/buss/viewer/index.js";
-	import { chatState, type AttachmentFile } from "@/stores/chat-state.svelte";
+	import { formatFileSize, getFileIcon } from "$lib/components/buss/viewer/viewer-utils.js";
+	import { chatState } from "@/stores/chat-state.svelte";
+	import type { AttachmentFile } from "@/types/chat";
 	import { cn } from "@/utils";
-	import {
-		Eye,
-		File,
-		FileCode,
-		FileImage,
-		FileJson,
-		FileSpreadsheet,
-		FileText,
-		Headphones,
-		Trash2,
-		Video,
-	} from "@lucide/svelte";
+	import { Eye, Trash2 } from "@lucide/svelte";
 
 	let attachments = $derived(chatState.attachments);
 	let selectedAttachment = $state<AttachmentFile | null>(null);
-
-	function formatFileSize(bytes: number): string {
-		if (bytes < 1024) return `${bytes}B`;
-		if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)}KB`;
-		return `${(bytes / (1024 * 1024)).toFixed(1)}MB`;
-	}
-
-	function getFileIcon(attachment: AttachmentFile) {
-		const { type, name } = attachment;
-
-		// Image files
-		if (type.startsWith("image/")) {
-			return FileImage;
-		}
-
-		// Audio files
-		if (type.startsWith("audio/")) {
-			return Headphones;
-		}
-
-		// Video files
-		if (type.startsWith("video/")) {
-			return Video;
-		}
-
-		// JSON files
-		if (type.includes("json")) {
-			return FileJson;
-		}
-
-		// JavaScript/TypeScript files
-		if (
-			type.includes("javascript") ||
-			type.includes("typescript") ||
-			name.endsWith(".js") ||
-			name.endsWith(".ts") ||
-			name.endsWith(".tsx") ||
-			name.endsWith(".jsx") ||
-			name.endsWith(".py") ||
-			name.endsWith(".java") ||
-			name.endsWith(".cpp") ||
-			name.endsWith(".c") ||
-			name.endsWith(".css") ||
-			name.endsWith(".html") ||
-			name.endsWith(".json") ||
-			name.endsWith(".xml") ||
-			name.endsWith(".yml") ||
-			name.endsWith(".yaml")
-		) {
-			return FileCode;
-		}
-
-		// Excel/Spreadsheet files
-		if (
-			type.includes("excel") ||
-			type.includes("spreadsheet") ||
-			type.includes("csv") ||
-			name.endsWith(".xlsx") ||
-			name.endsWith(".xls") ||
-			name.endsWith(".csv")
-		) {
-			return FileSpreadsheet;
-		}
-
-		// Text files and others
-		if (
-			type.startsWith("text/") ||
-			type.includes("yaml") ||
-			type.includes("xml") ||
-			name.endsWith(".txt") ||
-			name.endsWith(".md") ||
-			name.endsWith(".yml") ||
-			name.endsWith(".yaml")
-		) {
-			return FileText;
-		}
-
-		// Default file icon
-		return File;
-	}
 
 	function handleRemove(id: string) {
 		chatState.removeAttachment(id);
@@ -112,7 +23,7 @@
 </script>
 
 {#if attachments.length > 0}
-	<div class="flex gap-2 p-2">
+	<div class="flex gap-2 pb-2">
 		{#each attachments as attachment (attachment.id)}
 			<div class="group relative overflow-hidden rounded-lg border border-border">
 				<button

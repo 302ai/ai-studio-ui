@@ -1,13 +1,13 @@
 <script lang="ts">
-	import "../app.css";
-	import favicon from "$lib/assets/favicon.svg";
-	import { ModeWatcher } from "mode-watcher";
-	import { TabBar, type Tab } from "@/components/buss/tab-bar";
-	import { page } from "$app/state";
 	import { goto } from "$app/navigation";
-	import { Home, Layout, Settings, MessageCircle, Ghost } from "@lucide/svelte";
-	import { chatState } from "@/stores/chat-state.svelte";
+	import { page } from "$app/state";
+	import favicon from "$lib/assets/favicon.svg";
+	import { TabBar, type Tab } from "@/components/buss/tab-bar";
 	import { Toaster } from "@/components/ui/sonner";
+	import { chatState } from "@/stores/chat-state.svelte";
+	import { Ghost, Home, Layout, MessageCircle, Settings } from "@lucide/svelte";
+	import { ModeWatcher } from "mode-watcher";
+	import "../app.css";
 
 	let { children } = $props();
 
@@ -112,7 +112,7 @@
 {/snippet}
 
 <ModeWatcher />
-<Toaster />
+<Toaster position="top-center" />
 
 <div class="flex h-screen flex-col">
 	<TabBar

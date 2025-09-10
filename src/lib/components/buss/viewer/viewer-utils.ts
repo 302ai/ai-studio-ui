@@ -1,4 +1,15 @@
 import type { AttachmentFile } from "@/stores/chat-state.svelte";
+import {
+	File,
+	FileCode,
+	FileImage,
+	FileSpreadsheet,
+	FileText,
+	Headphones,
+	Video,
+	type IconProps,
+} from "@lucide/svelte";
+import type { Component } from "svelte";
 
 export type ViewerType = "image" | "audio" | "video" | "code" | "document" | "text" | "unknown";
 
@@ -107,6 +118,42 @@ export function getViewerType(attachment: AttachmentFile): ViewerType {
 	}
 
 	return "unknown";
+}
+
+export function getFileIcon(attachment: AttachmentFile): Component<IconProps, object, ""> {
+	const viewerType = getViewerType(attachment);
+
+	const { type, name } = attachment;
+
+	switch (viewerType) {
+		case "image":
+			return FileImage;
+		case "audio":
+			return Headphones;
+		case "video":
+			return Video;
+		case "code":
+			return FileCode;
+		case "document": {
+			// For document types, distinguish between spreadsheets and other documents
+			if (
+				type.includes("excel") ||
+				type.includes("spreadsheet") ||
+				type.includes("csv") ||
+				name.endsWith(".xlsx") ||
+				name.endsWith(".xls") ||
+				name.endsWith(".csv")
+			) {
+				return FileSpreadsheet;
+			}
+			return FileText;
+		}
+		case "text":
+			return FileText;
+		case "unknown":
+		default:
+			return File;
+	}
 }
 
 export async function loadTextContent(attachment: AttachmentFile): Promise<string> {

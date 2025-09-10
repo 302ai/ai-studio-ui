@@ -113,6 +113,9 @@
 	--ui-chat-action-active: var(--ui-icon-btn-active);
 	--ui-chat-action-active-fg: var(--ui-icon-btn-active-fg);
 	--ui-chat-attachment-viewer: var(--popover);
+	--ui-chat-user-message-bg: var(--ui-accent);
+	--ui-chat-user-message-fg: var(--ui-accent-fg);
+	--ui-chat-assistant-message-fg: var(--ui-text);
 
 	/* Provider List — exposed minimal knobs */
 	--ui-provider-item-h: 3.5rem; /* h-14 */
@@ -254,6 +257,9 @@
 	--color-chat-action-active-fg: var(--ui-chat-action-active-fg);
 	--color-chat-send-message-button: var(--ui-chat-send-message-button);
 	--color-chat-attachment-viewer-bg: var(--ui-chat-attachment-viewer-bg);
+	--color-chat-user-message-bg: var(--ui-chat-user-message-bg);
+	--color-chat-user-message-fg: var(--ui-chat-user-message-fg);
+	--color-chat-assistant-message-fg: var(--ui-chat-assistant-message-fg);
 
 	/* Provider List bridge */
 	--spacing-provider-item: var(--ui-provider-item-h);

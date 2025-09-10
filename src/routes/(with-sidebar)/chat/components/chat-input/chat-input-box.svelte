@@ -14,14 +14,33 @@
 	import { match } from "ts-pattern";
 	import { AttachmentThumbnailBar, AttachmentUploader } from "../attachment";
 
-	interface Props {
-		onSendMessage?: () => void;
-	}
-
-	let { onSendMessage = chatState.sendMessage }: Props = $props();
-
 	let actionDisabled = $derived(chatState.providerType !== "302ai");
 	let openModelSelect = $state<() => void>();
+
+	function handleSendMessage() {
+		match({
+			isEmpty: chatState.inputValue.trim() === "" && chatState.attachments.length === 0,
+			noModel: chatState.selectedModel === null,
+		})
+			.with({ isEmpty: true }, () => {
+				toast.warning(m.chat_emptyMessage());
+			})
+			.with({ noModel: true }, () => {
+				toast.warning(m.chat_noModel(), {
+					action: {
+						label: m.chat_selectModel(),
+						onClick: () => openModelSelect?.(),
+					},
+				});
+			})
+			.otherwise(() => {
+				if (chatState.hasMessages) {
+					chatState.sendMessage();
+				} else {
+					document.startViewTransition(() => chatState.sendMessage());
+				}
+			});
+	}
 </script>
 
 <div class="w-full max-w-chat-max-w" data-layoutid="chat-input-container">
@@ -44,29 +63,7 @@
 			placeholder={m.chat_placeholder()}
 			onkeydown={(e) => {
 				if (e.key === "Enter" && !e.shiftKey) {
-					if (chatState.sendMessageEnabled) {
-						onSendMessage();
-					} else {
-						match({
-							isEmpty: chatState.inputValue.trim() === "" && chatState.attachments.length === 0,
-							noModel: chatState.selectedModel === null,
-						})
-							.with({ isEmpty: true }, () => {
-								toast.warning(m.chat_emptyMessage());
-							})
-							.with({ noModel: true }, () => {
-								toast.warning(m.chat_noModel(), {
-									action: {
-										label: m.chat_selectModel(),
-										onClick: () => openModelSelect?.(),
-									},
-								});
-							})
-							.otherwise(() => {
-								toast.error(m.chat_unknownError());
-							});
-					}
-
+					handleSendMessage();
 					e.preventDefault();
 				}
 			}}
@@ -141,8 +138,7 @@
 						"flex size-9 items-center justify-center rounded-[10px] bg-chat-send-message-button text-foreground hover:!bg-chat-send-message-button/80",
 						"disabled:cursor-not-allowed disabled:bg-chat-send-message-button/50 disabled:hover:!bg-chat-send-message-button/50",
 					)}
-					onclick={onSendMessage}
-					disabled={!chatState.sendMessageEnabled}
+					onclick={handleSendMessage}
 				>
 					<img src={sendMessageIcon} alt="plane" class="size-5" />
 				</button>

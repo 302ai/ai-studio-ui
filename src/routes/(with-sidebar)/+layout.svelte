@@ -52,7 +52,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="flex-1 overflow-auto p-8">
+		<div class="flex-1 overflow-auto py-6">
 			{@render children()}
 		</div>
 	</Sidebar.Inset>

@@ -1,4 +1,4 @@
-import type { Model, Provider } from "@/stores/chat-state.svelte";
+import type { Model, Provider } from "@/types/chat";
 import { nanoid } from "nanoid";
 
 // Provider definitions

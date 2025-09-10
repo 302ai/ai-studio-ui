@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { ChatMessage } from "@/stores/chat-state.svelte";
+	import { ScrollArea } from "@/components/ui/scroll-area";
+	import type { ChatMessage } from "@/types/chat";
 	import AssistantMessage from "./assistant-message.svelte";
 	import UserMessage from "./user-message.svelte";
 
@@ -10,18 +11,24 @@
 	let { messages }: Props = $props();
 </script>
 
-<div class="max-h-full flex-1 space-y-4 overflow-y-auto px-4 py-4">
-	{#each messages as message (message.id)}
-		{#if message.role === "user"}
-			<UserMessage {message} />
-		{:else if message.role === "assistant"}
-			<AssistantMessage
-				message={{
-					...message,
-					role: "assistant" as const,
-					isTyping: message.isTyping ?? false,
-				}}
-			/>
-		{/if}
-	{/each}
-</div>
+<ScrollArea class="h-full w-full">
+	<div class="flex w-full justify-center">
+		<div class="w-full max-w-[720px] space-y-4 py-8">
+			{#each messages as message (message.id)}
+				{#if message.role === "user"}
+					<UserMessage
+						message={{ ...message, role: "user" as const, attachments: message.attachments ?? [] }}
+					/>
+				{:else if message.role === "assistant"}
+					<AssistantMessage
+						message={{
+							...message,
+							role: "assistant" as const,
+							status: message.status,
+						}}
+					/>
+				{/if}
+			{/each}
+		</div>
+	</div>
+</ScrollArea>

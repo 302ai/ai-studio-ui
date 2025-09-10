@@ -1,34 +1,23 @@
 <script lang="ts" module>
-	export interface Message {
-		id: string;
-		content: string;
-		timestamp: Date;
-		attachments?: Array<{
-			id: string;
-			name: string;
-			type: string;
-			url?: string;
-		}>;
-	}
+	export type UserMessage = ChatMessage & {
+		role: "user";
+		attachments: AttachmentFile[];
+	};
 
 	interface Props {
-		message: Message;
+		message: UserMessage;
 	}
 </script>
 
 <script lang="ts">
-	import { User } from "@lucide/svelte";
-	import MessageAttachment from "./message-attachment.svelte";
 	import { ViewerPanel } from "$lib/components/buss/viewer/index.js";
+	import type { AttachmentFile, ChatMessage } from "@/types/chat";
+	import MessageAttachment from "./message-attachment.svelte";
 
 	let { message }: Props = $props();
-	let selectedAttachment = $state<NonNullable<Message["attachments"]>[0] | null>(null);
+	let selectedAttachment = $state<AttachmentFile | null>(null);
 
-	function formatTime(date: Date): string {
-		return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-	}
-
-	function openViewer(attachment: NonNullable<Message["attachments"]>[0]) {
+	function openViewer(attachment: AttachmentFile) {
 		selectedAttachment = attachment;
 	}
 
@@ -38,39 +27,24 @@
 </script>
 
 <div class="mb-4 flex justify-end">
-	<div class="flex max-w-[80%] items-start gap-3">
-		<div class="flex flex-col items-end">
-			<div class="max-w-full rounded-lg bg-blue-500 px-4 py-2 text-white">
-				{#if message.content}
-					<p class="text-sm whitespace-pre-wrap">{message.content}</p>
-				{/if}
-				{#if message.attachments && message.attachments.length > 0}
-					<div class="space-y-2">
-						{#each message.attachments as attachment (attachment.id)}
-							<MessageAttachment {attachment} onViewerOpen={openViewer} />
-						{/each}
-					</div>
-				{/if}
+	<div
+		class="flex max-w-[80%] rounded-lg bg-chat-user-message-bg px-4 py-2 text-chat-user-message-fg"
+	>
+		<p class="text-sm whitespace-pre-wrap">{message.content}</p>
+		{#if message.attachments.length > 0}
+			<div class="space-y-2">
+				{#each message.attachments as attachment (attachment.id)}
+					<MessageAttachment {attachment} {openViewer} />
+				{/each}
 			</div>
-			<span class="mt-1 text-xs text-gray-500">{formatTime(message.timestamp)}</span>
-		</div>
-		<div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
-			<User class="h-4 w-4 text-blue-600" />
-		</div>
+		{/if}
 	</div>
 </div>
 
 <!-- Viewer Panel Modal -->
 {#if selectedAttachment}
 	<ViewerPanel
-		attachment={{
-			id: selectedAttachment.id,
-			name: selectedAttachment.name,
-			type: selectedAttachment.type,
-			size: 0,
-			file: new File([], selectedAttachment.name),
-			preview: selectedAttachment.url,
-		}}
+		attachment={selectedAttachment}
 		isOpen={selectedAttachment !== null}
 		onClose={closeViewer}
 	/>
