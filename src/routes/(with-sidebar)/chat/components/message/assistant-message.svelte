@@ -11,7 +11,7 @@
 <script lang="ts">
 	import { ModelIcon } from "$lib/components/buss/model-icon/index.js";
 	import * as Alert from "$lib/components/ui/alert/index.js";
-	import LdrsLoader from "@/components/buss/ldrs-loader.svelte";
+	import { LdrsLoader } from "@/components/buss/ldrs-loader";
 	import { m } from "@/paraglide/messages";
 	import { getLocale } from "@/paraglide/runtime";
 	import type { ChatMessage } from "@/types/chat";

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Label } from "$lib/components/ui/label/index.js";
 	import { m } from "$lib/paraglide/messages.js";
-	import ModelSelect from "@/components/buss/model-select.svelte";
+	import { ModelSelect } from "@/components/buss/model-select";
 	import type { Model } from "@/stores/chat-state.svelte";
 	import { cn } from "@/utils";
 

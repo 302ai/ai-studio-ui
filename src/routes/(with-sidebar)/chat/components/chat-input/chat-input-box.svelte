@@ -1,8 +1,8 @@
 <script lang="ts">
 	import sendMessageIcon from "$lib/assets/send-message.svg";
 	import { m } from "$lib/paraglide/messages.js";
-	import ButtonWithTooltip from "@/components/buss/button-with-tooltip.svelte";
-	import ModelSelect from "@/components/buss/model-select.svelte";
+	import { ButtonWithTooltip } from "@/components/buss/button-with-tooltip";
+	import { ModelSelect } from "@/components/buss/model-select";
 	import { Button } from "@/components/ui/button";
 	import { Separator } from "@/components/ui/separator";
 	import { Textarea } from "@/components/ui/textarea";

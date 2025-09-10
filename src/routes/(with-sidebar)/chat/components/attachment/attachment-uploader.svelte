@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import { m } from "$lib/paraglide/messages.js";
-	import ButtonWithTooltip from "@/components/buss/button-with-tooltip.svelte";
+	import { ButtonWithTooltip } from "@/components/buss/button-with-tooltip";
 	import { chatState, type AttachmentFile } from "@/stores/chat-state.svelte";
 	import { Paperclip } from "@lucide/svelte";
 	import { nanoid } from "nanoid";

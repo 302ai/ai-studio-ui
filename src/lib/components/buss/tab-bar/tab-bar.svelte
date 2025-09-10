@@ -28,7 +28,7 @@
 	import { m } from "$lib/paraglide/messages.js";
 	import { cn } from "$lib/utils";
 	import { animateButtonBounce } from "$lib/utils/animation";
-	import ButtonWithTooltip from "@/components/buss/button-with-tooltip.svelte";
+	import { ButtonWithTooltip } from "@/components/buss/button-with-tooltip";
 	import { Plus } from "@lucide/svelte";
 	import { onDestroy } from "svelte";
 	import { dndzone, TRIGGERS } from "svelte-dnd-action";

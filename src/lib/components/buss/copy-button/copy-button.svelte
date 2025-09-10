@@ -10,7 +10,7 @@
 	import { cn } from "$lib/utils.js";
 	import { Check, Copy } from "@lucide/svelte";
 	import { toast } from "svelte-sonner";
-	import ButtonWithTooltip from "./button-with-tooltip.svelte";
+	import { ButtonWithTooltip } from "../button-with-tooltip";
 
 	let { content, position = "bottom" }: Props = $props();
 
@@ -41,7 +41,7 @@
 	onclick={handleCopy}
 	tooltipSide={position}
 >
-	{#each [{ Icon: Check, visible: isCopied }, { Icon: Copy, visible: !isCopied }] as { Icon, visible } (Icon.name)}
+	{#each [{ Icon: Check, visible: isCopied, key: "check" }, { Icon: Copy, visible: !isCopied, key: "copy" }] as { Icon, visible, key } (key)}
 		<Icon
 			class={cn(
 				"absolute inset-0 m-auto transition-all duration-200 ease-in-out",

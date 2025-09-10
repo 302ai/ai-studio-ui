@@ -5,8 +5,8 @@
 </script>
 
 <script lang="ts">
-	import ButtonWithTooltip from "@/components/buss/button-with-tooltip.svelte";
-	import CopyButton from "@/components/buss/copy-button.svelte";
+	import { ButtonWithTooltip } from "@/components/buss/button-with-tooltip";
+	import { CopyButton } from "@/components/buss/copy-button";
 	import { m } from "@/paraglide/messages";
 	import type { ChatMessage } from "@/types/chat";
 	import { RefreshCcw, SquarePen } from "@lucide/svelte";
