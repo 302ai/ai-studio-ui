@@ -160,6 +160,7 @@
 
 	let modelsState = $state<Model[]>([]);
 	let isLoadingModels = $state(false);
+	let searchQuery = $state("");
 
 	function handleModelToggleCollected(model: Model) {
 		const success = providerState.toggleModelCollected(model.id);
@@ -216,6 +217,16 @@
 			saveFormData();
 		}, 500); // 防抖保存，500ms后保存
 	}
+
+	// 根据搜索查询过滤模型
+	let filteredModels = $derived(
+		modelsState.filter(
+			(model) =>
+				searchQuery === "" ||
+				model.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				model.name.toLowerCase().includes(searchQuery.toLowerCase()),
+		),
+	);
 </script>
 
 <div class="flex flex-1 flex-col overflow-hidden p-6">
@@ -330,18 +341,24 @@
 			{/if}
 
 			<!-- 操作按钮 -->
-			<div class="flex gap-3 pt-4">
+			<div class="flex items-center gap-3 pt-4">
 				<Button variant="default" onclick={handleGetModels} disabled={isLoadingModels}>
 					{isLoadingModels ? m.provider_get_models_loading() : m.provider_get_models()}
 				</Button>
 				<Button variant="outline" onclick={handleAddModel}>{m.provider_add_model()}</Button>
+				<div class="flex-1"></div>
+				<Input
+					bind:value={searchQuery}
+					placeholder={m.model_select_placeholder()}
+					class="w-64 rounded-settings-item bg-settings-item-bg hover:ring-1 hover:ring-ring"
+				/>
 			</div>
 		</div>
 
 		<!-- 模型列表区域 -->
 		<div class="min-h-0 flex-1">
 			<ModelList
-				models={modelsState}
+				models={filteredModels}
 				onModelEdit={handleModelEdit}
 				onModelDelete={handleModelDelete}
 				onModelToggleCollected={handleModelToggleCollected}

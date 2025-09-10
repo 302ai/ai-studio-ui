@@ -5,6 +5,6 @@
 </script>
 
 <div class="flex flex-col gap-settings-gap">
-	<Label class="text-label-fg">{m.versionInformation()}</Label>
+	<Label class="text-label-fg">{m.version_information()}</Label>
 	<SettingInfoItem label={m.settings_currentVersion()} value="25.35.4" />
 </div>

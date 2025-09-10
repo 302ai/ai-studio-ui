@@ -17,7 +17,7 @@
 		},
 		{
 			key: "ultraWide",
-			label: m.ultraWide(),
+			label: m.ultra_wide(),
 			value: "ultra-wide",
 		},
 	];

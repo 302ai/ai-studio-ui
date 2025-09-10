@@ -134,12 +134,12 @@
 {#if trigger}
 	{@render trigger(triggerProps)}
 {:else}
-	<Button {...triggerProps}>{m.modelSelect_trigger()}</Button>
+	<Button {...triggerProps}>{m.model_select_trigger()}</Button>
 {/if}
 
 <Command.Dialog bind:open={isOpen} class="w-[638px]">
 	<div class="[&_[data-slot=command-input-wrapper]]:!h-12">
-		<Command.Input bind:value={searchValue} placeholder={m.modelSelect_placeholder()} />
+		<Command.Input bind:value={searchValue} placeholder={m.model_select_placeholder()} />
 	</div>
 	<ScrollArea.Root class="max-h-[424px]">
 		<Command.List bind:ref={listRef} onmouseleave={handleListMouseLeave} class="max-h-full">

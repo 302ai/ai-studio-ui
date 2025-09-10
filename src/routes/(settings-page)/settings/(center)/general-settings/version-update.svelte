@@ -11,11 +11,11 @@
 </script>
 
 <div class="flex flex-col gap-settings-gap">
-	<Label class="text-label-fg">{m.versionUpdate()}</Label>
-	<SettingSwitchItem label={m.autoUpdate()} bind:checked={autoInherit} />
+	<Label class="text-label-fg">{m.version_update()}</Label>
+	<SettingSwitchItem label={m.auto_update()} bind:checked={autoInherit} />
 	{#snippet updateButton()}
-		<Button size="sm" onclick={handleCheckUpdate}>{m.checkUpdate()}</Button>
+		<Button size="sm" onclick={handleCheckUpdate}>{m.check_update()}</Button>
 	{/snippet}
 
-	<SettingInfoItem label={m.versionInformation()} value="25.35.4" action={updateButton} />
+	<SettingInfoItem label={m.version_information()} value="25.35.4" action={updateButton} />
 </div>
