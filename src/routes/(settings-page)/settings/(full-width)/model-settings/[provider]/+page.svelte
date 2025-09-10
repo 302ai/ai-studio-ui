@@ -10,6 +10,7 @@
 	import { providerState } from "$lib/stores/provider-state.svelte.js";
 	import type { ModelProvider } from "$lib/types/provider.js";
 	import { Eye, EyeOff } from "@lucide/svelte";
+	import { toast } from "svelte-sonner";
 
 	let providerParam = $derived(page.params.provider);
 
@@ -192,6 +193,21 @@
 		modelsState = [...modelsState, duplicatedModel];
 	}
 
+	function handleClearModels() {
+		if (!currentProvider) return;
+
+		// 清空该供应商的所有模型
+		const clearedCount = providerState.clearModelsByProvider(currentProvider.id);
+
+		// 更新UI中的模型列表
+		modelsState = [];
+
+		// 显示成功提示
+		if (clearedCount > 0) {
+			toast.success(m.text_clear_models_success({ count: clearedCount.toString() }));
+		}
+	}
+
 	// 保存表单数据到状态管理
 	function saveFormData() {
 		if (formData.id) {
@@ -348,6 +364,13 @@
 					{isLoadingModels ? m.text_button_get_models_loading() : m.text_button_get_models()}
 				</Button>
 				<Button variant="outline" onclick={handleAddModel}>{m.text_button_add_model()}</Button>
+				<Button
+					variant="destructive"
+					onclick={handleClearModels}
+					disabled={modelsState.length === 0}
+				>
+					{m.text_button_clear_models()}
+				</Button>
 				<div class="flex-1"></div>
 				<Input
 					bind:value={searchQuery}

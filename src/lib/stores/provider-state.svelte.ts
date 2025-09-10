@@ -227,6 +227,11 @@ class ProviderState {
 		return removedCount;
 	}
 
+	// 清空供应商的所有模型
+	clearModelsByProvider(providerId: string): number {
+		return this.removeModelsByProvider(providerId);
+	}
+
 	// 从API获取供应商的模型列表
 	async fetchModelsForProvider(provider: ModelProvider): Promise<boolean> {
 		try {
