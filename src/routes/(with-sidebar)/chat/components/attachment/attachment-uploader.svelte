@@ -113,7 +113,7 @@
 
 <ButtonWithTooltip
 	class="hover:!bg-chat-action-hover"
-	tooltip={`${m.chat_uploadAttachment()} (${attachments.length}/${MAX_ATTACHMENT_COUNT})`}
+	tooltip={`${m.title_upload_attachment()} (${attachments.length}/${MAX_ATTACHMENT_COUNT})`}
 	disabled={isMaxReached}
 	onclick={handleClick}
 >

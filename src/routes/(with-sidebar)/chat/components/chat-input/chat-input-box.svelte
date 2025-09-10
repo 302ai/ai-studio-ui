@@ -23,12 +23,12 @@
 			noModel: chatState.selectedModel === null,
 		})
 			.with({ isEmpty: true }, () => {
-				toast.warning(m.chat_emptyMessage());
+				toast.warning(m.text_toast_empty_message());
 			})
 			.with({ noModel: true }, () => {
-				toast.warning(m.chat_noModel(), {
+				toast.warning(m.text_toast_no_model(), {
 					action: {
-						label: m.chat_selectModel(),
+						label: m.text_button_select_model(),
 						onClick: () => openModelSelect?.(),
 					},
 				});
@@ -60,7 +60,7 @@
 				"border-none shadow-none focus-within:ring-0 focus-within:outline-hidden focus-visible:ring-0",
 			)}
 			bind:value={chatState.inputValue}
-			placeholder={m.chat_placeholder()}
+			placeholder={m.placeholder_input_chat()}
 			onkeydown={(e) => {
 				if (e.key === "Enter" && !e.shiftKey) {
 					handleSendMessage();
@@ -77,7 +77,7 @@
 						"hover:!bg-chat-action-hover",
 						chatState.isThinkingActive && "!bg-chat-action-active hover:!bg-chat-action-active",
 					)}
-					tooltip={actionDisabled ? m.chat_unsupportAction() : m.chat_thinking()}
+					tooltip={actionDisabled ? m.title_unsupport_action() : m.title_thinking()}
 					onclick={() => chatState.handleThinkingActiveChange(!chatState.isThinkingActive)}
 				>
 					<Lightbulb class={cn(chatState.isThinkingActive && "!text-chat-action-active-fg")} />
@@ -87,7 +87,7 @@
 						"hover:!bg-chat-action-hover",
 						chatState.isOnlineSearchActive && "!bg-chat-action-active hover:!bg-chat-action-active",
 					)}
-					tooltip={actionDisabled ? m.chat_unsupportAction() : m.chat_onlineSearch()}
+					tooltip={actionDisabled ? m.title_unsupport_action() : m.title_online_search()}
 					onclick={() => chatState.handleOnlineSearchActiveChange(!chatState.isOnlineSearchActive)}
 				>
 					<Globe class={cn(chatState.isOnlineSearchActive && "!text-chat-action-active-fg")} />
@@ -123,7 +123,7 @@
 					{#snippet trigger({ onclick })}
 						{((openModelSelect = onclick), "")}
 						<Button variant="ghost" class="text-xs hover:!bg-chat-action-hover" {onclick}>
-							{chatState.selectedModel?.name ?? m.chat_selectModel()}
+							{chatState.selectedModel?.name ?? m.text_button_select_model()}
 						</Button>
 					{/snippet}
 				</ModelSelect>

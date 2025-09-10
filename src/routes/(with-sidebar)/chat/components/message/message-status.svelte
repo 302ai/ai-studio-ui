@@ -13,14 +13,14 @@
 
 {#if status === "pending"}
 	<div class="flex items-center gap-2 text-sm text-muted-foreground">
-		{m.chat_pending()}
+		{m.text_chat_pending()}
 		<LdrsLoader type="dot-pulse" size={16} />
 	</div>
 {:else if status === "error"}
 	<Alert.Root variant="destructive" class="border-destructive bg-destructive/10">
 		<AlertCircleIcon />
-		<Alert.Title>{m.chat_error()}</Alert.Title>
-		<Alert.Description>{m.chat_error_description()}</Alert.Description>
+		<Alert.Title>{m.text_alert_chat_error()}</Alert.Title>
+		<Alert.Description>{m.text_alert_chat_error_description()}</Alert.Description>
 	</Alert.Root>
 {:else}
 	null

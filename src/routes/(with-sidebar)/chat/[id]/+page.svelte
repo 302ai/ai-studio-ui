@@ -7,7 +7,7 @@
 
 {#if !chatState.hasMessages}
 	<div class="flex h-full flex-col items-center justify-center gap-chat-gap-y">
-		<span class="text-center text-chat-slogan" data-layoutid="chat-slogan">{m.chat_slogan()}</span>
+		<span class="text-center text-chat-slogan" data-layoutid="chat-slogan">{m.app_slogan()}</span>
 		<ChatInputBox />
 	</div>
 {:else}

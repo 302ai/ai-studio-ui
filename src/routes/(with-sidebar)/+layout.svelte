@@ -20,7 +20,9 @@
 			class="absolute z-50 flex h-12 w-full flex-row items-center justify-between bg-transparent px-2"
 		>
 			<ButtonWithTooltip
-				tooltip={sidebarState.state === "expanded" ? m.sidebar_close() : m.sidebar_open()}
+				tooltip={sidebarState.state === "expanded"
+					? m.title_sidebar_close()
+					: m.title_sidebar_open()}
 				tooltipSide="bottom"
 			>
 				<Sidebar.Trigger class="size-9 hover:!bg-icon-btn-hover [&_svg]:!size-5" />
@@ -33,7 +35,7 @@
 						chatState.isPrivateChatActive && "!bg-icon-btn-active hover:!bg-icon-btn-active",
 					)}
 					tooltipSide="bottom"
-					tooltip={m.chat_privateChat()}
+					tooltip={m.title_incognito()}
 					onclick={() => chatState.handlePrivateChatActiveChange(!chatState.isPrivateChatActive)}
 				>
 					<Ghost
@@ -43,7 +45,7 @@
 
 				<a href="/settings/general-settings">
 					<ButtonWithTooltip
-						tooltip={m.settings()}
+						tooltip={m.title_settings()}
 						class="hover:!bg-icon-btn-hover"
 						tooltipSide="bottom"
 					>
