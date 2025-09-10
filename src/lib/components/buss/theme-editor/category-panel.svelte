@@ -49,15 +49,15 @@
 	function getCategoryLabel(categoryName: string): string {
 		switch (categoryName) {
 			case "colors":
-				return m.theme_category_colors();
+				return m.text_theme_category_colors();
 			case "layout":
-				return m.theme_category_layout();
+				return m.text_theme_category_layout();
 			case "components":
-				return m.theme_category_components();
+				return m.text_theme_category_components();
 			case "typography":
-				return m.theme_category_typography();
+				return m.text_theme_category_typography();
 			case "geometry":
-				return m.theme_category_geometry();
+				return m.text_theme_category_geometry();
 			default:
 				return category.label;
 		}
@@ -66,15 +66,15 @@
 	function getCategoryDescription(categoryName: string): string {
 		switch (categoryName) {
 			case "colors":
-				return m.theme_category_colors_desc();
+				return m.text_theme_category_colors_desc();
 			case "layout":
-				return m.theme_category_layout_desc();
+				return m.text_theme_category_layout_desc();
 			case "components":
-				return m.theme_category_components_desc();
+				return m.text_theme_category_components_desc();
 			case "typography":
-				return m.theme_category_typography_desc();
+				return m.text_theme_category_typography_desc();
 			case "geometry":
-				return m.theme_category_geometry_desc();
+				return m.text_theme_category_geometry_desc();
 			default:
 				return category.description || "";
 		}
@@ -153,7 +153,8 @@
 							placeholder={variable.defaultValue}
 						/>
 						<div class="text-xs text-muted-foreground">
-							{m.theme_variable_default()} <span class="font-mono">{variable.defaultValue}</span>
+							{m.text_theme_variable_default()}
+							<span class="font-mono">{variable.defaultValue}</span>
 						</div>
 					</div>
 				{/if}

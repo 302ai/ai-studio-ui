@@ -205,18 +205,18 @@
 	<div class="space-y-4">
 		<div class="flex items-center justify-between">
 			<div>
-				<h2 class="text-lg font-semibold">{m.theme_editor_title()}</h2>
+				<h2 class="text-lg font-semibold">{m.text_theme_editor_title()}</h2>
 				<p class="text-sm text-muted-foreground">
-					{m.theme_editor_description()}
+					{m.text_theme_editor_description()}
 				</p>
 			</div>
 			<div class="flex items-center gap-2">
 				<Badge variant="secondary">
-					{m.theme_editor_variables_count({ count: totalVariables.toString() })}
+					{m.text_theme_editor_variables_count({ count: totalVariables.toString() })}
 				</Badge>
 				{#if modifiedVariables > 0}
 					<Badge variant="default">
-						{m.theme_editor_modified_count({ count: modifiedVariables.toString() })}
+						{m.text_theme_editor_modified_count({ count: modifiedVariables.toString() })}
 					</Badge>
 				{/if}
 			</div>
@@ -226,16 +226,16 @@
 		<div class="flex flex-wrap items-center gap-2">
 			<Button onclick={resetAllToDefaults} variant="outline" size="sm">
 				<RotateCcw class="mr-2 h-4 w-4" />
-				{m.theme_editor_reset_all()}
+				{m.text_button_theme_editor_reset_all()}
 			</Button>
 			<Button onclick={exportTheme} variant="outline" size="sm">
 				<Download class="mr-2 h-4 w-4" />
-				{m.theme_editor_export()}
+				{m.text_button_theme_editor_export()}
 			</Button>
 			<label class="inline-flex">
 				<Button variant="outline" size="sm" class="cursor-pointer">
 					<Upload class="mr-2 h-4 w-4" />
-					{m.theme_editor_import()}
+					{m.text_button_theme_editor_import()}
 				</Button>
 				<input type="file" accept=".css,.txt" onchange={importTheme} class="sr-only" />
 			</label>
@@ -248,7 +248,7 @@
 			/>
 			<Input
 				bind:value={searchQuery}
-				placeholder={m.theme_editor_search_placeholder()}
+				placeholder={m.placeholder_input_theme_editor_search()}
 				class="pl-10"
 			/>
 		</div>
@@ -257,7 +257,7 @@
 	<!-- Loading state -->
 	{#if isLoading}
 		<div class="flex items-center justify-center py-12">
-			<div class="text-sm text-muted-foreground">{m.theme_editor_loading()}</div>
+			<div class="text-sm text-muted-foreground">{m.text_theme_editor_loading()}</div>
 		</div>
 	{/if}
 
@@ -265,7 +265,7 @@
 	{#if loadError}
 		<Alert.Root variant="destructive">
 			<Info class="h-4 w-4" />
-			<Alert.Title>{m.theme_editor_load_error()}</Alert.Title>
+			<Alert.Title>{m.text_theme_editor_load_error()}</Alert.Title>
 			<Alert.Description>{loadError}</Alert.Description>
 		</Alert.Root>
 	{/if}
@@ -283,13 +283,13 @@
 	{#if !isLoading && !loadError && filteredCategories.length === 0 && searchQuery}
 		<div class="py-12 text-center text-muted-foreground">
 			<Search class="mx-auto mb-4 h-12 w-12 opacity-50" />
-			<p>{m.theme_editor_no_results({ query: searchQuery })}</p>
+			<p>{m.text_theme_editor_no_results({ query: searchQuery })}</p>
 		</div>
 	{/if}
 
 	<!-- Help text -->
 	<div class="space-y-1 border-t pt-4 text-xs text-muted-foreground">
-		<p><strong>Tip:</strong> {m.theme_editor_tip()}</p>
-		<p>{m.theme_editor_help()}</p>
+		<p><strong>Tip:</strong> {m.text_theme_editor_tip()}</p>
+		<p>{m.text_theme_editor_help()}</p>
 	</div>
 </div>

@@ -15,14 +15,14 @@
 		{
 			key: "visual",
 			icon: Palette,
-			label: m.theme_visual_editor(),
-			badge: { text: m.theme_recommended(), variant: "secondary" as const },
+			label: m.text_theme_visual_editor(),
+			badge: { text: m.text_theme_recommended(), variant: "secondary" as const },
 		},
 		{
 			key: "code",
 			icon: Code,
-			label: m.theme_code_editor(),
-			badge: { text: m.theme_advanced(), variant: "outline" as const },
+			label: m.text_theme_code_editor(),
+			badge: { text: m.text_theme_advanced(), variant: "outline" as const },
 		},
 	];
 

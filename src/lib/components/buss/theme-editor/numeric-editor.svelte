@@ -113,7 +113,7 @@
 			{/if}
 		</div>
 		<Button variant="ghost" size="sm" onclick={resetToDefault}>
-			{m.theme_numeric_reset()}
+			{m.text_button_theme_numeric_reset()}
 		</Button>
 	</div>
 
@@ -137,7 +137,7 @@
 					onblur={handleInputChange}
 					onkeydown={(e) => e.key === "Enter" && handleInputChange()}
 					class="font-mono text-sm"
-					placeholder={m.theme_variable_range({
+					placeholder={m.text_theme_variable_range({
 						min: `${min}${unit}`,
 						max: `${max}${unit}`,
 					})}
@@ -152,7 +152,7 @@
 	<!-- Presets -->
 	{#if presets.length > 0}
 		<div class="space-y-2">
-			<Label class="text-xs text-muted-foreground">{m.theme_numeric_presets()}</Label>
+			<Label class="text-xs text-muted-foreground">{m.text_label_theme_numeric_presets()}</Label>
 			<div class="flex flex-wrap gap-1.5">
 				{#each presets as preset (preset)}
 					<Badge

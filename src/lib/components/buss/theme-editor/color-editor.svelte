@@ -120,7 +120,7 @@
 			{/if}
 		</div>
 		<Button variant="ghost" size="sm" onclick={resetToDefault}>
-			{m.theme_color_reset()}
+			{m.text_button_theme_color_reset()}
 		</Button>
 	</div>
 
@@ -139,14 +139,14 @@
 			bind:value={textInputValue}
 			onblur={handleTextInputChange}
 			onkeydown={(e) => e.key === "Enter" && handleTextInputChange()}
-			placeholder={m.theme_color_placeholder()}
+			placeholder={m.placeholder_input_theme_color()}
 			class="flex-1 font-mono text-sm"
 		/>
 	</div>
 
 	<!-- Color presets -->
 	<div class="space-y-2">
-		<Label class="text-xs text-muted-foreground">{m.theme_color_quick_colors()}</Label>
+		<Label class="text-xs text-muted-foreground">{m.text_label_theme_color_quick_colors()}</Label>
 		<div class="flex flex-wrap gap-1.5">
 			{#each colorPresets as preset (preset)}
 				<button
@@ -165,7 +165,7 @@
 
 	<!-- Current value display -->
 	<div class="flex items-center gap-2 text-xs text-muted-foreground">
-		<span>{m.theme_color_current()}</span>
+		<span>{m.text_theme_color_current()}</span>
 		<div class="h-4 w-4 rounded border border-border" style="background-color: {value}"></div>
 		<span class="font-mono">{value}</span>
 	</div>
