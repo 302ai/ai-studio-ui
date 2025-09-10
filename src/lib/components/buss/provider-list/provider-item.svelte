@@ -32,17 +32,17 @@
 	const description = $derived.by(() => {
 		// Check for error status first
 		if (provider.status === "error") {
-			return m.provider_error();
+			return m.text_provider_error();
 		}
 
 		// Check if not configured (no API key)
 		if (!provider.apiKey || provider.apiKey.trim() === "") {
-			return m.provider_not_configured();
+			return m.text_provider_not_configured();
 		}
 
 		// If configured, show real model count from store
 		const modelCount = providerState.models.filter((m) => m.providerId === provider.id).length;
-		return m.provider_models_count({ count: modelCount.toString() });
+		return m.text_provider_models_count({ count: modelCount.toString() });
 	});
 
 	const handleConfigure = () => {
@@ -98,11 +98,11 @@
 	<ContextMenu.Content class="w-48">
 		<ContextMenu.Item onclick={handleConfigure}>
 			<Cloud class="mr-2 h-4 w-4" />
-			{m.provider_context_configure()}
+			{m.text_context_configure_provider()}
 		</ContextMenu.Item>
 		<ContextMenu.Item onclick={handleRemove} class="text-destructive focus:text-destructive">
 			<X class="mr-2 h-4 w-4" />
-			{m.provider_context_remove()}
+			{m.text_context_remove_provider()}
 		</ContextMenu.Item>
 	</ContextMenu.Content>
 </ContextMenu.Root>
