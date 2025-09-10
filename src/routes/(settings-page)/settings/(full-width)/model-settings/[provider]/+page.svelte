@@ -233,7 +233,7 @@
 	<!-- 配置标题 -->
 	<div class="mb-6 flex flex-shrink-0 flex-col gap-1">
 		<h2 class="max-w-full break-all whitespace-normal">
-			{m.provider_configure({
+			{m.text_provider_configure({
 				name: formData.name || (formData.custom ? m.provider_custom_name() : m.provider_unnamed()),
 			})}
 		</h2>
@@ -246,15 +246,15 @@
 				<!-- 图标和名称（自定义供应商） -->
 				<div class="flex items-end gap-4">
 					<div class="flex flex-col gap-2">
-						<Label class="text-sm font-medium">{m.provider_icon()}</Label>
+						<Label class="text-sm font-medium">{m.text_label_provider_icon()}</Label>
 						<IconPicker value={formData.icon || formData.apiType} onChange={handleIconChange} />
 					</div>
 					<div class="flex flex-1 flex-col gap-2">
-						<Label for="name" class="text-sm font-medium">{m.provider_name()}</Label>
+						<Label for="name" class="text-sm font-medium">{m.text_label_provider_name()}</Label>
 						<Input
 							id="name"
 							bind:value={formData.name}
-							placeholder={m.provider_name_placeholder()}
+							placeholder={m.placeholder_input_provider_name()}
 							oninput={handleInputChange}
 							class="h-11 rounded-settings-item bg-settings-item-bg hover:ring-1 hover:ring-ring"
 						/>
@@ -264,17 +264,17 @@
 
 			<!-- Base URL -->
 			<div class="space-y-2">
-				<Label for="baseUrl">{m.provider_baseurl()}</Label>
+				<Label for="baseUrl">{m.text_label_provider_base_url()}</Label>
 				<Input
 					id="baseUrl"
 					bind:value={formData.baseUrl}
-					placeholder={formData.custom ? m.provider_baseurl_placeholder() : ""}
+					placeholder={formData.custom ? m.placeholder_input_provider_base_url() : ""}
 					oninput={handleInputChange}
 					class="rounded-settings-item bg-settings-item-bg hover:ring-1 hover:ring-ring"
 				/>
 				{#if formData.baseUrl}
 					<p class="text-xs text-muted-foreground">
-						{m.provider_baseurl_request_to({
+						{m.text_base_url_request_info({
 							url: getChatEndpointUrl(formData.baseUrl, formData.apiType),
 						})}
 					</p>
@@ -283,13 +283,13 @@
 
 			<!-- API Key -->
 			<div class="space-y-2">
-				<Label for="apiKey">{m.provider_apikey()}</Label>
+				<Label for="apiKey">{m.text_label_provider_api_key()}</Label>
 				<div class="relative">
 					<Input
 						id="apiKey"
 						type={showApiKey ? "text" : "password"}
 						bind:value={formData.apiKey}
-						placeholder={m.provider_apikey_placeholder()}
+						placeholder={m.placeholder_input_provider_api_key()}
 						class="rounded-settings-item bg-settings-item-bg pr-10 hover:ring-1 hover:ring-ring"
 						oninput={handleInputChange}
 					/>
@@ -309,7 +309,7 @@
 				{#if !formData.custom && formData.websites.apiKey}
 					<p class="text-xs text-muted-foreground">
 						<a href={formData.websites.apiKey} target="_blank" class="text-primary hover:underline">
-							{m.provider_get_apikey()}
+							{m.text_get_api_key()}
 						</a>
 					</p>
 				{/if}
@@ -318,7 +318,7 @@
 			<!-- 接口类型 (仅自定义供应商) -->
 			{#if formData.custom}
 				<div class="space-y-2">
-					<Label for="apiType">{m.provider_interface_type()}</Label>
+					<Label for="apiType">{m.text_label_provider_interface_type()}</Label>
 					<Select.Root
 						type="single"
 						bind:value={formData.apiType}
@@ -329,7 +329,7 @@
 					>
 						<Select.Trigger class="w-full rounded-settings-item bg-settings-item-bg">
 							{apiTypes.find((t) => t.value === formData.apiType)?.label ||
-								m.provider_interface_type_placeholder()}
+								m.placeholder_select_provider_interface_type()}
 						</Select.Trigger>
 						<Select.Content>
 							{#each apiTypes as type (type.value)}
@@ -343,13 +343,13 @@
 			<!-- 操作按钮 -->
 			<div class="flex items-center gap-3 pt-4">
 				<Button variant="default" onclick={handleGetModels} disabled={isLoadingModels}>
-					{isLoadingModels ? m.provider_get_models_loading() : m.provider_get_models()}
+					{isLoadingModels ? m.text_button_get_models_loading() : m.text_button_get_models()}
 				</Button>
-				<Button variant="outline" onclick={handleAddModel}>{m.provider_add_model()}</Button>
+				<Button variant="outline" onclick={handleAddModel}>{m.text_button_add_model()}</Button>
 				<div class="flex-1"></div>
 				<Input
 					bind:value={searchQuery}
-					placeholder={m.model_select_placeholder()}
+					placeholder={m.placeholder_input_search_model()}
 					class="w-64 rounded-settings-item bg-settings-item-bg hover:ring-1 hover:ring-ring"
 				/>
 			</div>

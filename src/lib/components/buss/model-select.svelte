@@ -139,7 +139,7 @@
 
 <Command.Dialog bind:open={isOpen} class="w-[638px]">
 	<div class="[&_[data-slot=command-input-wrapper]]:!h-12">
-		<Command.Input bind:value={searchValue} placeholder={m.placeholder_select_model()} />
+		<Command.Input bind:value={searchValue} placeholder={m.placeholder_input_search_model()} />
 	</div>
 	<ScrollArea.Root class="max-h-[424px]">
 		<Command.List bind:ref={listRef} onmouseleave={handleListMouseLeave} class="max-h-full">

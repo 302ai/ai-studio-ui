@@ -46,19 +46,19 @@
 		<!-- 表格头部 -->
 		<div class="text-muted-fg flex h-10 flex-shrink-0 bg-muted">
 			<div class="flex h-full min-w-[160px] flex-[1.3] items-center pl-4 outline-hidden">
-				<div class="truncate">{m.provider_models_name()}</div>
+				<div class="truncate">{m.text_models_column_name()}</div>
 			</div>
 
 			<div class="flex h-full min-w-[40px] flex-[0.7] items-center outline-hidden">
-				<div class="truncate">{m.provider_models_type()}</div>
+				<div class="truncate">{m.text_models_column_type()}</div>
 			</div>
 
 			<div class="flex h-full min-w-[100px] flex-[1.2] items-center outline-hidden">
-				<div class="truncate">{m.provider_models_capability()}</div>
+				<div class="truncate">{m.text_models_column_capability()}</div>
 			</div>
 
 			<div class="flex h-full min-w-[70px] flex-[0.8] items-center justify-center outline-hidden">
-				<div class="truncate">{m.provider_models_action()}</div>
+				<div class="truncate">{m.text_models_column_action()}</div>
 			</div>
 		</div>
 
@@ -75,7 +75,7 @@
 							d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
 						/>
 					</svg>
-					<p>{m.provider_models_empty_description()}</p>
+					<p>{m.text_models_empty_state()}</p>
 				</div>
 			</div>
 		{:else}
