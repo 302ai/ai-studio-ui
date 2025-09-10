@@ -39,35 +39,35 @@
 					Icon: Lightbulb,
 					bgClass: "bg-accent dark:bg-primary/10",
 					iconClass: "text-primary",
-					title: m.capability_reasoning(),
+					title: m.text_capability_reasoning(),
 				};
 			case "vision":
 				return {
 					Icon: Image,
 					bgClass: "bg-green-100 dark:bg-green-900/20",
 					iconClass: "text-green-600 dark:text-green-400",
-					title: m.capability_vision(),
+					title: m.text_capability_vision(),
 				};
 			case "music":
 				return {
 					Icon: Music,
 					bgClass: "bg-pink-50 dark:bg-pink-900/20",
 					iconClass: "text-pink-500",
-					title: m.capability_music(),
+					title: m.text_capability_music(),
 				};
 			case "video":
 				return {
 					Icon: Play,
 					bgClass: "bg-blue-50 dark:bg-blue-900/20",
 					iconClass: "text-blue-600",
-					title: m.capability_video(),
+					title: m.text_capability_video(),
 				};
 			case "function_call":
 				return {
 					Icon: Hammer,
 					bgClass: "bg-orange-50 dark:bg-orange-900/20",
 					iconClass: "text-orange-500",
-					title: m.capability_function_call(),
+					title: m.text_capability_function_call(),
 				};
 			default:
 				return null;
@@ -77,13 +77,13 @@
 	const getTypeLabel = (type: string) => {
 		switch (type) {
 			case "language":
-				return m.model_type_chat();
+				return m.text_model_type_chat();
 			case "embedding":
-				return m.model_type_embedding();
+				return m.text_model_type_embedding();
 			case "image-generation":
-				return m.model_type_image();
+				return m.text_model_type_image();
 			case "tts":
-				return m.model_type_audio();
+				return m.text_model_type_audio();
 			case "rerank":
 				return "Rerank";
 			default:
@@ -96,7 +96,7 @@
 			await navigator.clipboard.writeText(model.remark || model.name);
 			toast.success(m.text_context_copy_name());
 		} catch {
-			toast.error(m.model_copy_name_failed());
+			toast.error(m.text_model_copy_name_failed());
 		}
 	};
 
@@ -105,7 +105,7 @@
 			await navigator.clipboard.writeText(model.id);
 			toast.success(m.text_context_copy_id());
 		} catch {
-			toast.error(m.model_copy_id_failed());
+			toast.error(m.text_model_copy_id_failed());
 		}
 	};
 
@@ -167,7 +167,7 @@
 						size="icon"
 						class="pressed:bg-accent/20 h-8 w-8 rounded-lg p-0 hover:bg-accent/10"
 						onclick={onToggleCollected}
-						title={model.collected ? m.common_unstar() : m.common_star()}
+						title={model.collected ? m.title_button_unstar() : m.title_button_star()}
 					>
 						<Star
 							class={cn(
@@ -185,7 +185,7 @@
 						size="icon"
 						class="pressed:bg-accent/20 h-8 w-8 rounded-lg p-0 hover:bg-accent/10"
 						onclick={onEdit}
-						title={m.common_edit()}
+						title={m.title_button_edit()}
 					>
 						<PenLine class="size-4 text-muted-foreground hover:text-foreground" strokeWidth={1.5} />
 					</Button>
@@ -196,7 +196,7 @@
 						size="icon"
 						class="pressed:bg-destructive/20 h-8 w-8 rounded-lg p-0 hover:bg-destructive/10"
 						onclick={onDelete}
-						title={m.common_delete()}
+						title={m.title_button_delete()}
 					>
 						<Trash2 class="size-4 text-destructive/70 hover:text-destructive" />
 					</Button>
@@ -221,7 +221,7 @@
 					model.collected ? "fill-yellow-500 text-yellow-500" : "text-muted-foreground",
 				)}
 			/>
-			{model.collected ? m.common_unstar() : m.common_star()}
+			{model.collected ? m.text_button_unstar() : m.text_button_star()}
 		</ContextMenu.Item>
 		{#if onDuplicate}
 			<ContextMenu.Item onclick={handleDuplicate}>
@@ -232,11 +232,11 @@
 		<ContextMenu.Separator />
 		<ContextMenu.Item onclick={() => onEdit?.()}>
 			<PenLine class="mr-2 h-4 w-4" />
-			{m.common_edit()}
+			{m.text_button_edit()}
 		</ContextMenu.Item>
 		<ContextMenu.Item onclick={() => onDelete?.()} class="text-destructive focus:text-destructive">
 			<Trash2 class="mr-2 h-4 w-4" />
-			{m.common_delete()}
+			{m.text_button_delete()}
 		</ContextMenu.Item>
 	</ContextMenu.Content>
 </ContextMenu.Root>
