@@ -18,4 +18,5 @@ export interface ModelProvider {
 	custom?: boolean;
 	status: ModelProviderStatus;
 	websites: ModelProviderWebsites;
+	icon?: string;
 }

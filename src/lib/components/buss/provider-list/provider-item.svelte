@@ -1,14 +1,5 @@
 <script lang="ts" module>
 	import type { ModelProvider } from "$lib/types/provider.js";
-	import type { Snippet } from "svelte";
-
-	export type Provider = {
-		id: string;
-		name: string;
-		title: string;
-		description: string;
-		icon?: Snippet;
-	};
 
 	interface Props {
 		provider: ModelProvider;
@@ -62,7 +53,7 @@
 	>
 		<!-- Icon -->
 		<div class="flex size-provider-icon shrink-0 items-center justify-center">
-			<ModelIcon modelName={provider.apiType} className="h-6 w-6" />
+			<ModelIcon modelName={provider.icon || provider.apiType} className="h-6 w-6" />
 		</div>
 
 		<!-- Content -->

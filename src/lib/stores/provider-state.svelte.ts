@@ -110,6 +110,7 @@ class ProviderState {
 				models: "",
 				defaultBaseUrl: "",
 			},
+			icon: undefined,
 		};
 	}
 

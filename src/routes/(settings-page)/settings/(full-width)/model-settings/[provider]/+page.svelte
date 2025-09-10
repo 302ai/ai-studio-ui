@@ -35,6 +35,7 @@
 			models: "",
 			defaultBaseUrl: "",
 		},
+		icon: undefined,
 	});
 
 	// 当 currentProvider 变化时更新表单数据
@@ -51,6 +52,7 @@
 				custom: currentProvider.custom || false,
 				status: currentProvider.status,
 				websites: { ...currentProvider.websites },
+				icon: currentProvider.icon,
 			};
 
 			// 加载该供应商的排序后模型
@@ -71,7 +73,7 @@
 	];
 
 	function handleIconChange(iconKey: string) {
-		formData.apiType = iconKey;
+		formData.icon = iconKey;
 		saveFormData();
 	}
 
@@ -182,6 +184,7 @@
 				custom: formData.custom,
 				status: formData.status,
 				websites: formData.websites,
+				icon: formData.icon,
 			});
 		}
 	}
@@ -214,7 +217,7 @@
 				<div class="flex items-end gap-4">
 					<div class="flex flex-col gap-2">
 						<Label class="text-sm font-medium">{m.provider_icon()}</Label>
-						<IconPicker value={formData.apiType} onChange={handleIconChange} />
+						<IconPicker value={formData.icon || formData.apiType} onChange={handleIconChange} />
 					</div>
 					<div class="flex flex-1 flex-col gap-2">
 						<Label for="name" class="text-sm font-medium">{m.provider_name()}</Label>
