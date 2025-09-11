@@ -24,6 +24,8 @@
 		"@tailwindcss/typography": "^0.5.15",
 		"@tailwindcss/vite": "^4.0.0",
 		"@tanstack/table-core": "^8.21.3",
+		"@types/hast": "^3.0.4",
+		"@types/mdast": "^4.0.4",
 		"@types/node": "^24.3.1",
 		"bits-ui": "^2.9.6",
 		"clsx": "^2.1.1",
@@ -56,12 +58,19 @@
 		"@lobehub/icons-static-svg": "^1.65.0",
 		"@sveltejs/adapter-static": "^3.0.9",
 		"date-fns": "^4.1.0",
+		"highlight.js": "^11.11.1",
 		"ldrs": "^1.1.7",
 		"mode-watcher": "^1.1.0",
 		"nanoid": "^5.1.5",
+		"rehype-highlight": "^7.0.2",
+		"rehype-stringify": "^10.0.1",
+		"remark-gfm": "^4.0.1",
+		"remark-parse": "^11.0.0",
+		"remark-rehype": "^11.1.2",
 		"svelte-dnd-action": "^0.9.64",
 		"svelte-image-viewer": "^5.0.0",
-		"ts-pattern": "^5.8.0"
+		"ts-pattern": "^5.8.0",
+		"unified": "^11.0.5"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [

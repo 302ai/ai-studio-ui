@@ -10,6 +10,7 @@
 
 <script lang="ts">
 	import { ModelIcon } from "$lib/components/buss/model-icon/index.js";
+	import { MarkdownRenderer } from "$lib/components/buss/markdown/index.js";
 	import * as Alert from "$lib/components/ui/alert/index.js";
 	import { LdrsLoader } from "@/components/buss/ldrs-loader";
 	import { m } from "@/paraglide/messages";
@@ -57,7 +58,7 @@
 <div class="group flex flex-col gap-2">
 	{@render messageHeader()}
 
-	<span class="whitespace-pre-wrap">{message.content}</span>
+	<MarkdownRenderer content={message.content} />
 
 	{@render messageStatus()}
 

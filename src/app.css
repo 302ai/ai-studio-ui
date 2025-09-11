@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "highlight.js/styles/github.css";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -188,3 +189,4 @@
 /* Design System tokens for new buss components */
 @import "./lib/theme/ds.css";
 @import "./lib/theme/animation.css";
+@import "./lib/theme/markdown.css";
