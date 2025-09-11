@@ -1,6 +1,9 @@
 <script lang="ts" module>
+	type ActionType = "copy" | "regenerate" | "edit";
+
 	interface Props {
 		message: ChatMessage;
+		enabledActions?: ActionType[];
 	}
 </script>
 
@@ -11,7 +14,7 @@
 	import type { ChatMessage } from "@/types/chat";
 	import { RefreshCcw, SquarePen } from "@lucide/svelte";
 
-	let { message }: Props = $props();
+	let { message, enabledActions = ["copy", "regenerate", "edit"] }: Props = $props();
 </script>
 
 {#snippet actionCopy()}
@@ -39,7 +42,13 @@
 {/snippet}
 
 <div class="flex items-center gap-2">
-	{@render actionCopy()}
-	{@render actionRegenerate()}
-	{@render actionEdit()}
+	{#each enabledActions as action (action)}
+		{#if action === "copy"}
+			{@render actionCopy()}
+		{:else if action === "regenerate"}
+			{@render actionRegenerate()}
+		{:else if action === "edit"}
+			{@render actionEdit()}
+		{/if}
+	{/each}
 </div>
