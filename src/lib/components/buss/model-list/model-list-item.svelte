@@ -119,33 +119,33 @@
 <ContextMenu.Root>
 	<ContextMenu.Trigger
 		class={cn(
-			"h-[50px] cursor-pointer ring-primary outline-transparent hover:bg-muted/50",
+			"h-[50px] w-full cursor-pointer ring-primary outline-transparent hover:bg-muted/50",
 			!isLast ? "border-b border-border" : "",
 		)}
 	>
-		<div class="flex h-full">
+		<div class="grid h-full w-full" style="grid-template-columns: 1.3fr 0.7fr 1.2fr 0.8fr;">
 			<!-- 模型名称 -->
-			<div class="flex h-full min-w-[160px] flex-[1.3] items-center pr-2 pl-4 outline-hidden">
+			<div class="flex h-full items-center overflow-hidden pr-2 pl-4 outline-hidden">
 				<div class="truncate" title={model.remark || model.name}>
 					{model.remark || model.name}
 				</div>
 			</div>
 
 			<!-- 类型 -->
-			<div class="flex h-full min-w-[40px] flex-[0.7] items-center px-1 outline-hidden">
+			<div class="flex h-full items-center overflow-hidden px-1 outline-hidden">
 				<div class="truncate text-sm text-[#333333] dark:text-[#E6E6E6]">
 					{getTypeLabel(model.type)}
 				</div>
 			</div>
 
 			<!-- 能力 -->
-			<div class="flex h-full min-w-[100px] flex-[1.2] items-center gap-2 outline-hidden">
+			<div class="flex h-full items-center gap-2 overflow-hidden outline-hidden">
 				{#each Array.from(model.capabilities) as capability (capability)}
 					{@const capabilityInfo = getCapabilityIcon(String(capability))}
 					{#if capabilityInfo}
 						<div
 							class={cn(
-								"flex size-6 items-center justify-center rounded-sm",
+								"flex size-6 flex-shrink-0 items-center justify-center rounded-sm",
 								capabilityInfo.bgClass,
 							)}
 							title={capabilityInfo.title}
@@ -157,9 +157,7 @@
 			</div>
 
 			<!-- 操作 -->
-			<div
-				class="flex h-full min-w-[70px] flex-[0.8] items-center justify-center pr-2 outline-hidden"
-			>
+			<div class="flex h-full items-center justify-center overflow-hidden pr-2 outline-hidden">
 				<div class="flex h-full items-center justify-center">
 					<!-- Star -->
 					<Button

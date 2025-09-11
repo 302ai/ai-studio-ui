@@ -37,23 +37,26 @@
 	});
 </script>
 
-<div class="flex h-full flex-col rounded-xl border">
-	<div class="flex h-full flex-col overflow-hidden rounded-xl">
+<div class="flex h-full w-full flex-col rounded-xl border">
+	<div class="flex h-full w-full flex-col overflow-hidden rounded-xl">
 		<!-- 表格头部 -->
-		<div class="text-muted-fg flex h-10 flex-shrink-0 bg-muted">
-			<div class="flex h-full min-w-[160px] flex-[1.3] items-center pl-4 outline-hidden">
+		<div
+			class="text-muted-fg grid h-10 w-full flex-shrink-0 bg-muted"
+			style="grid-template-columns: 1.3fr 0.7fr 1.2fr 0.8fr;"
+		>
+			<div class="flex h-full items-center pl-4 outline-hidden">
 				<div class="truncate">{m.text_models_column_name()}</div>
 			</div>
 
-			<div class="flex h-full min-w-[40px] flex-[0.7] items-center outline-hidden">
+			<div class="flex h-full items-center outline-hidden">
 				<div class="truncate">{m.text_models_column_type()}</div>
 			</div>
 
-			<div class="flex h-full min-w-[100px] flex-[1.2] items-center outline-hidden">
+			<div class="flex h-full items-center outline-hidden">
 				<div class="truncate">{m.text_models_column_capability()}</div>
 			</div>
 
-			<div class="flex h-full min-w-[70px] flex-[0.8] items-center justify-center outline-hidden">
+			<div class="flex h-full items-center justify-center outline-hidden">
 				<div class="truncate">{m.text_models_column_action()}</div>
 			</div>
 		</div>
@@ -75,7 +78,7 @@
 				</div>
 			</div>
 		{:else}
-			<div bind:this={containerElement} class="min-h-0 flex-1">
+			<div bind:this={containerElement} class="min-h-0 w-full flex-1 overflow-hidden">
 				{#if containerHeight > 0}
 					<VirtualList
 						items={models}

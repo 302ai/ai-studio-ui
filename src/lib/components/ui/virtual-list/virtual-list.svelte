@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import type { Snippet } from "svelte";
 
-	interface Props<T> {
+	interface Props<T extends { id?: string | number }> {
 		items: T[];
 		itemHeight: number;
 		height: number;
@@ -10,7 +10,7 @@
 	}
 </script>
 
-<script lang="ts" generics="T">
+<script lang="ts" generics="T extends { id?: string | number }">
 	let { items, itemHeight, height, class: className = "", item }: Props<T> = $props();
 
 	let scrollTop = $state(0);
@@ -29,13 +29,17 @@
 	}
 </script>
 
-<div class="relative overflow-auto {className}" style="height: {height}px;" onscroll={handleScroll}>
+<div
+	class="relative overflow-auto {className}"
+	style="height: {height}px; width: 100%; scrollbar-gutter: stable;"
+	onscroll={handleScroll}
+>
 	<!-- 总高度占位符 -->
-	<div style="height: {totalHeight}px; position: relative;">
+	<div style="height: {totalHeight}px; position: relative; width: 100%;">
 		<!-- 可见项目容器 -->
-		<div style="transform: translateY({offsetY}px);">
-			{#each visibleItems as itemData, index (items.indexOf(itemData))}
-				<div style="height: {itemHeight}px;">
+		<div style="transform: translateY({offsetY}px); width: 100%;">
+			{#each visibleItems as itemData, index (itemData.id || startIndex + index)}
+				<div style="height: {itemHeight}px; width: 100%;">
 					{@render item(itemData, startIndex + index)}
 				</div>
 			{/each}

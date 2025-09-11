@@ -414,7 +414,7 @@
 		</div>
 
 		<!-- 模型列表区域 -->
-		<div class="min-h-0 flex-1">
+		<div class="min-h-0 w-full flex-1 overflow-hidden">
 			<ModelList
 				models={filteredModels}
 				onModelEdit={handleModelEdit}
