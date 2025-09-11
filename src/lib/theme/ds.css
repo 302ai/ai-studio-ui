@@ -91,6 +91,10 @@
 	--ui-settings-shortcut-text-size: 0.875rem; /* text-sm */
 	--ui-settings-shortcut-hint-color: #aaaaaa; /* hint text color - light mode */
 
+	/* Settings sidebar */
+	--ui-settings-sidebar-bg: var(--ui-surface-muted);
+	--ui-settings-sidebar-width: 15rem; /* w-60 */
+
 	/* Segmented button (concrete defaults) */
 	--ui-seg-btn-thumb-h: 2rem; /* h-[32px] */
 	--ui-seg-btn-container-h: 2.75rem; /* h-11 */
@@ -221,6 +225,10 @@
 	/* Settings shortcut text bridge */
 	--text-settings-shortcut-size: var(--ui-settings-shortcut-text-size);
 	--color-settings-shortcut-hint: var(--ui-settings-shortcut-hint-color);
+
+	/* Settings sidebar bridge */
+	--color-settings-bg: var(--ui-settings-sidebar-bg);
+	--spacing-settings-sidebar-width: var(--ui-settings-sidebar-width);
 
 	/* Segmented button bridge */
 	--spacing-seg-button-thumb-height: var(--ui-seg-btn-thumb-h);
