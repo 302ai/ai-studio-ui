@@ -69,6 +69,10 @@ class ChatState {
 		this.messages = [];
 	}
 
+	updateMessage(messageId: string, content: string) {
+		this.messages = this.messages.map((msg) => (msg.id === messageId ? { ...msg, content } : msg));
+	}
+
 	addAttachment(attachment: AttachmentFile) {
 		this.attachments = [...this.attachments, attachment];
 	}
