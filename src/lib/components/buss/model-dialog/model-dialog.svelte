@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import type { Model, ModelCreateInput, ModelType, ModelCapability } from "$lib/types/model.js";
+	import type { Model, ModelCapability, ModelCreateInput, ModelType } from "$lib/types/model.js";
 
 	export interface Props {
 		open: boolean;
@@ -13,12 +13,12 @@
 
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button/index.js";
+	import { Checkbox } from "$lib/components/ui/checkbox/index.js";
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
 	import * as Select from "$lib/components/ui/select/index.js";
 	import { Switch } from "$lib/components/ui/switch/index.js";
-	import { Checkbox } from "$lib/components/ui/checkbox/index.js";
 	import { m } from "$lib/paraglide/messages.js";
 
 	let { open = $bindable(), mode, model, providerId, onClose, onSave }: Props = $props();
@@ -173,15 +173,16 @@
 			<!-- Capabilities -->
 			<div class="space-y-2">
 				<Label>{m.text_label_model_capabilities()}</Label>
-				<div class="space-y-2">
+				<div class="flex flex-wrap gap-3">
 					{#each availableCapabilities as capability (capability.value)}
-						<div class="flex items-center space-x-2">
+						<div class="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-accent/10">
 							<Checkbox
+								class="border-muted-foreground/40 bg-transparent hover:border-muted-foreground/70 dark:border-white/30"
 								id={capability.value}
 								checked={formData.capabilities.has(capability.value)}
 								onCheckedChange={(checked) => toggleCapability(capability.value, !!checked)}
 							/>
-							<Label for={capability.value} class="text-sm font-normal">
+							<Label for={capability.value} class="cursor-pointer text-sm font-normal">
 								{capability.label}
 							</Label>
 						</div>
