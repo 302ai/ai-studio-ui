@@ -98,7 +98,7 @@
 	>
 		<div
 			class={cn(
-				"relative w-fit max-w-[calc(100vw-2rem)] rounded-lg border bg-background p-4 shadow-lg duration-200",
+				"relative w-fit max-w-[calc(100vw-2rem)] rounded-lg border bg-overlay p-4 shadow-lg duration-200",
 				!isClosing ? "animate-in fade-in-0 zoom-in-95" : "animate-out fade-out-0 zoom-out-95",
 			)}
 			onclick={(e) => e.stopPropagation()}
@@ -108,9 +108,8 @@
 			tabindex="0"
 		>
 			<button
-				class="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden"
+				class="absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100"
 				onclick={onClose}
-				aria-label="Close"
 			>
 				<X class="h-4 w-4" />
 			</button>

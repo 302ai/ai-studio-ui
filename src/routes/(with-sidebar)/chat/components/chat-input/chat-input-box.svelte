@@ -76,7 +76,11 @@
 				>
 					{#snippet trigger({ onclick })}
 						{((openModelSelect = onclick), "")}
-						<Button variant="ghost" class="text-xs hover:!bg-chat-action-hover" {onclick}>
+						<Button
+							variant="ghost"
+							class="text-sm text-foreground/50 hover:!bg-chat-action-hover"
+							{onclick}
+						>
 							{chatState.selectedModel?.name ?? m.text_button_select_model()}
 						</Button>
 					{/snippet}

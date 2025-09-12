@@ -135,7 +135,7 @@
 	<!-- Label and value display -->
 	<div class="flex w-full items-center">
 		{#if tips}
-			<LabelWithTips {label} {tips} />
+			<LabelWithTips class="z-51" {label} {tips} />
 		{:else}
 			<span class="text-label-fg">{label}</span>
 		{/if}

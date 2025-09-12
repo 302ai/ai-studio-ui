@@ -1,15 +1,17 @@
 <script lang="ts">
 	import { Label } from "$lib/components/ui/label";
 	import { Tooltip, TooltipContent, TooltipTrigger } from "$lib/components/ui/tooltip";
+	import { cn } from "@/utils";
 	import { CircleQuestionMark } from "@lucide/svelte";
 
 	interface Props {
 		label: string;
 		tips: string;
 		tooltipPlacement?: "top" | "bottom" | "left" | "right";
+		class?: string;
 	}
 
-	let { label, tips, tooltipPlacement = "right" }: Props = $props();
+	let { label, tips, tooltipPlacement = "right", class: className }: Props = $props();
 </script>
 
 <div class="flex flex-row items-center gap-x-1" data-slot="label">
@@ -20,7 +22,10 @@
 		</TooltipTrigger>
 
 		<TooltipContent
-			class="rounded-[10px] border bg-overlay p-0 text-sm/6 text-overlay-foreground"
+			class={cn(
+				"rounded-[10px] border bg-overlay p-0 text-sm/6 text-overlay-foreground",
+				className,
+			)}
 			side={tooltipPlacement}
 			arrowClasses="hidden"
 			sideOffset={5}
