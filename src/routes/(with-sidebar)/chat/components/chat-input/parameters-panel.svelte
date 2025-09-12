@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { m } from "@/paraglide/messages.js";
 	import { chatState } from "@/stores/chat-state.svelte";
+	import ParametersInput from "./parameters-input.svelte";
 	import ParametersSlider from "./parameters-slider.svelte";
 </script>
 
 <div class="w-[500px]">
-	<div class="flex flex-col gap-y-2 rounded-[10px] bg-background p-4">
+	<div class="flex flex-col gap-y-4 rounded-[10px] bg-background p-4">
 		<ParametersSlider
 			label={m.text_label_temperature()}
 			tips={m.title_temperature_tips()}
@@ -23,6 +24,12 @@
 			step={0.1}
 			value={chatState.topP}
 			onChange={chatState.handleTopPChange.bind(chatState)}
+		/>
+		<ParametersInput
+			label={m.text_label_max_tokens()}
+			tips={m.title_max_tokens_tips()}
+			value={chatState.maxTokens}
+			onChange={chatState.handleMaxTokensChange.bind(chatState)}
 		/>
 		<ParametersSlider
 			label={m.text_label_frequency_penalty()}
