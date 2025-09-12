@@ -16,12 +16,7 @@
 
 <script lang="ts">
 	import { buttonVariants } from "$lib/components/ui/button";
-	import {
-		Tooltip,
-		TooltipContent,
-		TooltipProvider,
-		TooltipTrigger,
-	} from "$lib/components/ui/tooltip/index.js";
+	import * as Tooltip from "$lib/components/ui/tooltip";
 	import { cn } from "$lib/utils.js";
 
 	let {
@@ -38,18 +33,18 @@
 	const buttonClass = $derived(cn(buttonVariants({ variant, size }), className));
 </script>
 
-<TooltipProvider>
-	<Tooltip>
-		<TooltipTrigger class={cn(buttonClass, "group rounded-[10px]")} {disabled} {onclick}>
+<Tooltip.Provider>
+	<Tooltip.Root>
+		<Tooltip.Trigger class={cn(buttonClass, "group rounded-[10px]")} {disabled} {onclick}>
 			{@render children?.()}
-		</TooltipTrigger>
-		<TooltipContent
+		</Tooltip.Trigger>
+		<Tooltip.Content
 			side={tooltipSide}
 			class="rounded-[10px] border bg-overlay px-2.5 py-1.5 text-sm/6 text-overlay-foreground"
 			arrowClasses="hidden"
 			sideOffset={5}
 		>
 			{tooltip}
-		</TooltipContent>
-	</Tooltip>
-</TooltipProvider>
+		</Tooltip.Content>
+	</Tooltip.Root>
+</Tooltip.Provider>
