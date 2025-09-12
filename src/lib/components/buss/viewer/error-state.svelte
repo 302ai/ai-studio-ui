@@ -8,7 +8,7 @@
 	import { m } from "$lib/paraglide/messages.js";
 	import CircleX from "@lucide/svelte/icons/circle-x";
 
-	let { message = m.chat_attachment_viewer_error() }: ErrorStateProps = $props();
+	let { message = m.text_attachment_viewer_error() }: ErrorStateProps = $props();
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center">

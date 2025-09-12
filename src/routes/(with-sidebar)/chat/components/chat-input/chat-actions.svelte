@@ -6,11 +6,18 @@
 	import mcpIcon from "@lobehub/icons-static-svg/icons/mcp.svg";
 	import { Globe, Lightbulb, Settings2 } from "@lucide/svelte";
 	import { AttachmentUploader } from "../attachment";
+	import ParametersOverlay from "./parameters-overlay.svelte";
+	import ParametersPanel from "./parameters-panel.svelte";
 
 	let actionDisabled = $derived(chatState.providerType !== "302ai");
+	let isParametersOpen = $state(false);
+
+	function handleParametersClose() {
+		isParametersOpen = false;
+	}
 </script>
 
-{#snippet actionThinking()}
+{#snippet actionEnableThinking()}
 	<ButtonWithTooltip
 		class={cn(
 			"hover:!bg-chat-action-hover",
@@ -23,7 +30,7 @@
 	</ButtonWithTooltip>
 {/snippet}
 
-{#snippet actionOnlineSearch()}
+{#snippet actionEnableOnlineSearch()}
 	<ButtonWithTooltip
 		class={cn(
 			"hover:!bg-chat-action-hover",
@@ -36,13 +43,13 @@
 	</ButtonWithTooltip>
 {/snippet}
 
-{#snippet actionMCP()}
+{#snippet actionEnableMCP()}
 	<ButtonWithTooltip
 		class={cn(
 			"hover:!bg-chat-action-hover",
 			chatState.isMCPActive && "!bg-chat-action-active hover:!bg-chat-action-active",
 		)}
-		tooltip={m.chat_mcpServers()}
+		tooltip={m.title_mcpServers()}
 		onclick={() => chatState.handleMCPActiveChange(!chatState.isMCPActive)}
 	>
 		<img
@@ -57,10 +64,22 @@
 	</ButtonWithTooltip>
 {/snippet}
 
-{#snippet actionSettings()}
-	<ButtonWithTooltip class="hover:!bg-chat-action-hover" tooltip={m.chat_parameters()}>
+{#snippet actionSetParameters()}
+	<ButtonWithTooltip
+		class="hover:!bg-chat-action-hover"
+		tooltip={m.title_chat_parameters()}
+		onclick={() => (isParametersOpen = true)}
+	>
 		<Settings2 />
 	</ButtonWithTooltip>
+
+	<ParametersOverlay
+		title={m.title_chat_parameters()}
+		open={isParametersOpen}
+		onClose={handleParametersClose}
+	>
+		<ParametersPanel />
+	</ParametersOverlay>
 {/snippet}
 
 {#snippet actionUploadAttachment()}
@@ -69,8 +88,8 @@
 
 <div class="flex h-chat-bar items-center gap-chat-bar-gap">
 	{@render actionUploadAttachment()}
-	{@render actionThinking()}
-	{@render actionOnlineSearch()}
-	{@render actionMCP()}
-	{@render actionSettings()}
+	{@render actionEnableThinking()}
+	{@render actionEnableOnlineSearch()}
+	{@render actionEnableMCP()}
+	{@render actionSetParameters()}
 </div>
